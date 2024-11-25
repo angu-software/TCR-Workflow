@@ -1,1 +1,4 @@
-git commit -am working
+#!/bin/bash
+
+echo "[TCR] Committing ..."
+eval "${TCR_COMMIT_COMMAND}"

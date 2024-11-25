@@ -1,1 +1,5 @@
-git checkout HEAD -- src/
+#!/bin/bash
+
+# Revert changes in the src/ directory to the last committed state
+echo "[TCR] Reverting ..."
+eval "${TCR_REVERT_COMMAND}"
