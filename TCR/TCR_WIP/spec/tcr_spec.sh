@@ -25,9 +25,7 @@ source './lib/lock_file.sh'
 
 # -- error_const.sh --
 
-# Error format: "<error_code>|<error_message>"
-
-TCR_ERROR_TCR_ALREADY_ENABLED='1|[TCR] TCR is already enabled'
+source './lib/error_const.sh'
 
 # -- error.sh --
 
