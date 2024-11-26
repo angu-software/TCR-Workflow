@@ -135,36 +135,11 @@ Describe 'error'
     End
 End
 
-# -- tcr.sh --
-
-TCR_WORK_DIRECTORY="$(pwd)"
-
-tcr() {
-
-    if [ "$1" = 'enable' ]; then
-
-        if [ -n "$LOC_FILE_EXISTS" ]; then
-            raise_error "$TCR_ERROR_TCR_ALREADY_ENABLED"
-            return
-        fi
-
-        create_lock_file
-        LOC_FILE_EXISTS=1
-        print '[TCR] ON'
-        return
-    fi
-
-    if [ "$1" = 'disable' ]; then
-        remove_lock_file
-        unset LOC_FILE_EXISTS
-        print '[TCR] OFF'
-        return
-    fi
-}
-
 # -- Tests --
 
 Describe 'tcr'
+    source './tcr'
+
     setup() {
         export TCR_OUTPUT_SILENT='true'
     }
