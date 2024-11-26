@@ -1,12 +1,19 @@
 #!/bin/bash
 
+TCR_HOME="${TCR_HOME:-"$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"}"
+export TCR_HOME
+
 TCR_WORK_DIRECTORY="$(pwd)"
 export TCR_WORK_DIRECTORY
+
+source "$TCR_HOME/lib/error.sh"
+source "$TCR_HOME/lib/lock_file.sh"
 
 tcr() {
 
     if [ "$1" = 'enable' ]; then
 
+        # TODO: Replace with real check if the file is existing
         if [ -n "$LOC_FILE_EXISTS" ]; then
             raise_error "$TCR_ERROR_TCR_ALREADY_ENABLED"
             return
@@ -26,3 +33,7 @@ tcr() {
         return
     fi
 }
+
+if [ "${BASH_SOURCE[0]}" = "$0" ]; then
+    tcr "$@"
+fi

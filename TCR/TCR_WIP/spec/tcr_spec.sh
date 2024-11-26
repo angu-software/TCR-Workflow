@@ -1,30 +1,6 @@
 #!/bin/bash
 
-# -- path.sh --
-
-source './lib/path.sh'
-
-# -- print.sh --
-
-source './lib/print.sh'
-
-# -- lock_file.sh --
-
-source './lib/lock_file.sh'
-
-# -- error_const.sh --
-
-source './lib/error_const.sh'
-
-# -- error.sh --
-
-source './lib/error.sh'
-
-# -- exit_mock.sh --
-
-source './spec/test_doubles/exit_mock.sh'
-
-# -- Tests --
+source './spec/test_consts.sh'
 
 Describe 'tcr'
     source './tcr'
@@ -42,6 +18,7 @@ Describe 'tcr'
     AfterEach 'teardown'
 
 # -- Mocks --
+    source './spec/test_doubles/exit_mock.sh'
 
     TCR_WORK_DIRECTORY='/current/work/directory'
 

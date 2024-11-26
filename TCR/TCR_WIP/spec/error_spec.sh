@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# TODO: indirect dependency in error.sh
-source './lib/print.sh'
-source './lib/error.sh'
+source './spec/test_consts.sh'
 
+source './lib/error.sh'
 source './spec/test_doubles/exit_mock.sh'
 
 Describe 'error'

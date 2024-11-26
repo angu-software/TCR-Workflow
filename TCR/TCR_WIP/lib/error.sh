@@ -1,5 +1,8 @@
 #!/bin/bash
 
+source "$TCR_HOME/lib/print.sh"
+source "$TCR_HOME/lib/error_const.sh"
+
 TCR_EXIT='exit'
 
 error_message() {

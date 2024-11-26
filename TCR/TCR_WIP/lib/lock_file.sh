@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "$TCR_HOME/lib/path.sh"
+
 TCR_LOCK_FILE_NAME='.tcr.lock'
 
 current_lock_file_path() {
@@ -13,3 +15,5 @@ create_lock_file() {
 remove_lock_file() {
     rm -f "$(current_lock_file_path)"
 }
+
+# TODO: Check if lock file exists 
