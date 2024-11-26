@@ -1,7 +1,6 @@
 #!/bin/bash
 
 TCR_EXIT='exit'
-export TCR_EXIT
 
 error_message() {
     local error="$1"
