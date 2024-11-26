@@ -4,7 +4,7 @@
 source './lib/print.sh'
 source './lib/error.sh'
 
-source './spec/exit_mock.sh'
+source './spec/test_doubles/exit_mock.sh'
 
 Describe 'error'
     setup_exit_mock

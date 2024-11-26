@@ -22,7 +22,7 @@ source './lib/error.sh'
 
 # -- exit_mock.sh --
 
-source './spec/exit_mock.sh'
+source './spec/test_doubles/exit_mock.sh'
 
 # -- Tests --
 
