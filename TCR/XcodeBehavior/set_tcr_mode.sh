@@ -1,14 +1,51 @@
 #!/bin/bash
+set -e
+#set -x
 
-is_enabled=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+ON="ON"
+OFF="OFF"
 
-if [ "$is_enabled" == "on" ]; then
-    touch .tcr.lock
-    echo "[TCR] ON "
-elif [ "$is_enabled" == "off" ]; then
-    rm -f .tcr.lock
-    echo "[TCR] OFF"
-else
-    echo "Error: Please specify 'on' or 'off'."
-    exit 1
+TRC_LOCK_FILE=".tcr.lock"
+
+create_file() {
+    touch "$1"
+}
+
+delete_file() {
+    rm -f "$1"
+}
+
+enable_tcr() {
+    create_file $TRC_LOCK_FILE
+}
+
+disable_tcr() {
+    delete_file $TRC_LOCK_FILE
+}
+
+to_uppercase() {
+    echo "$1" | tr '[:lower:]' '[:upper:]'
+}
+
+# --- Public
+
+set_tcr_mode() {
+    mode=$(to_uppercase "$1")
+
+    if [ "$mode" == "$ON" ]; then
+        enable_tcr
+    elif [ "$mode" == "$OFF" ]; then
+        disable_tcr
+    else
+        echo "Error: Please specify '$ON' or '$OFF'."
+        exit 1
+    fi
+
+    echo "[TCR] $mode"
+}
+
+# --- Main
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    set_tcr_mode "$1"
 fi
