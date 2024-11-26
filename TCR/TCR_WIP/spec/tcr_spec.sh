@@ -2,16 +2,7 @@
 
 # -- path.sh --
 
-path_join() {
-    local delimiter='/'
-    local result="$1"
-    shift
-    for part in "$@"; do
-        result="${result}${delimiter}${part}"
-    done
-    
-    echo "$result"
-}
+source './lib/path.sh'
 
 # -- path_spec.sh --
 
