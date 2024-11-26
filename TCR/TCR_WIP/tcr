@@ -14,21 +14,18 @@ tcr() {
     if [ "$1" = 'enable' ]; then
 
         # TODO: Replace with real check if the file is existing
-        if [ -n "$LOC_FILE_EXISTS" ]; then
+        if is_lock_file_existing; then
             raise_error "$TCR_ERROR_TCR_ALREADY_ENABLED"
             return
         fi
 
         create_lock_file
-        LOC_FILE_EXISTS=1
-        export LOC_FILE_EXISTS
         print '[TCR] ON'
         return
     fi
 
     if [ "$1" = 'disable' ]; then
         remove_lock_file
-        unset LOC_FILE_EXISTS
         print '[TCR] OFF'
         return
     fi

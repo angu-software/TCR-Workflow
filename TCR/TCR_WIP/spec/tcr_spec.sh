@@ -22,6 +22,10 @@ Describe 'tcr'
 
     TCR_WORK_DIRECTORY='/current/work/directory'
 
+    is_lock_file_existing() {
+        [ -n "$expected_lock_file_path" ]
+    }
+
     touch() {
         expected_lock_file_path="$1"
     }
@@ -48,10 +52,9 @@ Describe 'tcr'
         End
 
         Describe 'when enabling tcr mode again'
-            tcr 'enable'
-
             It 'should raise an error'
                 unset TCR_OUTPUT_SILENT
+                tcr 'enable'
 
                 When call tcr 'enable'
                 The error should eq "$(error_message "$TCR_ERROR_TCR_ALREADY_ENABLED")"

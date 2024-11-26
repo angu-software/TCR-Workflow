@@ -16,4 +16,6 @@ remove_lock_file() {
     rm -f "$(current_lock_file_path)"
 }
 
-# TODO: Check if lock file exists 
+is_lock_file_existing() {
+    [ -f "$(current_lock_file_path)" ]
+}
