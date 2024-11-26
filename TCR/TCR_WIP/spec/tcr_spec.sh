@@ -96,12 +96,7 @@ raise_error() {
 
 # -- exit_mock.sh --
 
-setup_exit_mock() {
-    TCR_EXIT='exit_mock'
-    exit_mock() {
-        export TCR_TEST_EXIT_STATUS="$1"
-    }
-}
+source './spec/exit_mock.sh'
 
 # -- error_spec.sh --
 
