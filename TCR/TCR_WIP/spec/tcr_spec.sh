@@ -1,10 +1,8 @@
 #!/bin/bash
-
-source './spec/test_consts.sh'
-
 source './tcr'
-TCR_WORK_DIRECTORY='/current/work/directory'
 
+source './spec/test_doubles/home_dir_mock.sh'
+source './spec/test_doubles/work_dir_mock.sh'
 source './spec/test_doubles/exit_mock.sh'
 source './spec/test_doubles/lock_file_mock.sh'
 

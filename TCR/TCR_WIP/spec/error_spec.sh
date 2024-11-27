@@ -1,8 +1,9 @@
 #!/bin/bash
 
-source './spec/test_consts.sh'
+source './spec/test_doubles/home_dir_mock.sh'
 
 source './lib/error.sh'
+
 source './spec/test_doubles/exit_mock.sh'
 
 Describe 'error'

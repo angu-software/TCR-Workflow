@@ -8,7 +8,9 @@ source "$TCR_HOME/lib/lock_file.sh"
 
 tcr() {
 
-    if [ "$1" = 'enable' ]; then
+    local action="$1"
+
+    if [ "$action" = 'enable' ]; then
 
         if is_lock_file_existing; then
             raise_error "$TCR_ERROR_TCR_ALREADY_ENABLED"
@@ -20,7 +22,7 @@ tcr() {
         return
     fi
 
-    if [ "$1" = 'disable' ]; then
+    if [ "$action" = 'disable' ]; then
         remove_lock_file
         print '[TCR] OFF'
         return
