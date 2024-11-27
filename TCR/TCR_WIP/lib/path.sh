@@ -14,5 +14,5 @@ path_join() {
 path_expand() {
     local path="$1"
 
-    eval "cd $path && pwd"
+    cd "$path" && pwd
 }

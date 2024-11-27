@@ -1,9 +1,9 @@
 #!/bin/bash
 
+source './spec/test_doubles/work_dir_mock.sh'
+
 source './tcr'
 
-source './spec/test_doubles/home_dir_mock.sh'
-source './spec/test_doubles/work_dir_mock.sh'
 source './spec/test_doubles/exit_mock.sh'
 source './spec/test_doubles/file_mock.sh'
 
