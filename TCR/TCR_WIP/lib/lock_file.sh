@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source "$TCR_HOME/lib/path.sh"
+source "$TCR_HOME/lib/file.sh"
 
 TCR_LOCK_FILE_NAME='.tcr.lock'
 
@@ -9,13 +10,13 @@ current_lock_file_path() {
 }
 
 create_lock_file() {
-    touch "$(current_lock_file_path)"
+    create_file "$(current_lock_file_path)"
 }
 
 remove_lock_file() {
-    rm -f "$(current_lock_file_path)"
+    remove_file "$(current_lock_file_path)"
 }
 
 is_lock_file_existing() {
-    [ -f "$(current_lock_file_path)" ]
+    is_file_existing "$(current_lock_file_path)"
 }
