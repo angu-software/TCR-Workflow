@@ -16,30 +16,32 @@ Describe 'tcr run'
     AfterEach 'teardown'
 
     TCR_RUN_BUILD_COMMAND='echo "Running build command"'
+    TCR_RUN_TEST_COMMAND='echo "Running test command"'
     
     TEST_COMMAND_EXIT_STATUS=0
     run_command() {
-        TEST_EXECUTED_COMMAND="$1"
+        TEST_EXECUTED_COMMAND="$TEST_EXECUTED_COMMAND|$1"
         return $TEST_COMMAND_EXIT_STATUS
     }
 
-    # TODO: tcr run fails with the error code of the executed command after resetting the changes
+    #Todo 'tcr run fails with the error code of the executed command after resetting the changes'
 
     Describe 'When executing tcr with run action'
         It 'It runs the build command'
             When call tcr run
-            The variable TEST_EXECUTED_COMMAND should eq 'echo "Running build command"'
+            The variable TEST_EXECUTED_COMMAND should include 'echo "Running build command"'
         End
 
         Describe 'When the build command succeeds'
-            Pending 'Needs implementation'
-
+            
             It 'It runs the test command'
                 When call tcr run
-                The output should eq 'Running test command'
+                The variable TEST_EXECUTED_COMMAND should include 'echo "Running test command"'
             End
 
             Describe 'When the test command succeeds'
+                Pending 'Needs implementation'
+
                 It 'It commits the changes'
                     When call tcr run
                     The output should eq 'Committing changes'
@@ -52,6 +54,8 @@ Describe 'tcr run'
             End
 
             Describe 'When the test command fails'
+                Pending 'Needs implementation'
+
                 It 'It reverts the changes'
                     When call tcr run
                     The output should eq 'Reverting changes'
@@ -71,6 +75,7 @@ Describe 'tcr run'
                 When call tcr run
                 The error should eq '[TCR Error] Build failed with status 99'
                 The variable TCR_TEST_EXIT_STATUS should eq 99
+                The status should eq 99
             End
 
             It 'It plays the failure sound'
