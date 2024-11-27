@@ -8,7 +8,7 @@ TCR_EXIT='exit'
 
 TCR_ERROR_MSG_PREFIX='[TCR Error]'
 
-make_error() {
+error_build() {
     local code="$1"
     local message="$2"
 
@@ -29,7 +29,7 @@ error_code() {
     echo "$code"
 }
 
-raise_error() {
+error_raise() {
     local error="$1"
 
     print "$(error_message "$error")" "$TCR_OUTPUT_STDERR"

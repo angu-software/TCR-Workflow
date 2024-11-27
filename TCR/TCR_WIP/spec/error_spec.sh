@@ -27,17 +27,17 @@ Describe 'error'
         End
     End
 
-    Describe 'raise_error'
+    Describe 'error_raise'
         It 'should print the error message to stderr'
-            When call raise_error "$ERROR"
+            When call error_raise "$ERROR"
             The error should eq 'Some strange error'
             The variable TCR_TEST_EXIT_STATUS should eq 1
         End
     End
 
-    Describe 'make_error'
+    Describe 'error_build'
         It 'should return an error with the given code and message'
-            When call make_error 2 'Another error'
+            When call error_build 2 'Another error'
             The output should eq '2|[TCR Error] Another error'
         End
     End

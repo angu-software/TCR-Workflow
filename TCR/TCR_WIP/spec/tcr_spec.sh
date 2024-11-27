@@ -12,11 +12,11 @@ Describe 'tcr'
     setup() {
         export TCR_OUTPUT_SILENT='true'
         setup_exit_mock
-        setup_lock_file_mock
+        setup_file_mock
     }
     teardown() {
         setup_exit_mock
-        setup_lock_file_mock
+        setup_file_mock
         unset TCR_OUTPUT_SILENT
     }
     BeforeEach 'setup'
@@ -25,7 +25,7 @@ Describe 'tcr'
     Describe 'when enabling tcr mode'
         It 'should creates a tcr lock file at the current work directory'
             When call tcr 'enable'
-            The variable TCR_TEST_LOCK_FILE_PATH should eq '/current/work/directory/.tcr.lock'
+            The variable TCR_TEST_FILE_CREATE_PATH should eq '/current/work/directory/.tcr.lock'
         End
         
         It 'should inform that tcr mode is enabled'
@@ -37,8 +37,8 @@ Describe 'tcr'
 
         It 'writes important information to the lock file'
             When call tcr 'enable'
-            The variable TCR_TEST_LOCK_FILE_CONTENT should eq 'TCR_WORK_DIRECTORY=/current/work/directory'
-            The variable TCR_TEST_LOCK_FILE_CONTENT_WRITE_PATH should eq '/current/work/directory/.tcr.lock'
+            The variable TCR_TEST_FILE_SET_CONTENT should eq 'TCR_WORK_DIRECTORY=/current/work/directory'
+            The variable TCR_TEST_FILE_SET_CONTENT_PATH should eq '/current/work/directory/.tcr.lock'
         End
 
         Describe 'when enabling tcr mode again'
@@ -56,7 +56,7 @@ Describe 'tcr'
     Describe 'when disabling tcr mode'
         It 'should delete the tcr lock file'
             When call tcr 'disable'
-            The variable TCR_TEST_LOCK_FILE_DELETE_CMD should eq '_rm_ -f /current/work/directory/.tcr.lock'
+            The variable TCR_TEST_FILE_DELETE_CMD should eq '_rm_ -f /current/work/directory/.tcr.lock'
         End
 
         It 'should inform that tcr mode is disabled'

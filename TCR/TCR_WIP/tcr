@@ -18,7 +18,7 @@ tcr() {
             disable_tcr
         ;;
         *)
-            raise_error "$TCR_ERROR_TCR_UNKNOWN_ACTION"
+            error_raise "$TCR_ERROR_TCR_UNKNOWN_ACTION"
         ;;
     esac
 }
@@ -26,8 +26,8 @@ tcr() {
 # -- Actions -- #
 
 enable_tcr() {
-    if is_lock_file_existing; then
-        raise_error "$TCR_ERROR_TCR_ALREADY_ENABLED"
+    if lock_file_is_existing; then
+        error_raise "$TCR_ERROR_TCR_ALREADY_ENABLED"
         return
     fi
 
@@ -36,7 +36,7 @@ enable_tcr() {
 }
 
 disable_tcr() {
-    remove_lock_file
+    lock_file_remove
     print_status 'OFF'
 }
 
@@ -49,7 +49,7 @@ prepare_lock_file_content() {
 }
 
 setup_lock_file() {
-    create_lock_file
+    lock_file_create
     lock_file_set_content "$(prepare_lock_file_content)"
 }
 

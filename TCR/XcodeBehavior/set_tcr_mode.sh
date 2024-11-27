@@ -7,7 +7,7 @@ OFF="OFF"
 
 TRC_LOCK_FILE=".tcr.lock"
 
-create_file() {
+file_create() {
     touch "$1"
 }
 
@@ -16,7 +16,7 @@ delete_file() {
 }
 
 enable_tcr() {
-    create_file $TRC_LOCK_FILE
+    file_create $TRC_LOCK_FILE
 }
 
 disable_tcr() {
