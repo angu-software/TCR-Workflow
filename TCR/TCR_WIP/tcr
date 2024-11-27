@@ -17,6 +17,9 @@ tcr() {
         "$TCR_ACTION_DISABLE")
             tcr_action_disable
         ;;
+        "$TCR_ACTION_RUN")
+            tcr_action_run
+        ;;
         *)
             error_raise "$TCR_ERROR_TCR_UNKNOWN_ACTION"
         ;;
