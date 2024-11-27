@@ -5,12 +5,7 @@ TCR_HOME="${TCR_HOME:-"$(cd "$(dirname "$0")" && pwd)"}"
 
 TCR_WORK_DIRECTORY="${TCR_WORK_DIRECTORY:-"$(pwd)"}"
 
-source "$TCR_HOME/lib/path.sh"
-source "$TCR_HOME/lib/lock_file.sh"
-source "$TCR_HOME/lib/tcr/error_consts.sh"
-source "$TCR_HOME/lib/tcr/action_consts.sh"
-
-source "$TCR_HOME/lib/tcr/tcr_action_enable.sh"
+source "$TCR_HOME/lib/tcr/actions.sh"
 
 tcr() {
     local action="$1"
@@ -20,19 +15,12 @@ tcr() {
             tcr_action_enable
         ;;
         "$TCR_ACTION_DISABLE")
-            disable_tcr
+            tcr_action_disable
         ;;
         *)
             error_raise "$TCR_ERROR_TCR_UNKNOWN_ACTION"
         ;;
     esac
-}
-
-# -- Actions -- #
-
-disable_tcr() {
-    lock_file_remove
-    print_status 'OFF'
 }
 
 # -- Main -- #
