@@ -10,12 +10,14 @@ source "$TCR_HOME/lib/lock_file.sh"
 source "$TCR_HOME/lib/tcr/error_consts.sh"
 source "$TCR_HOME/lib/tcr/action_consts.sh"
 
+source "$TCR_HOME/lib/tcr/tcr_action_enable.sh"
+
 tcr() {
     local action="$1"
 
     case "$action" in
         "$TCR_ACTION_ENABLE")
-            enable_tcr
+            tcr_action_enable
         ;;
         "$TCR_ACTION_DISABLE")
             disable_tcr
@@ -28,36 +30,9 @@ tcr() {
 
 # -- Actions -- #
 
-enable_tcr() {
-    if lock_file_is_existing; then
-        error_raise "$TCR_ERROR_TCR_ALREADY_ENABLED"
-        return
-    fi
-
-    setup_lock_file
-    print_status 'ON'
-}
-
 disable_tcr() {
     lock_file_remove
     print_status 'OFF'
-}
-
-# -- Guts -- #
-
-prepare_lock_file_content() {
-    local content
-    content="$(cat <<-LOCK_FILE_CONTENT
-TCR_HOME="$(path_expand "$TCR_HOME")"
-LOCK_FILE_CONTENT
-    )"
-
-    echo "$content"
-}
-
-setup_lock_file() {
-    lock_file_create
-    lock_file_set_content "$(prepare_lock_file_content)"
 }
 
 # -- Main -- #
