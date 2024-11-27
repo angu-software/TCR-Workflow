@@ -38,7 +38,7 @@ Describe 'tcr'
         It 'it writes important information to the lock file'
             When call tcr 'enable'
             The variable TCR_TEST_FILE_SET_CONTENT_PATH should eq '/current/work/directory/.tcr.lock'
-            The variable TCR_TEST_FILE_SET_CONTENT should eq 'TCR_HOME="."'
+            The variable TCR_TEST_FILE_SET_CONTENT should eq 'TCR_HOME="/Users/angu/Personal_Repos/Basic Multiplication/TCR/TCR_WIP"'
         End
 
         Describe 'when enabling tcr mode again'

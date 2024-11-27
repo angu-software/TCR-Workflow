@@ -3,6 +3,7 @@
 TCR_HOME="${TCR_HOME:-"$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"}"
 TCR_WORK_DIRECTORY="$(pwd)"
 
+source "$TCR_HOME/lib/path.sh"
 source "$TCR_HOME/lib/lock_file.sh"
 source "$TCR_HOME/lib/tcr/error_consts.sh"
 source "$TCR_HOME/lib/tcr/action_consts.sh"
@@ -45,7 +46,7 @@ disable_tcr() {
 prepare_lock_file_content() {
     local content
     content="$(cat <<-LOCK_FILE_CONTENT
-TCR_HOME="$TCR_HOME"
+TCR_HOME="$(path_expand "$TCR_HOME")"
 LOCK_FILE_CONTENT
     )"
 

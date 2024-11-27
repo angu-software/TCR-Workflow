@@ -10,3 +10,9 @@ path_join() {
     
     echo "$result"
 }
+
+path_expand() {
+    local path="$1"
+
+    eval "cd $path && pwd"
+}
