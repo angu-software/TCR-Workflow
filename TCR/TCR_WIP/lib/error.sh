@@ -1,9 +1,19 @@
 #!/bin/bash
 
 source "$TCR_HOME/lib/print.sh"
-source "$TCR_HOME/lib/error_const.sh"
 
 TCR_EXIT='exit'
+
+# Error format: "<error_code>|<error_message>"
+
+TCR_ERROR_MSG_PREFIX='[TCR Error]'
+
+make_error() {
+    local code="$1"
+    local message="$2"
+
+    echo "${code}|${TCR_ERROR_MSG_PREFIX} ${message}"
+}
 
 error_message() {
     local error="$1"

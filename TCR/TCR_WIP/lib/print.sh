@@ -6,6 +6,8 @@
 TCR_OUTPUT_STDOUT='>&1'
 TCR_OUTPUT_STDERR='>&2'
 
+TCR_OUTPUT_STATUS_MSG_PREFIX='[TCR]'
+
 print() {
     local message="$1"
     local output="${2:-$TCR_OUTPUT_STDOUT}"
@@ -19,4 +21,10 @@ print() {
     elif [ "$output" == "$TCR_OUTPUT_STDERR" ]; then
         echo "$message" >&2
     fi
+}
+
+print_status() {
+    local message="$1"
+
+    print "${TCR_OUTPUT_STATUS_MSG_PREFIX} $message"
 }

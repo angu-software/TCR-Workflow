@@ -3,35 +3,42 @@
 TCR_HOME="${TCR_HOME:-"$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"}"
 TCR_WORK_DIRECTORY="$(pwd)"
 
-source "$TCR_HOME/lib/error.sh"
 source "$TCR_HOME/lib/lock_file.sh"
-
-TCR_ERROR_TCR_ALREADY_ENABLED="$(make_error 1 'TCR is already enabled')"
-TCR_ERROR_TCR_UNKNOWN_ACTION="$(make_error 2 'Unknown action')"
+source "$TCR_HOME/lib/tcr/error_consts.sh"
+source "$TCR_HOME/lib/tcr/action_consts.sh"
 
 tcr() {
-
     local action="$1"
 
-    if [ "$action" = 'enable' ]; then
+    case "$action" in
+        "$TCR_ACTION_ENABLE")
+            enable_tcr
+        ;;
+        "$TCR_ACTION_DISABLE")
+            disable_tcr
+        ;;
+        *)
+            raise_error "$TCR_ERROR_TCR_UNKNOWN_ACTION"
+        ;;
+    esac
+}
 
-        if is_lock_file_existing; then
-            raise_error "$TCR_ERROR_TCR_ALREADY_ENABLED"
-            return
-        fi
-
-        create_lock_file
-        print '[TCR] ON'
-        return
-    elif [ "$action" = 'disable' ]; then
-        remove_lock_file
-        print '[TCR] OFF'
-        return
-    else 
-        raise_error "$TCR_ERROR_TCR_UNKNOWN_ACTION"
+enable_tcr() {
+    if is_lock_file_existing; then
+        raise_error "$TCR_ERROR_TCR_ALREADY_ENABLED"
         return
     fi
+
+    create_lock_file
+    print_status 'ON'
 }
+
+disable_tcr() {
+    remove_lock_file
+    print_status 'OFF'
+}
+
+# -- Main -- #
 
 if [ "${BASH_SOURCE[0]}" = "$0" ]; then
     tcr "$@"
