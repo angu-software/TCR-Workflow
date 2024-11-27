@@ -43,7 +43,11 @@ disable_tcr() {
 # -- Guts -- #
 
 prepare_lock_file_content() {
-    local content="TCR_WORK_DIRECTORY=$TCR_WORK_DIRECTORY"
+    local content
+    content="$(cat <<-LOCK_FILE_CONTENT
+TCR_HOME="$TCR_HOME"
+LOCK_FILE_CONTENT
+    )"
 
     echo "$content"
 }

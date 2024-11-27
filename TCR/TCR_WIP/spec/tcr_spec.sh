@@ -35,10 +35,10 @@ Describe 'tcr'
             The output should eq '[TCR] ON'
         End
 
-        It 'writes important information to the lock file'
+        It 'it writes important information to the lock file'
             When call tcr 'enable'
-            The variable TCR_TEST_FILE_SET_CONTENT should eq 'TCR_WORK_DIRECTORY=/current/work/directory'
             The variable TCR_TEST_FILE_SET_CONTENT_PATH should eq '/current/work/directory/.tcr.lock'
+            The variable TCR_TEST_FILE_SET_CONTENT should eq 'TCR_HOME="."'
         End
 
         Describe 'when enabling tcr mode again'
