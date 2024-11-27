@@ -1,10 +1,6 @@
-#!/bin/bash
-
-# -- path.sh --
+#!/bin/bash#
 
 source './lib/path.sh'
-
-# -- path_spec.sh --
 
 Describe 'path'
     Describe 'path_join'

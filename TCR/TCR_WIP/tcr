@@ -6,6 +6,9 @@ TCR_WORK_DIRECTORY="$(pwd)"
 source "$TCR_HOME/lib/error.sh"
 source "$TCR_HOME/lib/lock_file.sh"
 
+TCR_ERROR_TCR_ALREADY_ENABLED="$(make_error 1 'TCR is already enabled')"
+TCR_ERROR_TCR_UNKNOWN_ACTION="$(make_error 2 'Unknown action')"
+
 tcr() {
 
     local action="$1"
@@ -20,11 +23,12 @@ tcr() {
         create_lock_file
         print '[TCR] ON'
         return
-    fi
-
-    if [ "$action" = 'disable' ]; then
+    elif [ "$action" = 'disable' ]; then
         remove_lock_file
         print '[TCR] OFF'
+        return
+    else 
+        raise_error "$TCR_ERROR_TCR_UNKNOWN_ACTION"
         return
     fi
 }

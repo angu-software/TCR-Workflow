@@ -1,4 +1,5 @@
 #!/bin/bash
+
 source './tcr'
 
 source './spec/test_doubles/home_dir_mock.sh'
@@ -17,15 +18,9 @@ Describe 'tcr'
         setup_exit_mock
         setup_lock_file_mock
         unset TCR_OUTPUT_SILENT
-        unset TCR_TEST_EXIT_STATUS
     }
     BeforeEach 'setup'
     AfterEach 'teardown'
-
-# -- Mocks --
-
-
-# -- Examples --
 
     Describe 'when enabling tcr mode'
         It 'should creates a tcr lock file at the current work directory'
@@ -47,7 +42,7 @@ Describe 'tcr'
 
                 When call tcr 'enable'
                 The error should eq "$(error_message "$TCR_ERROR_TCR_ALREADY_ENABLED")"
-                The variable "$TCR_TEST_EXIT_STATUS" should eq "$(error_code "$TCR_ERROR_TCR_ALREADY_ENABLED")"
+                The variable TCR_TEST_EXIT_STATUS should eq "$(error_code "$TCR_ERROR_TCR_ALREADY_ENABLED")"
             End
         End
     End
@@ -63,6 +58,16 @@ Describe 'tcr'
 
             When call tcr 'disable'
             The output should eq '[TCR] OFF'
+        End
+    End
+
+    Describe 'when passing unknown arguments'
+        It 'should raise an error'
+            unset TCR_OUTPUT_SILENT
+
+            When call tcr 'unknown'
+            The error should eq "$(error_message "$TCR_ERROR_TCR_UNKNOWN_ACTION")"
+            The variable TCR_TEST_EXIT_STATUS should eq "$(error_code "$TCR_ERROR_TCR_UNKNOWN_ACTION")"
         End
     End
 End
