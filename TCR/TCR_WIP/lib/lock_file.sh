@@ -20,3 +20,9 @@ remove_lock_file() {
 is_lock_file_existing() {
     is_file_existing "$(current_lock_file_path)"
 }
+
+lock_file_set_content() {
+    local content="$1"
+
+    file_set_content "$content" "$(current_lock_file_path)"
+}

@@ -23,19 +23,34 @@ tcr() {
     esac
 }
 
+# -- Actions -- #
+
 enable_tcr() {
     if is_lock_file_existing; then
         raise_error "$TCR_ERROR_TCR_ALREADY_ENABLED"
         return
     fi
 
-    create_lock_file
+    setup_lock_file
     print_status 'ON'
 }
 
 disable_tcr() {
     remove_lock_file
     print_status 'OFF'
+}
+
+# -- Guts -- #
+
+prepare_lock_file_content() {
+    local content="TCR_WORK_DIRECTORY=$TCR_WORK_DIRECTORY"
+
+    echo "$content"
+}
+
+setup_lock_file() {
+    create_lock_file
+    lock_file_set_content "$(prepare_lock_file_content)"
 }
 
 # -- Main -- #
