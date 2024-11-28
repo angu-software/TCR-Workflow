@@ -8,6 +8,7 @@ Describe 'tcr run'
 
     setup() {
         TCR_OUTPUT_SILENT='true'
+        unset $TEST_TCR_DISABLED
         setup_exit_mock
     }
     teardown() {
@@ -44,6 +45,10 @@ Describe 'tcr run'
             TCR_RUN_COMMIT_EXECUTED_COMMAND="$new_command"
             return $TCR_RUN_COMMIT_COMMAND_EXIT_STATUS
         fi
+    }
+
+    tcr_is_enabled() {
+        [ -z "$TEST_TCR_DISABLED" ]
     }
 
     Describe 'When executing tcr with run action'
@@ -141,17 +146,17 @@ Describe 'tcr run'
                 The error should eq '[TCR Error] Building failed with status 99'
                 The variable TCR_TEST_EXIT_STATUS should eq 99
             End
-
-            # Todo it should not revert the changes
         End
 
         Describe 'When tcr is not enabled'
-            Pending 'Needs implementation'
+            TEST_TCR_DISABLED='true'
 
-            It 'it raises an error'
+            It 'It raises an error'
+                unset TCR_OUTPUT_SILENT
+
                 When call tcr run
-                The error should eq 'TCR is not enabled'
-                The variable TCR_TEST_EXIT_STATUS should eq 1
+                The error should eq '[TCR Error] TCR is not enabled'
+                The variable TCR_TEST_EXIT_STATUS should eq 3
             End
         End
     End
