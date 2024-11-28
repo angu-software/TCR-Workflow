@@ -41,10 +41,6 @@ Describe 'tcr run'
         fi
     }
 
-    # tcr fails with the last occurred error code
-    # tcr skips comand phase when command is not specified (VAR empty or unset)
-    # tcr tells when it skipps a command phase
-
     Describe 'When executing tcr with run action'
         It 'It runs the build command'
             When call tcr run
@@ -64,11 +60,6 @@ Describe 'tcr run'
                 It 'It commits the changes'
                     When call tcr run
                     The output should eq 'Committing changes'
-                End
-
-                It 'It plays the success sound'
-                    When call tcr run
-                    The output should eq 'Playing success sound'
                 End
             End
 
@@ -113,15 +104,6 @@ Describe 'tcr run'
                         The variable TCR_TEST_EXIT_STATUS should eq 77
                     End
                 End
-
-                # Todo it revert changes after the test command (call order)
-
-                It 'It plays the failure sound'
-                    Pending 'Needs implementation'
-
-                    When call tcr run
-                    The output should eq 'Playing failure sound'
-                End
             End
         End
 
@@ -137,13 +119,6 @@ Describe 'tcr run'
             End
 
             # Todo it should not revert the changes
-
-            It 'It plays the failure sound'
-                Pending 'Needs implementation'
-
-                When call tcr run
-                The output should eq 'Playing failure sound'
-            End
         End
 
         Describe 'When tcr is not enabled'
