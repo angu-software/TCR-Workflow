@@ -2,31 +2,43 @@
 
 TCR_ACTION_RUN='run'
 
+TCR_ACTION_RUN_PHASE_BUILD='Building'
+TCR_ACTION_RUN_PHASE_TEST='Testing'
+TCR_ACTION_RUN_PHASE_COMMIT='Committing'
+TCR_ACTION_RUN_PHASE_REVERT='Reverting'
+
 tcr_action_run() {
 
-    execution_phase='Building'
+    execution_phase="$TCR_ACTION_RUN_PHASE_BUILD"
     execute_phase "$execution_phase"
     phase_error_code=$?
 
     if is_success "$phase_error_code"; then
-        execution_phase='Testing'
+        prev_phase="$execution_phase"
+        prev_error_code="$phase_error_code"
+        
+        execution_phase="$TCR_ACTION_RUN_PHASE_TEST"
         execute_phase "$execution_phase"
         phase_error_code=$?
 
         if is_success "$phase_error_code"; then
-            execution_phase='Committing'
+            prev_phase="$execution_phase"
+            prev_error_code="$phase_error_code"
+
+            execution_phase="$TCR_ACTION_RUN_PHASE_COMMIT"
             execute_phase "$execution_phase"
             phase_error_code=$?
-        else
-            error_code_testing="$phase_error_code"
+        else            
+            prev_phase="$execution_phase"
+            prev_error_code="$phase_error_code"
 
-            execution_phase='Reverting'
+            execution_phase="$TCR_ACTION_RUN_PHASE_REVERT"
             execute_phase "$execution_phase"
             phase_error_code=$?
 
             if is_success "$phase_error_code"; then
-                execution_phase='Testing'
-                phase_error_code="$error_code_testing"
+                execution_phase="$prev_phase"
+                phase_error_code="$prev_error_code"
             fi
         fi
     fi
@@ -51,16 +63,16 @@ execute_phase() {
 
 command_for_phase() {
     case "$phase" in
-        'Building')
+        "$TCR_ACTION_RUN_PHASE_BUILD")
             echo "$TCR_RUN_BUILD_COMMAND"
             ;;
-        'Testing')
+        "$TCR_ACTION_RUN_PHASE_TEST")
             echo "$TCR_RUN_TEST_COMMAND"
             ;;
-        'Reverting')
+        "$TCR_ACTION_RUN_PHASE_REVERT")
             echo "$TCR_RUN_REVERT_COMMAND"
             ;;
-        'Committing')
+        "$TCR_ACTION_RUN_PHASE_COMMIT")
             echo "$TCR_RUN_COMMIT_COMMAND"
             ;;
     esac
