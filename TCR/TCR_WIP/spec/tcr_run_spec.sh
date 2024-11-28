@@ -64,6 +64,14 @@ Describe 'tcr run'
                     When call tcr run
                     The variable TCR_RUN_COMMIT_EXECUTED_COMMAND should eq 'echo "Committing changes"'
                 End
+
+                It 'It tells that it commits the changes'
+                    unset TCR_OUTPUT_SILENT
+
+                    When call tcr run
+                    The output should eq '[TCR] Committing changes'
+                    The error should not be present
+                End
             End
 
             Describe 'When the test command fails'

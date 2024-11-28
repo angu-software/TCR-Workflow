@@ -23,7 +23,7 @@ tcr_action_run() {
                 error_code="$error_code_testing"
             fi
         else
-            run_command "$TCR_RUN_COMMIT_COMMAND"
+            execute_commit_command
         fi
     fi
 
@@ -45,6 +45,11 @@ execute_build_command() {
 
 execute_test_command() {
     run_command "$TCR_RUN_TEST_COMMAND"
+}
+
+execute_commit_command() {
+    print_status 'Committing changes'
+    run_command "$TCR_RUN_COMMIT_COMMAND"
 }
 
 execute_revert_command() {
