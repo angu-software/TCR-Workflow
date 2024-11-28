@@ -23,7 +23,9 @@ tcr_action_run() {
                 error_code="$error_code_testing"
             fi
         else
+            subject='Committing'
             execute_commit_command
+            error_code=$?
         fi
     fi
 

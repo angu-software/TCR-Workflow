@@ -72,6 +72,19 @@ Describe 'tcr run'
                     The output should eq '[TCR] Committing changes'
                     The error should not be present
                 End
+
+                Context 'When the commit command is failing'
+                    TCR_RUN_COMMIT_COMMAND_EXIT_STATUS=88
+
+                    It 'It raises an error'
+                        unset TCR_OUTPUT_SILENT
+
+                        When call tcr run
+                        The output should be present
+                        The error should eq '[TCR Error] Committing failed with status 88'
+                        The variable TCR_TEST_EXIT_STATUS should eq 88
+                    End
+                End
             End
 
             Describe 'When the test command fails'
