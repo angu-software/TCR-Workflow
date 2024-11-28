@@ -13,10 +13,10 @@ tcr() {
     case "$action" in
         "$TCR_ACTION_ENABLE")
             tcr_action_enable
-        ;;
+            ;;
         "$TCR_ACTION_DISABLE")
             tcr_action_disable
-        ;;
+            ;;
         "$TCR_ACTION_RUN")
             if ! tcr_is_enabled; then
                 error_raise "$TCR_ERROR_TCR_NOT_ENABLED"
@@ -24,7 +24,10 @@ tcr() {
             fi
 
             tcr_action_run
-        ;;
+            ;;
+        "$TCR_ACTION_INIT")
+            tcr_action_init
+            ;;
         *)
             error_raise "$TCR_ERROR_TCR_UNKNOWN_ACTION"
         ;;
