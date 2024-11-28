@@ -3,27 +3,41 @@
 TCR_ACTION_RUN='run'
 
 tcr_action_run() {
-    if execute_build_command; then
+
+    subject='Building'
+    execute_build_command
+    error_code=$?
+
+    if [ $error_code -eq 0 ]; then
+        subject='Testing'
         execute_test_command
+        error_code=$?
+    fi
+
+    handle_error "$error_code" "$subject"
+}
+
+handle_error() {
+    error_code="$1"
+    subject="$2"
+
+    if [ "$error_code" -ne 0 ]; then
+        error_raise "$(make_run_command_error "$error_code" "$subject")"
     fi
 }
 
 execute_build_command() {
     run_command "$TCR_RUN_BUILD_COMMAND"
-    error_code=$?
-
-    if [ $error_code -ne 0 ]; then
-        error_raise "$(build_command_failure "$error_code")"
-    fi
 }
 
 execute_test_command() {
     run_command "$TCR_RUN_TEST_COMMAND"
 }
 
-build_command_failure() {
+make_run_command_error() {
     error_code="$1"
-    error_build "$error_code" "Build failed with status $error_code"
+    subject="$2"
+    error_build "$error_code" "$subject failed with status $error_code"
 }
 
 run_command() {

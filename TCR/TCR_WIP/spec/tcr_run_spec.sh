@@ -16,12 +16,22 @@ Describe 'tcr run'
     AfterEach 'teardown'
 
     TCR_RUN_BUILD_COMMAND='echo "Running build command"'
-    TCR_RUN_TEST_COMMAND='echo "Running test command"'
+    TCR_RUN_BUILD_COMMAND_EXIT_STATUS=0
     
-    TEST_COMMAND_EXIT_STATUS=0
+    TCR_RUN_TEST_COMMAND='echo "Running test command"'
+    TCR_RUN_TEST_COMMAND_EXIT_STATUS=0
+
     run_command() {
-        TEST_EXECUTED_COMMAND="$TEST_EXECUTED_COMMAND|$1"
-        return $TEST_COMMAND_EXIT_STATUS
+        new_command="$1"
+        TEST_EXECUTED_COMMAND="$TEST_EXECUTED_COMMAND|$new_command"
+
+        if [ "$new_command" == "$TCR_RUN_BUILD_COMMAND" ]; then
+            TCR_RUN_BUILD_EXECUTED_COMMAND="$new_command"
+            return $TCR_RUN_BUILD_COMMAND_EXIT_STATUS
+        elif [ "$new_command" == "$TCR_RUN_TEST_COMMAND" ]; then
+            TCR_RUN_TEST_EXECUTED_COMMAND="$new_command"
+            return $TCR_RUN_TEST_COMMAND_EXIT_STATUS
+        fi
     }
 
     #Todo 'tcr run fails with the error code of the executed command after resetting the changes'
@@ -29,14 +39,14 @@ Describe 'tcr run'
     Describe 'When executing tcr with run action'
         It 'It runs the build command'
             When call tcr run
-            The variable TEST_EXECUTED_COMMAND should include 'echo "Running build command"'
+            The variable TCR_RUN_BUILD_EXECUTED_COMMAND should eq 'echo "Running build command"'
         End
 
         Describe 'When the build command succeeds'
             
             It 'It runs the test command'
                 When call tcr run
-                The variable TEST_EXECUTED_COMMAND should include 'echo "Running test command"'
+                The variable TCR_RUN_TEST_EXECUTED_COMMAND should eq 'echo "Running test command"'
             End
 
             Describe 'When the test command succeeds'
@@ -54,14 +64,26 @@ Describe 'tcr run'
             End
 
             Describe 'When the test command fails'
-                Pending 'Needs implementation'
+                TCR_RUN_TEST_COMMAND_EXIT_STATUS=66
+
+                It 'raises an error'
+                    When call tcr run
+                    The error should eq '[TCR Error] Testing failed with status 66'
+                    The variable TCR_TEST_EXIT_STATUS should eq 66
+                End
 
                 It 'It reverts the changes'
+                    Pending 'Needs implementation'
+
                     When call tcr run
                     The output should eq 'Reverting changes'
                 End
 
+                # Todo it revert changes after the test command (call order)
+
                 It 'It plays the failure sound'
+                    Pending 'Needs implementation'
+
                     When call tcr run
                     The output should eq 'Playing failure sound'
                 End
@@ -69,13 +91,12 @@ Describe 'tcr run'
         End
 
         Describe 'When the build command fails'
-            TEST_COMMAND_EXIT_STATUS=99
+            TCR_RUN_BUILD_COMMAND_EXIT_STATUS=99
 
             It 'It raises an error'
                 When call tcr run
-                The error should eq '[TCR Error] Build failed with status 99'
+                The error should eq '[TCR Error] Building failed with status 99'
                 The variable TCR_TEST_EXIT_STATUS should eq 99
-                The status should eq 99
             End
 
             It 'It plays the failure sound'
