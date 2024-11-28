@@ -22,6 +22,8 @@ tcr_action_run() {
             else
                 error_code="$error_code_testing"
             fi
+        else
+            run_command "$TCR_RUN_COMMIT_COMMAND"
         fi
     fi
 

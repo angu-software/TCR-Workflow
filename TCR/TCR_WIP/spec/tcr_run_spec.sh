@@ -22,12 +22,14 @@ Describe 'tcr run'
     TCR_RUN_TEST_COMMAND='echo "Running test command"'
     TCR_RUN_TEST_COMMAND_EXIT_STATUS=0
 
+    TCR_RUN_COMMIT_COMMAND='echo "Committing changes"'
+    TCR_RUN_COMMIT_COMMAND_EXIT_STATUS=0
+
     TCR_RUN_REVERT_COMMAND='echo "Reverting changes"'
     TCR_RUN_REVERT_COMMAND_EXIT_STATUS=0
 
     run_command() {
         new_command="$1"
-        TEST_COMMAND_SEQUENCE=$'$TEST_COMMAND_SEQUENCE\n$new_command'
 
         if [ "$new_command" == "$TCR_RUN_BUILD_COMMAND" ]; then
             TCR_RUN_BUILD_EXECUTED_COMMAND="$new_command"
@@ -38,6 +40,9 @@ Describe 'tcr run'
         elif [ "$new_command" == "$TCR_RUN_REVERT_COMMAND" ]; then
             TCR_RUN_REVERT_EXECUTED_COMMAND="$new_command"
             return $TCR_RUN_REVERT_COMMAND_EXIT_STATUS
+        elif [ "$new_command" == "$TCR_RUN_COMMIT_COMMAND" ]; then
+            TCR_RUN_COMMIT_EXECUTED_COMMAND="$new_command"
+            return $TCR_RUN_COMMIT_COMMAND_EXIT_STATUS
         fi
     }
 
@@ -55,11 +60,9 @@ Describe 'tcr run'
             End
 
             Describe 'When the test command succeeds'
-                Pending 'Needs implementation'
-
                 It 'It commits the changes'
                     When call tcr run
-                    The output should eq 'Committing changes'
+                    The variable TCR_RUN_COMMIT_EXECUTED_COMMAND should eq 'echo "Committing changes"'
                 End
             End
 
