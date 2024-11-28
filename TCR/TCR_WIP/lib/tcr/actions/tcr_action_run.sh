@@ -11,7 +11,13 @@ tcr_action_run() {
     if [ $error_code -eq 0 ]; then
         subject='Testing'
         execute_test_command
-        error_code=$?
+        error_code_testing=$?
+
+        if [ "$error_code_testing" -ne 0 ]; then
+            execute_revert_command
+        fi
+
+        error_code="$error_code_testing"
     fi
 
     handle_error "$error_code" "$subject"
@@ -32,6 +38,10 @@ execute_build_command() {
 
 execute_test_command() {
     run_command "$TCR_RUN_TEST_COMMAND"
+}
+
+execute_revert_command() {
+    run_command "$TCR_RUN_REVERT_COMMAND"
 }
 
 make_run_command_error() {

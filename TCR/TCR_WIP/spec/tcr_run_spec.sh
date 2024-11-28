@@ -21,9 +21,12 @@ Describe 'tcr run'
     TCR_RUN_TEST_COMMAND='echo "Running test command"'
     TCR_RUN_TEST_COMMAND_EXIT_STATUS=0
 
+    TCR_RUN_REVERT_COMMAND='echo "Reverting changes"'
+    TCR_RUN_REVERT_COMMAND_EXIT_STATUS=0
+
     run_command() {
         new_command="$1"
-        TEST_EXECUTED_COMMAND="$TEST_EXECUTED_COMMAND|$new_command"
+        TEST_COMMAND_SEQUENCE=$'$TEST_COMMAND_SEQUENCE\n$new_command'
 
         if [ "$new_command" == "$TCR_RUN_BUILD_COMMAND" ]; then
             TCR_RUN_BUILD_EXECUTED_COMMAND="$new_command"
@@ -31,6 +34,9 @@ Describe 'tcr run'
         elif [ "$new_command" == "$TCR_RUN_TEST_COMMAND" ]; then
             TCR_RUN_TEST_EXECUTED_COMMAND="$new_command"
             return $TCR_RUN_TEST_COMMAND_EXIT_STATUS
+        elif [ "$new_command" == "$TCR_RUN_REVERT_COMMAND" ]; then
+            TCR_RUN_REVERT_EXECUTED_COMMAND="$new_command"
+            return $TCR_RUN_REVERT_COMMAND_EXIT_STATUS
         fi
     }
 
@@ -66,19 +72,19 @@ Describe 'tcr run'
             Describe 'When the test command fails'
                 TCR_RUN_TEST_COMMAND_EXIT_STATUS=66
 
-                It 'raises an error'
+                It 'It raises an error'
                     When call tcr run
                     The error should eq '[TCR Error] Testing failed with status 66'
                     The variable TCR_TEST_EXIT_STATUS should eq 66
                 End
 
                 It 'It reverts the changes'
-                    Pending 'Needs implementation'
-
                     When call tcr run
-                    The output should eq 'Reverting changes'
+                    The error should be present
+                    The variable TCR_RUN_REVERT_EXECUTED_COMMAND should eq 'echo "Reverting changes"'
                 End
 
+                # Todo it tells that it reverts the changes
                 # Todo it revert changes after the test command (call order)
 
                 It 'It plays the failure sound'
@@ -98,6 +104,8 @@ Describe 'tcr run'
                 The error should eq '[TCR Error] Building failed with status 99'
                 The variable TCR_TEST_EXIT_STATUS should eq 99
             End
+
+            # Todo it should not revert the changes
 
             It 'It plays the failure sound'
                 Pending 'Needs implementation'
