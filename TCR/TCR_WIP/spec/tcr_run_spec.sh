@@ -57,11 +57,25 @@ Describe 'tcr run'
             The variable TCR_RUN_BUILD_EXECUTED_COMMAND should eq 'echo "Running build command"'
         End
 
+        It 'It tells that it builds the changes'
+            unset TCR_OUTPUT_SILENT
+
+            When call tcr run
+            The output should include '[TCR] Building changes'
+        End
+
         Describe 'When the build command succeeds'
             
             It 'It runs the test command'
                 When call tcr run
                 The variable TCR_RUN_TEST_EXECUTED_COMMAND should eq 'echo "Running test command"'
+            End
+
+            It 'It tells that it runs the tests'
+                unset TCR_OUTPUT_SILENT
+
+                When call tcr run
+                The output should include '[TCR] Testing changes'
             End
 
             Describe 'When the test command succeeds'
@@ -74,7 +88,7 @@ Describe 'tcr run'
                     unset TCR_OUTPUT_SILENT
 
                     When call tcr run
-                    The output should eq '[TCR] Committing changes'
+                    The output should include '[TCR] Committing changes'
                     The error should not be present
                 End
 
@@ -117,7 +131,7 @@ Describe 'tcr run'
                     unset TCR_OUTPUT_SILENT
 
                     When call tcr run
-                    The output should eq '[TCR] Reverting changes'
+                    The output should include '[TCR] Reverting changes'
                     The error should be present
                 End
 
@@ -143,6 +157,7 @@ Describe 'tcr run'
                 unset TCR_OUTPUT_SILENT
 
                 When call tcr run
+                The output should be present
                 The error should eq '[TCR Error] Building failed with status 99'
                 The variable TCR_TEST_EXIT_STATUS should eq 99
             End

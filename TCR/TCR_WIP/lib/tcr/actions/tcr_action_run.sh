@@ -45,19 +45,23 @@ handle_error() {
 
 execute_phase() {
     phase="$1"
-    
+
+    execute_phase_command "$phase" "$(command_for_phase)"
+}
+
+command_for_phase() {
     case "$phase" in
         'Building')
-            execute_phase_command '' "$TCR_RUN_BUILD_COMMAND"
+            echo "$TCR_RUN_BUILD_COMMAND"
             ;;
         'Testing')
-            execute_phase_command '' "$TCR_RUN_TEST_COMMAND"
+            echo "$TCR_RUN_TEST_COMMAND"
             ;;
         'Reverting')
-            execute_phase_command "$phase" "$TCR_RUN_REVERT_COMMAND"
+            echo "$TCR_RUN_REVERT_COMMAND"
             ;;
         'Committing')
-            execute_phase_command "$phase" "$TCR_RUN_COMMIT_COMMAND"
+            echo "$TCR_RUN_COMMIT_COMMAND"
             ;;
     esac
 }
