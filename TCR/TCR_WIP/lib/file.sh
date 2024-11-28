@@ -24,3 +24,10 @@ file_set_content() {
 
     echo "$content" > "$file_path"
 }
+
+file_find() {
+    local search_dir="$1"
+    local file_name_glob="$2"
+
+    find "$search_dir" -maxdepth 1 -type f -name "$file_name_glob"
+}
