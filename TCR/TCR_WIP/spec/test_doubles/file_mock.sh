@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "./lib/condition_tests.sh"
+
 touch() {
     TCR_TEST_FILE_CREATE_PATH="$1"
 }
@@ -9,7 +11,7 @@ rm() {
 }
 
 file_is_existing() {
-    [ -n "$TCR_TEST_FILE_CREATE_PATH" ]
+    is_set "$TCR_TEST_FILE_CREATE_PATH"
 }
 
 file_set_content() {

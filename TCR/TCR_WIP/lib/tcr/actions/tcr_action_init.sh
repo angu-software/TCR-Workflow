@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "$TCR_HOME/lib/foundation.sh"
+
 TCR_ACTION_INIT='init'
 
 # Create template config

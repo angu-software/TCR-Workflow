@@ -5,6 +5,7 @@ TCR_HOME="${TCR_HOME:-"$(cd "$(dirname "$0")" && pwd)"}"
 
 TCR_WORK_DIRECTORY="${TCR_WORK_DIRECTORY:-"$(pwd)"}"
 
+source "$TCR_HOME/lib/foundation.sh"
 source "$TCR_HOME/lib/tcr/actions.sh"
 
 tcr() {

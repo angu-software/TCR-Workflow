@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "$TCR_HOME/lib/foundation.sh"
+
 TCR_ACTION_RUN='run'
 
 TCR_ACTION_RUN_PHASE_BUILD='Building'
@@ -88,7 +90,7 @@ execute_phase_command() {
     phase="$1"
     command="$2"
 
-    if [ -n "$phase" ]; then
+    if is_set "$phase"; then
         print_status "$phase changes"
     fi
     run_command "$command"

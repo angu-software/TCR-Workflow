@@ -48,7 +48,7 @@ Describe 'tcr run'
     }
 
     tcr_is_enabled() {
-        [ -z "$TEST_TCR_DISABLED" ]
+        is_unset "$TEST_TCR_DISABLED"
     }
 
     Describe 'When executing tcr with run action'

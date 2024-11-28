@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$TCR_HOME/lib/print.sh"
+source "$TCR_HOME/lib/foundation.sh"
 source "$TCR_HOME/lib/lock_file.sh"
 
 TCR_ACTION_DISABLE='disable'

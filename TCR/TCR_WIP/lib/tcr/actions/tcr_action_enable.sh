@@ -1,7 +1,6 @@
 #!/bin/bash
 
-source "$TCR_HOME/lib/print.sh"
-source "$TCR_HOME/lib/lock_file.sh"
+source "$TCR_HOME/lib/foundation.sh"
 source "$TCR_HOME/lib/tcr/error_consts.sh"
 
 TCR_ACTION_ENABLE='enable'

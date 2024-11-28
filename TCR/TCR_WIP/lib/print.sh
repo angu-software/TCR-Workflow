@@ -3,6 +3,8 @@
 # set TCR_OUTPUT_SILENT to silence the output
 # usually used for testing
 
+source "$TCR_HOME/lib/condition_tests.sh"
+
 TCR_OUTPUT_STDOUT='>&1'
 TCR_OUTPUT_STDERR='>&2'
 
@@ -12,7 +14,7 @@ print() {
     local message="$1"
     local output="${2:-$TCR_OUTPUT_STDOUT}"
 
-    if [ -n "$TCR_OUTPUT_SILENT" ]; then
+    if is_set "$TCR_OUTPUT_SILENT"; then
         return
     fi
     
