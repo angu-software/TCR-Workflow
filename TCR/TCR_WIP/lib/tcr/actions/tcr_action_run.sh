@@ -41,6 +41,7 @@ execute_test_command() {
 }
 
 execute_revert_command() {
+    print_status 'Reverting changes'
     run_command "$TCR_RUN_REVERT_COMMAND"
 }
 

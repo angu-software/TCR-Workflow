@@ -7,6 +7,7 @@ source './spec/test_doubles/exit_mock.sh'
 Describe 'tcr run'
 
     setup() {
+        TCR_OUTPUT_SILENT='true'
         setup_exit_mock
     }
     teardown() {
@@ -73,18 +74,32 @@ Describe 'tcr run'
                 TCR_RUN_TEST_COMMAND_EXIT_STATUS=66
 
                 It 'It raises an error'
+                    unset TCR_OUTPUT_SILENT
+
                     When call tcr run
+                    The output should be present
                     The error should eq '[TCR Error] Testing failed with status 66'
                     The variable TCR_TEST_EXIT_STATUS should eq 66
                 End
 
                 It 'It reverts the changes'
+                    unset TCR_OUTPUT_SILENT
+
                     When call tcr run
+                    The output should be present
                     The error should be present
                     The variable TCR_RUN_REVERT_EXECUTED_COMMAND should eq 'echo "Reverting changes"'
                 End
 
-                # Todo it tells that it reverts the changes
+                It 'It tells that it reverts the changes'
+                    unset TCR_OUTPUT_SILENT
+
+                    When call tcr run
+                    The output should eq '[TCR] Reverting changes'
+                    The error should be present
+                End
+
+                # Todo If revert command fails it also raises an error)
                 # Todo it revert changes after the test command (call order)
 
                 It 'It plays the failure sound'
@@ -100,6 +115,8 @@ Describe 'tcr run'
             TCR_RUN_BUILD_COMMAND_EXIT_STATUS=99
 
             It 'It raises an error'
+                unset TCR_OUTPUT_SILENT
+
                 When call tcr run
                 The error should eq '[TCR Error] Building failed with status 99'
                 The variable TCR_TEST_EXIT_STATUS should eq 99
