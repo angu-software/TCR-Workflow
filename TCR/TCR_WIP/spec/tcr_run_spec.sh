@@ -41,7 +41,9 @@ Describe 'tcr run'
         fi
     }
 
-    #Todo 'tcr run fails with the error code of the executed command after resetting the changes'
+    # tcr fails with the last occurred error code
+    # tcr skips comand phase when command is not specified (VAR empty or unset)
+    # tcr tells when it skipps a command phase
 
     Describe 'When executing tcr with run action'
         It 'It runs the build command'
@@ -99,7 +101,19 @@ Describe 'tcr run'
                     The error should be present
                 End
 
-                # Todo If revert command fails it also raises an error)
+                Context 'When the revert command is failing'
+                    TCR_RUN_REVERT_COMMAND_EXIT_STATUS=77
+
+                    It 'It raises an error'
+                        unset TCR_OUTPUT_SILENT
+
+                        When call tcr run
+                        The output should be present
+                        The error should eq '[TCR Error] Reverting failed with status 77'
+                        The variable TCR_TEST_EXIT_STATUS should eq 77
+                    End
+                End
+
                 # Todo it revert changes after the test command (call order)
 
                 It 'It plays the failure sound'

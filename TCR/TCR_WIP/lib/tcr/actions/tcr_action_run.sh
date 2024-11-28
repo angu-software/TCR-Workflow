@@ -15,9 +15,14 @@ tcr_action_run() {
 
         if [ "$error_code_testing" -ne 0 ]; then
             execute_revert_command
+            error_code_revert=$?
+            if [ "$error_code_revert" -ne 0 ]; then
+                subject='Reverting'
+                error_code="$error_code_revert"
+            else
+                error_code="$error_code_testing"
+            fi
         fi
-
-        error_code="$error_code_testing"
     fi
 
     handle_error "$error_code" "$subject"
