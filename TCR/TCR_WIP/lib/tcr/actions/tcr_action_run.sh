@@ -14,7 +14,7 @@ TCR_ACTION_RUN_CFG_PATH=''
 
 tcr_action_run() {
 
-    TCR_ACTION_RUN_CFG_PATH=$(config_file_find_in_dir "$TCR_WORK_DIRECTORY")
+    TCR_ACTION_RUN_CFG_PATH=$(config_file_find_first_in_dir "$TCR_WORK_DIRECTORY")
 
     execution_phase="$TCR_ACTION_RUN_PHASE_BUILD"
     execute_phase "$execution_phase"

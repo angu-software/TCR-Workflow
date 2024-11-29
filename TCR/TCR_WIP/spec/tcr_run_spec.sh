@@ -53,7 +53,10 @@ Describe 'tcr run'
 
     TEST_CFG_FILE_PATH='/current/work/directory/tcr.tcrcfg'
     config_file_find_in_dir() {
-        echo "$TEST_CFG_FILE_PATH"
+        cat <<-FILE_LIST
+$TEST_CFG_FILE_PATH
+$TEST_CFG_FILE_PATH
+FILE_LIST
     }
 
     Describe 'When executing tcr with run action'
