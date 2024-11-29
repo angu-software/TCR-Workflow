@@ -51,7 +51,24 @@ Describe 'tcr run'
         is_unset "$TEST_TCR_DISABLED"
     }
 
+    TEST_CFG_FILE_PATH='/current/work/directory/tcr.tcrcfg'
+    config_file_find_in_dir() {
+        echo "$TEST_CFG_FILE_PATH"
+    }
+
     Describe 'When executing tcr with run action'
+
+        It 'It searches for a tcr configuration file in the current work directory'
+            When call tcr run
+            The variable TCR_ACTION_RUN_CFG_PATH should eq "$TEST_CFG_FILE_PATH"
+        End
+
+        # When a cfg file was found
+        # it reads its contained commands from the first found file
+        # it runs the build command ...
+        # When no cfg file was found
+        # It raises an error
+
         It 'It runs the build command'
             When call tcr run
             The variable TCR_RUN_BUILD_EXECUTED_COMMAND should eq 'echo "Running build command"'

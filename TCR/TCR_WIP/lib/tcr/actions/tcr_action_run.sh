@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source "$TCR_HOME/lib/foundation.sh"
+source "$TCR_HOME/lib/tcr/config_file.sh"
 
 TCR_ACTION_RUN='run'
 
@@ -9,7 +10,11 @@ TCR_ACTION_RUN_PHASE_TEST='Testing'
 TCR_ACTION_RUN_PHASE_COMMIT='Committing'
 TCR_ACTION_RUN_PHASE_REVERT='Reverting'
 
+TCR_ACTION_RUN_CFG_PATH=''
+
 tcr_action_run() {
+
+    TCR_ACTION_RUN_CFG_PATH=$(config_file_find_in_dir "$TCR_WORK_DIRECTORY")
 
     execution_phase="$TCR_ACTION_RUN_PHASE_BUILD"
     execute_phase "$execution_phase"
@@ -96,6 +101,7 @@ execute_phase_command() {
     run_command "$command"
 }
 
+# TODO: move to condition_tests.sh
 is_success() {
     [ "$1" -eq 0 ]
 }
