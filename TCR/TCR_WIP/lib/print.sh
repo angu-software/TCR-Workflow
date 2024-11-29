@@ -1,14 +1,19 @@
 #!/bin/bash
 
-# set TCR_OUTPUT_SILENT to silence the output
-# usually used for testing
-
 source "$TCR_HOME/lib/condition_tests.sh"
 
 TCR_OUTPUT_STDOUT='>&1'
 TCR_OUTPUT_STDERR='>&2'
 
 TCR_OUTPUT_STATUS_MSG_PREFIX='[TCR]'
+
+print_set_quiet() {
+    TCR_OUTPUT_SILENT='true'
+}
+
+print_unset_quiet() {
+    unset TCR_OUTPUT_SILENT
+}
 
 print() {
     local message="$1"

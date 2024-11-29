@@ -7,12 +7,12 @@ source './spec/test_doubles/exit_mock.sh'
 Describe 'tcr run'
 
     setup() {
-        TCR_OUTPUT_SILENT='true'
+        print_set_quiet
         unset $TEST_TCR_DISABLED
         setup_exit_mock
     }
     teardown() {
-        setup_exit_mock
+        teardown_exit_mock
     }
     BeforeEach 'setup'
     AfterEach 'teardown'
@@ -66,8 +66,16 @@ FILE_LIST
             The variable TCR_ACTION_RUN_CFG_PATH should eq "$TEST_CFG_FILE_PATH"
         End
 
-        # When no cfg file was found
-        # It raises an error
+        Context 'When no cfg file was found'
+            It 'It raises an error'
+                print_unset_quiet
+                unset TEST_CFG_FILE_PATH
+                    
+                When call tcr run
+                The error should eq '[TCR Error] No configuration file found'
+                The variable TCR_TEST_EXIT_STATUS should eq 20
+            End
+        End
 
         Context 'When a config file was found'
         # When a cfg file was found
