@@ -17,32 +17,26 @@ Describe 'tcr run'
     BeforeEach 'setup'
     AfterEach 'teardown'
 
-    TCR_RUN_BUILD_COMMAND_EXIT_STATUS=0
-    
-    TCR_RUN_TEST_COMMAND='echo "Running test command"'
-    TCR_RUN_TEST_COMMAND_EXIT_STATUS=0
-
-    TCR_RUN_COMMIT_COMMAND='echo "Committing changes"'
-    TCR_RUN_COMMIT_COMMAND_EXIT_STATUS=0
-
-    TCR_RUN_REVERT_COMMAND='echo "Reverting changes"'
-    TCR_RUN_REVERT_COMMAND_EXIT_STATUS=0
+    TEST_TCR_BUILD_CMD_EXIT_STATUS=0
+    TEST_TCR_TEST_CMD_EXIT_STATUS=0
+    TEST_TCR_COMMIT_CMD_EXIT_STATUS=0
+    TEST_TCR_REVERT_CMD_EXIT_STATUS=0
 
     run_command() {
         new_command="$1"
 
         if [ "$new_command" == "$TCR_BUILD_CMD" ]; then
             TCR_RUN_BUILD_EXECUTED_COMMAND="$new_command"
-            return $TCR_RUN_BUILD_COMMAND_EXIT_STATUS
-        elif [ "$new_command" == "$TCR_RUN_TEST_COMMAND" ]; then
+            return $TEST_TCR_BUILD_CMD_EXIT_STATUS
+        elif [ "$new_command" == "$TCR_TEST_CMD" ]; then
             TCR_RUN_TEST_EXECUTED_COMMAND="$new_command"
-            return $TCR_RUN_TEST_COMMAND_EXIT_STATUS
-        elif [ "$new_command" == "$TCR_RUN_REVERT_COMMAND" ]; then
+            return $TEST_TCR_TEST_CMD_EXIT_STATUS
+        elif [ "$new_command" == "$TCR_REVERT_CMD" ]; then
             TCR_RUN_REVERT_EXECUTED_COMMAND="$new_command"
-            return $TCR_RUN_REVERT_COMMAND_EXIT_STATUS
-        elif [ "$new_command" == "$TCR_RUN_COMMIT_COMMAND" ]; then
+            return $TEST_TCR_REVERT_CMD_EXIT_STATUS
+        elif [ "$new_command" == "$TCR_COMMIT_CMD" ]; then
             TCR_RUN_COMMIT_EXECUTED_COMMAND="$new_command"
-            return $TCR_RUN_COMMIT_COMMAND_EXIT_STATUS
+            return $TEST_TCR_COMMIT_CMD_EXIT_STATUS
         fi
     }
 
@@ -78,9 +72,9 @@ FILE_LIST
 
         Context 'When a config file was found'
 
-            It 'It runs the build command'
+            It 'It runs the build command from the loaded config'
                 When call tcr run
-                The variable TCR_BUILD_CMD should eq 'echo "Running build command"'
+                The variable TCR_RUN_BUILD_EXECUTED_COMMAND should eq "$TCR_BUILD_CMD"
             End
 
             It 'It tells that it builds the changes'
@@ -92,9 +86,9 @@ FILE_LIST
 
             Describe 'When the build command succeeds'
                 
-                It 'It runs the test command'
+                It 'It runs the test command from the loaded config'
                     When call tcr run
-                    The variable TCR_RUN_TEST_EXECUTED_COMMAND should eq 'echo "Running test command"'
+                    The variable TCR_RUN_TEST_EXECUTED_COMMAND should eq "$TCR_TEST_CMD"
                 End
 
                 It 'It tells that it runs the tests'
@@ -105,9 +99,9 @@ FILE_LIST
                 End
 
                 Describe 'When the test command succeeds'
-                    It 'It commits the changes'
+                    It 'It commits the changes using the command from the config'
                         When call tcr run
-                        The variable TCR_RUN_COMMIT_EXECUTED_COMMAND should eq 'echo "Committing changes"'
+                        The variable TCR_RUN_COMMIT_EXECUTED_COMMAND should eq "$TCR_COMMIT_CMD"
                     End
 
                     It 'It tells that it commits the changes'
@@ -119,7 +113,7 @@ FILE_LIST
                     End
 
                     Context 'When the commit command is failing'
-                        TCR_RUN_COMMIT_COMMAND_EXIT_STATUS=88
+                        TEST_TCR_COMMIT_CMD_EXIT_STATUS=88
 
                         It 'It raises an error'
                             unset TCR_OUTPUT_SILENT
@@ -133,7 +127,7 @@ FILE_LIST
                 End
 
                 Describe 'When the test command fails'
-                    TCR_RUN_TEST_COMMAND_EXIT_STATUS=66
+                    TEST_TCR_TEST_CMD_EXIT_STATUS=66
 
                     It 'It raises an error'
                         unset TCR_OUTPUT_SILENT
@@ -144,13 +138,13 @@ FILE_LIST
                         The variable TCR_TEST_EXIT_STATUS should eq 66
                     End
 
-                    It 'It reverts the changes'
+                    It 'It reverts the changes using the command from the loaded config'
                         unset TCR_OUTPUT_SILENT
 
                         When call tcr run
                         The output should be present
                         The error should be present
-                        The variable TCR_RUN_REVERT_EXECUTED_COMMAND should eq 'echo "Reverting changes"'
+                        The variable TCR_RUN_REVERT_EXECUTED_COMMAND should eq "$TCR_REVERT_CMD"
                     End
 
                     It 'It tells that it reverts the changes'
@@ -162,7 +156,7 @@ FILE_LIST
                     End
 
                     Context 'When the revert command is failing'
-                        TCR_RUN_REVERT_COMMAND_EXIT_STATUS=77
+                        TEST_TCR_REVERT_CMD_EXIT_STATUS=77
 
                         It 'It raises an error'
                             unset TCR_OUTPUT_SILENT
@@ -178,7 +172,7 @@ FILE_LIST
         End
 
         Describe 'When the build command fails'
-            TCR_RUN_BUILD_COMMAND_EXIT_STATUS=99
+            TEST_TCR_BUILD_CMD_EXIT_STATUS=99
 
             It 'It raises an error'
                 unset TCR_OUTPUT_SILENT

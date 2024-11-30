@@ -16,6 +16,9 @@
 [ ] TCR skips comand phase when command is not specified (VAR empty or unset)
 [ ] TCR tells when it skips a command phase
 [ ] TCR plays success and failure sounds (usefull when execution is based on folder changes)
+[ ] cfg Templates for TCR variants
+  [ ] TCR commit, stash
+  [ ] TCR stage, revert unstaged
 
 ## Done
 

@@ -79,16 +79,16 @@ execute_phase() {
 command_for_phase() {
     case "$phase" in
         "$TCR_ACTION_RUN_PHASE_BUILD")
-            echo "$TCR_RUN_BUILD_COMMAND"
+            echo "$TCR_BUILD_CMD"
             ;;
         "$TCR_ACTION_RUN_PHASE_TEST")
-            echo "$TCR_RUN_TEST_COMMAND"
+            echo "$TCR_TEST_CMD"
             ;;
         "$TCR_ACTION_RUN_PHASE_REVERT")
-            echo "$TCR_RUN_REVERT_COMMAND"
+            echo "$TCR_REVERT_CMD"
             ;;
         "$TCR_ACTION_RUN_PHASE_COMMIT")
-            echo "$TCR_RUN_COMMIT_COMMAND"
+            echo "$TCR_COMMIT_CMD"
             ;;
     esac
 }
