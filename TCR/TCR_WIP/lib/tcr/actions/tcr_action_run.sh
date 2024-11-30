@@ -22,6 +22,8 @@ tcr_action_run() {
         return
     fi
 
+    source "$TCR_ACTION_RUN_CFG_PATH"
+
     execution_phase="$TCR_ACTION_RUN_PHASE_BUILD"
     execute_phase "$execution_phase"
     phase_error_code=$?

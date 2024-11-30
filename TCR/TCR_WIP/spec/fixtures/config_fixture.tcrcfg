@@ -1,0 +1,15 @@
+# TCR Configuration File
+# TCR version: 0.1.0
+
+# Build command
+export TCR_BUILD_CMD
+TCR_BUILD_CMD="echo \"Running build command\""
+
+# Test command
+TCR_TEST_CMD="echo Testing"
+
+# Commit command
+TCR_COMMIT_CMD="echo Committing"
+
+# Revert command
+TCR_REVERT_CMD="echo Reverting"

@@ -17,7 +17,6 @@ Describe 'tcr run'
     BeforeEach 'setup'
     AfterEach 'teardown'
 
-    TCR_RUN_BUILD_COMMAND='echo "Running build command"'
     TCR_RUN_BUILD_COMMAND_EXIT_STATUS=0
     
     TCR_RUN_TEST_COMMAND='echo "Running test command"'
@@ -32,7 +31,7 @@ Describe 'tcr run'
     run_command() {
         new_command="$1"
 
-        if [ "$new_command" == "$TCR_RUN_BUILD_COMMAND" ]; then
+        if [ "$new_command" == "$TCR_BUILD_CMD" ]; then
             TCR_RUN_BUILD_EXECUTED_COMMAND="$new_command"
             return $TCR_RUN_BUILD_COMMAND_EXIT_STATUS
         elif [ "$new_command" == "$TCR_RUN_TEST_COMMAND" ]; then
@@ -51,7 +50,7 @@ Describe 'tcr run'
         is_unset "$TEST_TCR_DISABLED"
     }
 
-    TEST_CFG_FILE_PATH='/current/work/directory/tcr.tcrcfg'
+    TEST_CFG_FILE_PATH='./spec/fixtures/config_fixture.tcrcfg'
     config_file_find_in_dir() {
         cat <<-FILE_LIST
 $TEST_CFG_FILE_PATH
@@ -78,13 +77,10 @@ FILE_LIST
         End
 
         Context 'When a config file was found'
-        # When a cfg file was found
-        # it reads its contained commands from the first found file
-        # it runs the build command ...
 
             It 'It runs the build command'
                 When call tcr run
-                The variable TCR_RUN_BUILD_EXECUTED_COMMAND should eq 'echo "Running build command"'
+                The variable TCR_BUILD_CMD should eq 'echo "Running build command"'
             End
 
             It 'It tells that it builds the changes'
