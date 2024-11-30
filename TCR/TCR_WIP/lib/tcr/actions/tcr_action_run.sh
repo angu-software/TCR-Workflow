@@ -109,11 +109,6 @@ execute_phase_command() {
     run_command "$command"
 }
 
-# TODO: move to condition_tests.sh
-is_success() {
-    [ "$1" -eq 0 ]
-}
-
 run_command() {
     eval "*@"
 }
