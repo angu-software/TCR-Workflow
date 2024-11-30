@@ -14,5 +14,10 @@ tcr_action_init() {
         return
     fi
 
+    create_config_template
+}
+
+create_config_template() {
+    print_status "Generating template configuration $(config_file_template_file_name)"
     config_file_create_template
 }

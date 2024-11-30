@@ -2,11 +2,8 @@
 
 ## In progress
 
-[ ] TCR runs on a config file
-
 ## Open
 
-[ ] trc init tells that is created a template file
 [ ] Path to a config file can be specified when tcr run is executed
 [ ] Optional config name can be passed as argument when creating a template cfg
 [ ] More documentation on the commands specified on the config template
@@ -22,5 +19,9 @@
 
 ## Done
 
-~~[x] TCR fails with the last occurred error code~~
+~~[x] trc init tells that is created a template file~~
+~~[x] TCR runs on a config file~~
 ~~[x] TCR offers to generate a config template~~
+~~[x] TCR fails with the last occurred error code~~
+
+

@@ -10,6 +10,7 @@ source './spec/test_doubles/file_mock.sh'
 Describe 'tcr init'
 
     setup() {
+        print_set_quiet
         setup_exit_mock
         setup_file_mock
         unset TEST_CFG_EXISTS
@@ -25,6 +26,13 @@ Describe 'tcr init'
         It 'It creates a template config in the working directory'
             When call tcr init
             The variable TCR_TEST_FILE_CREATE_PATH should eq '/current/work/directory/tcr.tcrcfg'
+        End
+
+        It 'It tells that it creates an cfg template'
+            print_unset_quiet
+
+            When call tcr init
+            The output should eq '[TCR] Generating template configuration 'tcr.tcrcfg''
         End
 
         It 'It writes config template content to the config file'
@@ -53,6 +61,7 @@ CONFIG
         Context 'When config file already exists'
             It 'It raises an error'
                 TEST_CFG_EXISTS='true'
+                print_unset_quiet
             
                 When call tcr init
                 The error should eq '[TCR Error] Config file already exists'

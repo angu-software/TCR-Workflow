@@ -6,12 +6,9 @@ source "$TCR_HOME/lib/foundation.sh"
 TCR_CONFIG_FILE_EXTENSION='.tcrcfg'
 TCR_CONFIG_FILE_DEFAULT_NAME='tcr'
 
-config_file_create() {
-    local config_name
-    config_name="${TCR_CONFIG_FILE_DEFAULT_NAME}${TCR_CONFIG_FILE_EXTENSION}"
-    
+config_file_create() {  
     local config_path
-    config_path="$(path_join "$TCR_WORK_DIRECTORY" "$config_name")"
+    config_path="$(path_join "$TCR_WORK_DIRECTORY" "$(config_file_template_file_name)")"
 
     file_create "$config_path"
 }
@@ -52,6 +49,10 @@ config_file_template_file_path() {
     config_name="${TCR_CONFIG_FILE_DEFAULT_NAME}${TCR_CONFIG_FILE_EXTENSION}"
     
     path_join "$TCR_WORK_DIRECTORY" "$config_name"
+}
+
+config_file_template_file_name() {
+    echo "${TCR_CONFIG_FILE_DEFAULT_NAME}${TCR_CONFIG_FILE_EXTENSION}"
 }
 
 config_file_template_content() {
