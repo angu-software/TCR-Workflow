@@ -4,9 +4,7 @@
 
 ## Open
 
-[ ] Move tcr to its own workspace/git repo
-  [ ] create README.md with expales
-[ ] TCR raises an error if no parameters are specified
+[ ] create README.md with expales
 [ ] TCR status action. Shows if tcr is enabled or disabled
 [ ] TCR commands help
 
@@ -27,6 +25,8 @@
 
 ## Done
 
+[x] TCR raises an error if no parameters are specified
+[x] Move tcr to its own workspace/git repo
 [x] TCR skips comand phase when command is not specified (VAR empty or unset)
 [x] TCR tells when it skips a command phase
 [x] trc init tells that is created a template file

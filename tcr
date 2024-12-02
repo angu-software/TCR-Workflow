@@ -11,6 +11,11 @@ source "$TCR_HOME/lib/tcr/actions.sh"
 tcr() {
     local action="$1"
 
+    if is_unset "$action"; then
+        error_raise "$TCR_ERROR_TCR_ARGUMENTS_MISSING"
+        return
+    fi
+
     case "$action" in
         "$TCR_ACTION_ENABLE")
             tcr_action_enable
