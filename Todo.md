@@ -5,7 +5,6 @@
 ## Open
 
 [ ] create README.md with expales
-[ ] TCR status action. Shows if tcr is enabled or disabled
 [ ] TCR commands help
 
 [ ] More documentation on the commands specified on the config template
@@ -25,6 +24,7 @@
 
 ## Done
 
+[x] TCR status action. Shows if tcr is enabled or disabled
 [x] TCR raises an error if no parameters are specified
 [x] Move tcr to its own workspace/git repo
 [x] TCR skips comand phase when command is not specified (VAR empty or unset)

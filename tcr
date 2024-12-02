@@ -34,6 +34,9 @@ tcr() {
         "$TCR_ACTION_INIT")
             tcr_action_init
             ;;
+        "$TCR_ACTION_STATUS")
+            tcr_action_status
+            ;;
         *)
             error_raise "$TCR_ERROR_TCR_UNKNOWN_ACTION"
         ;;
