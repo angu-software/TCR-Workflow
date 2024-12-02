@@ -84,6 +84,23 @@ FILE_LIST
                 The output should include '[TCR] Building changes'
             End
 
+            Context 'When no build command is set in the cfg file'
+                TEST_CFG_FILE_PATH='./spec/fixtures/config_fixture_no_build_cmd.tcrcfg'
+
+                It 'It skipps the build phase'
+                    When call tcr run
+                    The variable TCR_RUN_BUILD_EXECUTED_COMMAND should be blank
+                End
+
+                It 'It tells that it is skipping the build command'
+                    print_unset_quiet
+
+                    When call tcr run
+                    The output should include '[TCR] Skipping Building phase'
+                    The output should not include '[TCR] Building changes'
+                End
+            End
+
             Describe 'When the build command succeeds'
                 
                 It 'It runs the test command from the loaded config'

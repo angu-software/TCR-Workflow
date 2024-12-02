@@ -103,6 +103,11 @@ execute_phase_command() {
     phase="$1"
     command="$2"
 
+    if is_unset "$command"; then
+        print_status "Skipping $phase phase"
+        return
+    fi
+
     if is_set "$phase"; then
         print_status "$phase changes"
     fi
