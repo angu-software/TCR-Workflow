@@ -2,13 +2,13 @@
 
 ## In progress
 
-* [ ] Installation guide in readme for TCR
+* [x] Installation guide in readme for TCR
 
 ## Open
 
-* [ ] Installation guide in readme for TCR
 * [ ] TCR commands help
 
+* [ ] Install/Uninstall script, creating a symlink (account for symlink resolving TCR_HOME path)
 * [ ] More documentation on the commands specified on the config * template
   * [ ] Build command is options, in case nothing needs to be build (comment by default?)
 * [ ] Watch content of directly for changes to trigger tcr
