@@ -1,3 +1,6 @@
-# TCR
+# TCR: Test Commit || Revert
 
-TCR: Test Commit || Revert; Software development workflow for devs who love to challenge there own coding skills.
+<!-- Status Badges -->
+[![Development Tests](https://github.com/angu-software/TCR-Workflow/actions/workflows/DevelopmentTests.yml/badge.svg)](https://github.com/angu-software/TCR-Workflow/actions/workflows/DevelopmentTests.yml)
+
+Software development workflow for devs who love to challenge there own coding skills.
