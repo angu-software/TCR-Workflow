@@ -5,6 +5,16 @@
 
 Software development workflow for devs who love to challenge there own coding skills.
 
+## Installation
+
+Clone the repo or download one of the release artifacts and store it at a location of your choice on your machine.
+
+To invoke TCR specify the path to the `tcr` executable from your working directory.
+
+```text
+~/My_Repos/Cool_Project &> ~/tools/TCR-Workflow/tcr init
+```
+
 ## Quick start
 
 ### Preparing TCR
