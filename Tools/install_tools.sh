@@ -15,6 +15,11 @@ install_tool() {
 
     echo "Installing ${TOOL_NAME} ${TOOL_VERSION}..."
 
+    if ! [ -f "${TOOLS_BIN_DIR}" ]; then
+        echo "Creating ${TOOLS_BIN_DIR}"
+        mkdir -p ${TOOLS_BIN_DIR}
+    fi
+
     # Download tools
     curl -L -o ${DOWNLOAD_DIR}/${TOOL_ARCHIVE} ${TOOL_URL}
 
@@ -42,7 +47,7 @@ SHELL_SPEC_URL="https://github.com/shellspec/shellspec/releases/download/${SHELL
 
 # -- Install SwiftLint --
 
-TOOLS_DIR=Tools
+TOOLS_DIR=./Tools
 DOWNLOAD_DIR=$TOOLS_DIR/__tmp__
 TOOLS_BIN_DIR=$TOOLS_DIR/bin
 
