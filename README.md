@@ -86,9 +86,11 @@ $> tcr disable
 
 ## Acknowledgements
 
-THX to [@Kent Beck] who lit my spark on the TCR workflow at the [goto; CP 24] in a short chat!
+THX to [@Kent Beck] who lit my spark on the TCR workflow at the [goto; CP 24] in a short chat! Since then I could not stop thinking about TCR which eventually led to the creation of this repository.
 
-THX to the team creating  which created the [tcr-workshop repo], which inspired this project
+THX to the team creating  which created the [tcr-workshop repo], which inspired this project.
+
+---
 
 [@Kent Beck]: https://github.com/KentBeck
 [goto; CP 24]: https://gotocph.com/2024
