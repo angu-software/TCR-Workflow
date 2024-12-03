@@ -1,5 +1,6 @@
 #!/bin/bash
 
+ARCHIVE_NAME="tcr-workflow"
 PROJECT_ROOT="."
 FILES=(
     "$PROJECT_ROOT/lib"
@@ -13,8 +14,19 @@ FILES=(
     "$PROJECT_ROOT/uninstall_tcr.sh"
 )
 
+create_tar() {
+    echo "Creating tar archive..."
+    tar -czvf "$ARCHIVE_NAME.tar.gz" "${FILES[@]}"
+}
+
+create_zip() {
+    echo "Creating zip archive..."
+    zip -r "$ARCHIVE_NAME.zip" "${FILES[@]}"
+}
+
 create_artifacts() {
-    tar -czvf tcr-workflow.tar.gz "${FILES[@]}"
+    create_tar
+    create_zip
 }
 
 echo "Creating artifacts..."
