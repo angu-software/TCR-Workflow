@@ -115,5 +115,5 @@ execute_phase_command() {
 }
 
 run_command() {
-    eval "*@"
+    eval "$*"
 }
