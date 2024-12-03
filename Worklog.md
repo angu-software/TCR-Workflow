@@ -4,8 +4,9 @@
 
 ## Open
 
+* [ ] Add some hints to errors. What can the user do to avoid the error
 * [ ] Call tcr run every 2s (configurable)
-* [ ] Watch content of directory for changes to trigger tcr
+* [ ] Watch content of directory for changes to trigger tcr (consider git diff-index HEAD  --name-status -- $PATHS)
 * [ ] Path to a config file can be specified when tcr run is executed
 * [ ] Optional config name can be passed as argument when creating a template cfg
 * [ ] TCR plays success and failure sounds (usefull when execution is based on folder changes)
