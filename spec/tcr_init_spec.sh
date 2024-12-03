@@ -38,7 +38,7 @@ Describe 'tcr init'
         It 'It writes config template content to the config file'
             When call tcr init
             The variable TCR_TEST_FILE_SET_CONTENT_PATH should eq '/current/work/directory/tcr.tcrcfg'
-            The variable TCR_TEST_FILE_SET_CONTENT should include "TCR version: 0.1.0"
+            The variable TCR_TEST_FILE_SET_CONTENT should include "TCR version: $TCR_VERSION"
             The variable TCR_TEST_FILE_SET_CONTENT should include "# TCR_BUILD_CMD=''"
             The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_TEST_CMD=''"
             The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_COMMIT_CMD='git add . && git commit -m \"[TCR] Changes working\"'"
