@@ -59,18 +59,40 @@ config_file_template_content() {
     cat <<-CONFIG
 # TCR Configuration File
 # TCR version: $TCR_VERSION
+#
+# This configuration file is used to set up the commands for the TCR (Test && Commit || Revert) workflow.
+# The TCR workflow automates the process of running tests, committing changes if tests pass, and reverting changes if tests fail.
 
-# Build command
-TCR_BUILD_CMD=''
+# -- Build command (Optional) --
+# Command to build the project before running tests.
+# If the build command is not specified, the tests will be run without building the project.
+# If the build command fails, tcr will simply fail without any further command execution.
+#
+# TCR_BUILD_CMD=''
 
-# Test command
+# -- Test command --
+# Command to run the tests.
+# This command should return a non-zero exit code if tests fail.
+#
 TCR_TEST_CMD=''
 
-# Commit command
+# -- Commit command --
+# Command to commit the changes if tests pass.
+#
 TCR_COMMIT_CMD='git add . && git commit -m "[TCR] Changes working"'
 
+# -- Revert command --
+# Command to revert the changes if tests fail.
+# Typically reverts the working directory to the last committed state.
 # Revert command
-TCR_REVERT_CMD='git checkout --'
+# Command to revert the changes if tests fail.
+# Typically reverts the working directory to the last committed state.
+# Alternatively, you can define other, less destructive commands to handle the revert process, such as:
+# - Reverting only changes in tracked files
+# - Stashing the changes
+# - Reverting only unstaged changes
+#
+TCR_REVERT_CMD='git reset --hard'
 
 CONFIG
 }

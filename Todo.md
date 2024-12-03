@@ -5,10 +5,7 @@
 ## Open
 
 * [ ] Install/Uninstall script, creating a symlink (account for symlink resolving TCR_HOME path)
-* [ ] More documentation on the commands specified on the config * template
-  * [ ] Build command is options, in case nothing needs to be build (comment by default?)
 * [ ] Watch content of directly for changes to trigger tcr
-* [ ] TCR raises an error if the working dir is not a git repo
 * [ ] Path to a config file can be specified when tcr run is executed
 * [ ] Optional config name can be passed as argument when creating a template cfg
 * [ ] TCR plays success and failure sounds (usefull when execution is based on folder changes)
@@ -22,6 +19,9 @@
 
 ## Done
 
+* [x] More documentation on the commands specified on the config template
+  * [x] Build command is optional, in case nothing needs to be build (comment by default?)
+* [ ] ~~TCR raises an error if the working dir is not a git repo~~
 * [x] TCR commands help
 * [x] TCR version option
 * [x] Installation guide in readme for TCR
@@ -33,6 +33,6 @@
 * [x] TCR tells when it skips a command phase
 * [x] trc init tells that is created a template file
 * [x] TCR runs on a config file
-  * [x] ~~TCR takes an config containing the commands to execute *.* tcrcgf~~
+  * [ ] ~~TCR takes an config containing the commands to execute *.* tcrcgf~~
 * [x] TCR offers to generate a config template
 * [x] TCR fails with the last occurred error code
