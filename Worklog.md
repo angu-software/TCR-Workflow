@@ -4,6 +4,7 @@
 
 ## Open
 
+* [ ] Call tcr run every 2s (configurable)
 * [ ] Watch content of directory for changes to trigger tcr
 * [ ] Path to a config file can be specified when tcr run is executed
 * [ ] Optional config name can be passed as argument when creating a template cfg
