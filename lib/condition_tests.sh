@@ -12,3 +12,7 @@ is_unset() {
 is_success() {
     [ "$1" -eq 0 ]
 }
+
+is_containing() {
+    [[ "$1" == *"$2"* ]]
+}
