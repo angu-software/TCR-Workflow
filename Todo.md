@@ -2,9 +2,6 @@
 
 ## In progress
 
-* [ ] Readme documentation on install/unistall scripts and specifying custom path for symlink
-* [x] Install/Uninstall script, creating a symlink (account for symlink resolving TCR_HOME path)
-
 ## Open
 
 * [ ] Watch content of directory for changes to trigger tcr
@@ -21,6 +18,8 @@
 
 ## Done
 
+* [x] Readme documentation on install/unistall scripts and specifying custom path for symlink
+* [x] Install/Uninstall script, creating a symlink (account for symlink resolving TCR_HOME path)
 * [x] More documentation on the commands specified on the config template
   * [x] Build command is optional, in case nothing needs to be build (comment by default?)
 * [ ] ~~TCR raises an error if the working dir is not a git repo~~

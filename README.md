@@ -9,11 +9,15 @@ Software development workflow for devs who love to challenge there own coding sk
 
 Clone the repo or download one of the release artifacts and store it at a location of your choice on your machine.
 
-To invoke TCR specify the path to the `tcr` executable from your working directory.
+From that folder run
 
 ```text
-~/My_Repos/Cool_Project &> ~/tools/TCR-Workflow/tcr init
+$> install_tcr.sh
 ```
+
+It will create a symlink to the tcr executable so you do not need to specify the full path of the tcr executable every time you want to use the tool.
+
+> Note: You can specify the path where the tcr symlink is create by adapting the `tcr.env`
 
 ## Quick start
 
