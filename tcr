@@ -16,6 +16,9 @@ tcr() {
     if is_containing "$arguments" "$TCR_OPTION_HELP"; then
         tcr_option_help
         return
+    elif is_containing "$arguments" "$TCR_OPTION_VERSION"; then
+        tcr_option_version
+        return
     fi
 
     if is_unset "$action"; then

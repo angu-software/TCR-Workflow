@@ -2,9 +2,6 @@
 
 ## In progress
 
-* [x] TCR commands help
-* [ ] TCR version option
-
 ## Open
 
 * [ ] Install/Uninstall script, creating a symlink (account for symlink resolving TCR_HOME path)
@@ -25,6 +22,8 @@
 
 ## Done
 
+* [x] TCR commands help
+* [x] TCR version option
 * [x] Installation guide in readme for TCR
 * [x] create README.md with expamples
 * [x] TCR status action. Shows if tcr is enabled or disabled

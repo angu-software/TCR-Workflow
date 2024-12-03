@@ -11,4 +11,11 @@ Describe 'tcr'
             The output should include 'Actions:'
         End
     End
+
+    Context 'tcr --version'
+        It 'should show the version'
+            When call tcr '--version'
+            The output should eq "[TCR] v$TCR_VERSION"
+        End
+    End
 End
