@@ -2,9 +2,11 @@
 
 ## In progress
 
+* [ ] Readme documentation on install/unistall scripts and specifying custom path for symlink
+* [x] Install/Uninstall script, creating a symlink (account for symlink resolving TCR_HOME path)
+
 ## Open
 
-* [ ] Install/Uninstall script, creating a symlink (account for symlink resolving TCR_HOME path)
 * [ ] Watch content of directory for changes to trigger tcr
 * [ ] Path to a config file can be specified when tcr run is executed
 * [ ] Optional config name can be passed as argument when creating a template cfg

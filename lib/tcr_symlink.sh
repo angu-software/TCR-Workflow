@@ -1,8 +1,8 @@
 #!/bin/bash
 
+source './tcr.env'
 source './tcr'
 
-SYMLINK_DESTINATION_PATH="/usr/local/bin"
 SYMLINK_PATH="$SYMLINK_DESTINATION_PATH/tcr"
 
 TCR_HOME="$(file_absolute_dir_path "./tcr")"
