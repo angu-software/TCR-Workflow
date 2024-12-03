@@ -5,7 +5,7 @@
 ## Open
 
 * [ ] Install/Uninstall script, creating a symlink (account for symlink resolving TCR_HOME path)
-* [ ] Watch content of directly for changes to trigger tcr
+* [ ] Watch content of directory for changes to trigger tcr
 * [ ] Path to a config file can be specified when tcr run is executed
 * [ ] Optional config name can be passed as argument when creating a template cfg
 * [ ] TCR plays success and failure sounds (usefull when execution is based on folder changes)

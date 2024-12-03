@@ -1,7 +1,22 @@
 #!/bin/bash
 
-TCR_HOME="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TCR_HOME="${TCR_HOME:-"$(cd "$(dirname "$0")" && pwd)"}"
+file_absolute_dir_path() {
+    local file_path="$1"
+    local file_dir
+    local absolute_file_dir_path
+
+    if [ -L "$file_path" ]; then
+        file_path="$(readlink "$0")"
+    fi
+
+    file_dir="$(dirname "$file_path")"
+    absolute_file_dir_path="$(cd "$file_dir" && pwd)"
+
+    echo "$absolute_file_dir_path"
+}
+
+TCR_HOME="$(file_absolute_dir_path "${BASH_SOURCE[0]}")"
+TCR_HOME="${TCR_HOME:-"$(file_absolute_dir_path "$0")"}"
 
 TCR_WORK_DIRECTORY="${TCR_WORK_DIRECTORY:-"$(pwd)"}"
 
