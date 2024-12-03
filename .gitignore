@@ -4,3 +4,6 @@ Tools/bin
 
 # TCR
 tcr.lock
+
+# Release artifacts
+*.tar.gz
