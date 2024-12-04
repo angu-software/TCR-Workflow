@@ -3,7 +3,7 @@
 Tools/bin
 
 # TCR
-tcr.lock
+.tcr.lock
 
 # Release artifacts
 *.tar.gz

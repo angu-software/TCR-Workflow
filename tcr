@@ -21,6 +21,7 @@ TCR_HOME="${TCR_HOME:-"$(file_absolute_dir_path "$0")"}"
 TCR_WORK_DIRECTORY="${TCR_WORK_DIRECTORY:-"$(pwd)"}"
 
 source "$TCR_HOME/lib/foundation.sh"
+source "$TCR_HOME/lib/tcr/tcr_foundation.sh"
 source "$TCR_HOME/lib/tcr/actions.sh"
 source "$TCR_HOME/lib/tcr/options.sh"
 
@@ -66,10 +67,6 @@ tcr() {
             error_raise "$TCR_ERROR_TCR_UNKNOWN_ACTION"
         ;;
     esac
-}
-
-tcr_is_enabled() {
-    lock_file_is_existing
 }
 
 # -- Main -- #
