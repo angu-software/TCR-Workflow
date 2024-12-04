@@ -31,7 +31,9 @@ error_code() {
 
 error_raise() {
     local error="$1"
+    local error_code
+    error_code="$(error_code "$error")"
 
     print "$(error_message "$error")" "$TCR_OUTPUT_STDERR"
-    $TCR_EXIT "$(error_code "$error")"
+    $TCR_EXIT "$error_code"
 }

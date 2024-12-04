@@ -4,6 +4,7 @@
 
 ## Open
 
+* [ ] error_raise should still return the error code
 * [ ] Add some hints to errors. What can the user do to avoid the error
 * [ ] Call tcr run every 2s (configurable)
 * [ ] Watch content of directory for changes to trigger tcr (consider git diff-index HEAD  --name-status -- $PATHS)
