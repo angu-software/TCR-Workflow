@@ -6,6 +6,7 @@
 
 * [ ] error_raise should still return the error code
 * [ ] Add some hints to errors. What can the user do to avoid the error
+* [ ] Offer action to squash tcr commit together with a new message
 * [ ] Call tcr run every 2s (configurable)
 * [ ] Watch content of directory for changes to trigger tcr (consider git diff-index HEAD  --name-status -- $PATHS)
 * [ ] Path to a config file can be specified when tcr run is executed
