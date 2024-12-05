@@ -4,6 +4,7 @@ source "$TCR_HOME/lib/condition_tests.sh"
 
 TCR_OUTPUT_STDOUT='>&1'
 TCR_OUTPUT_STDERR='>&2'
+TCR_OUTPUT_DEFAULT="$TCR_OUTPUT_STDOUT"
 
 TCR_OUTPUT_STATUS_MSG_PREFIX='[TCR]'
 
@@ -17,7 +18,7 @@ print_unset_quiet() {
 
 print() {
     local message="$1"
-    local output="${2:-$TCR_OUTPUT_STDOUT}"
+    local output="${2:-$TCR_OUTPUT_DEFAULT}"
 
     if is_set "$TCR_OUTPUT_SILENT"; then
         return

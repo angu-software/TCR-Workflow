@@ -2,19 +2,18 @@
 
 ## In progress
 
-* [ ] Watch content of directory for changes to trigger tcr (consider git diff-index HEAD  --name-status -- $PATHS)
-  * [x] tcr watch command to start observing and triggering tcr on changes
-  * [ ] tell that watch has started
-  * [ ] tcr status reflects that watch is running
-  * [ ] tcr watch --stop to stop running observation
-  * [ ] add to help
-  * [ ] structure to define a action with options
-  * [ ] obtain options for action from arguments
-  * [ ] tcr disable also stops watch
-
 ## Open
 
+* [ ] `tcr disable` also stops watch
+* [ ] `tcr watch --stop` to stop running observation
+* [ ] add `tcr watch` to help
 * [ ] Offer to adjust the change detection command through the config file (offers to adjust which folders to watch)
+* [ ] tell that watch has started
+* [ ] `tcr status` reflects that watch is running
+
+* [ ] structure to define a action with options
+* [ ] obtain options for action from arguments
+
 * [ ] ensure that watch loop runs further after executed commands fail
 * [ ] error_raise should still return the error code
 * [ ] Add some hints to errors. What can the user do to avoid the error
@@ -32,3 +31,5 @@
   * [ ] tcr status shows those stats when enabled
 
 ## Done
+
+* [x] Watch content of directory for changes to trigger tcr (consider git diff-index HEAD  --name-status -- $PATHS)
