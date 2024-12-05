@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# evaluate tcr_action_watch is called
-
 source './spec/test_doubles/home_dir_mock.sh'
 source './lib/foundation.sh'
 

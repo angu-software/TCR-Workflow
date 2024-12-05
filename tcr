@@ -63,6 +63,9 @@ tcr() {
         "$TCR_ACTION_STATUS")
             tcr_action_status
             ;;
+        "$TCR_ACTION_WATCH")
+            tcr_action_watch
+            ;;
         *)
             error_raise "$TCR_ERROR_TCR_UNKNOWN_ACTION"
         ;;

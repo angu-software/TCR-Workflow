@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Add `tcr watch` to observe file changes in a git repository and run tcr on changes
+
 ## 0.1.0
 
 * Readme documentation on install/unistall scripts and specifying custom path for symlink

@@ -3,9 +3,15 @@
 ## In progress
 
 * [ ] Watch content of directory for changes to trigger tcr (consider git diff-index HEAD  --name-status -- $PATHS)
+  * [x] tcr watch command to start observing and triggering tcr on changes
+  * [ ] tcr watch --stop to stop running observation
+  * [ ] add to help
+  * [ ] structure to define a action with options
+  * [ ] obtain options for action from arguments
 
 ## Open
 
+* [ ] Offer to adjust the change detection command through the config file (offers to adjust which folders to watch)
 * [ ] ensure that watch loop runs further after executed commands fail
 * [ ] error_raise should still return the error code
 * [ ] Add some hints to errors. What can the user do to avoid the error
