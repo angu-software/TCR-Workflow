@@ -18,7 +18,7 @@ Describe 'tcr_action_watch'
 
     watch_directory_loop_start() {
         # Mocked away to avoid infinite loop
-        return 0
+        echo "$*"
     }
 
     Context 'When tcr is disabled'
@@ -36,6 +36,12 @@ Describe 'tcr_action_watch'
         It 'It starts a loop to watches for changes'
             When call tcr_action_watch
             The variable TCR_ACTION_WATCH_LOOP_PROCESS_ID should be defined
+            The output should be present
+        End
+
+        It 'It starts a loop with the necessary paramerers'
+            When call tcr_action_watch
+            The output should eq 'tcr_action_run_on_change'
         End
     End
 End

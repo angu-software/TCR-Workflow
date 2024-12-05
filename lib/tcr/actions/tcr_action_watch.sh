@@ -14,6 +14,10 @@ tcr_action_watch() {
         return "$(error_code "$TCR_ERROR_TCR_NOT_ENABLED")" # TODO: use $? once error_raise returns the error code
     fi
 
-    watch_directory_loop_start &
+    watch_directory_loop_start "tcr_action_run_on_change" &
     TCR_ACTION_WATCH_LOOP_PROCESS_ID=$!
+}
+
+tcr_action_run_on_change() {
+    echo "[TCR WATCH] Running on change"
 }
