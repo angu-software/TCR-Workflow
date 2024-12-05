@@ -4,10 +4,13 @@
 
 * [ ] Watch content of directory for changes to trigger tcr (consider git diff-index HEAD  --name-status -- $PATHS)
   * [x] tcr watch command to start observing and triggering tcr on changes
+  * [ ] tell that watch has started
+  * [ ] tcr status reflects that watch is running
   * [ ] tcr watch --stop to stop running observation
   * [ ] add to help
   * [ ] structure to define a action with options
   * [ ] obtain options for action from arguments
+  * [ ] tcr disable also stops watch
 
 ## Open
 
