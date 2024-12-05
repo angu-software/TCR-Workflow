@@ -7,3 +7,7 @@ Tools/bin
 
 # Release artifacts
 *.tar.gz
+
+# Test artifacts
+spec/tmp/*.*
+!spec/tmp/.gitkeep
