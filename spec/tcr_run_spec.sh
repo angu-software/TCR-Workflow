@@ -22,7 +22,7 @@ Describe 'tcr run'
     TEST_TCR_COMMIT_CMD_EXIT_STATUS=0
     TEST_TCR_REVERT_CMD_EXIT_STATUS=0
 
-    run_command() {
+    command_run() {
         new_command="$1"
 
         if [ "$new_command" == "$TCR_BUILD_CMD" ]; then

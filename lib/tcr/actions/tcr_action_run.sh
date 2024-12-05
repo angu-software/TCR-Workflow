@@ -111,9 +111,6 @@ execute_phase_command() {
     if is_set "$phase"; then
         print_status "$phase changes"
     fi
-    run_command "$command"
-}
 
-run_command() {
-    eval "$*"
+    command_run "$command"
 }
