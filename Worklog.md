@@ -28,12 +28,12 @@
   * [ ] tcr runs (changes), committed (success), reverted (failed), not build
   * [ ] Session starts with tcr enable and ends with tcr disable
   * [ ] tcr status shows those stats when enabled
-* [ ] Aliases for tcr enable/disable -> start/stop
 * [ ] Optional partameter for TCR start to specify some label to check on focus of the session
   * [ ] reflected in tcr status
 
 ## Done
 
+* [x] Rename for tcr enable/disable -> start/stop
 * [x] `tcr disable` also stops watch
 * [x] add method tcr_action_watch_is_watch_running
 * [x] Watch content of directory for changes to trigger tcr (consider git diff-index HEAD  --name-status -- $PATHS)
