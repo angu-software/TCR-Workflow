@@ -1,9 +1,6 @@
 # Worklog
 
 ## In progress
-
-* [ ] `tcr disable` also stops watch
-* [x] add method tcr_action_watch_is_watch_running
   
 ## Open
 
@@ -37,4 +34,6 @@
 
 ## Done
 
+* [x] `tcr disable` also stops watch
+* [x] add method tcr_action_watch_is_watch_running
 * [x] Watch content of directory for changes to trigger tcr (consider git diff-index HEAD  --name-status -- $PATHS)
