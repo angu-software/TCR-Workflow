@@ -29,7 +29,7 @@ Describe 'tcr disable'
 
             It 'should delete the tcr lock file'
                 When call tcr 'disable'
-                The variable TCR_TEST_FILE_DELETE_CMD should include '_rm_ -f /current/work/directory/.tcr.lock'
+                The variable FILE_SYSTEM_STUB_RM should include 'rm -f /current/work/directory/.tcr.lock'
             End
 
             It 'should inform that tcr mode is disabled'

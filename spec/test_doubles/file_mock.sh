@@ -2,18 +2,10 @@
 
 source "./lib/condition_tests.sh"
 
+source "./spec/test_doubles/rm_stub.sh"
+
 touch() {
     TCR_TEST_FILE_CREATE_PATH="$1"
-}
-
-rm() {
-    cmd="_rm_ $1 $2"
-
-    if is_set "$TCR_TEST_FILE_DELETE_CMD"; then
-        TCR_TEST_FILE_DELETE_CMD="$TCR_TEST_FILE_DELETE_CMD\n$cmd"
-    else 
-        TCR_TEST_FILE_DELETE_CMD="$cmd"
-    fi
 }
 
 file_is_existing() {
@@ -30,8 +22,10 @@ setup_file_mock() {
 }
 
 teardown_file_mock() {
+    test_stub_rm_reset
+
     unset TCR_TEST_FILE_CREATE_PATH
-    unset TCR_TEST_FILE_DELETE_CMD
+    unset FILE_SYSTEM_STUB_RM
     unset TCR_TEST_FILE_SET_CONTENT
     unset TCR_TEST_FILE_SET_CONTENT_PATH
 }
