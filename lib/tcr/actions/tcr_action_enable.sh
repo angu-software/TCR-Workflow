@@ -3,7 +3,7 @@
 source "$TCR_HOME/lib/foundation.sh"
 source "$TCR_HOME/lib/tcr/error_consts.sh"
 
-TCR_ACTION_ENABLE='enable'
+TCR_ACTION_ENABLE='start'
 
 tcr_action_enable() {
     if lock_file_is_existing; then

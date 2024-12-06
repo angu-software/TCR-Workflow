@@ -22,31 +22,34 @@ Describe 'tcr enable'
     BeforeEach 'setup'
     AfterEach 'teardown'
 
+    subject() {
+        tcr start
+    }
+
     Describe 'when enabling tcr mode'
         It 'should creates a tcr lock file at the current work directory'
-            When call tcr 'enable'
+            When call subject
             The variable TCR_TEST_FILE_CREATE_PATH should eq '/current/work/directory/.tcr.lock'
         End
         
         It 'should inform that tcr mode is enabled'
             unset TCR_OUTPUT_SILENT
 
-            When call tcr 'enable'
+            When call subject
             The output should eq '[TCR] ON'
         End
 
         It 'it writes important information to the lock file'
-            When call tcr 'enable'
+            When call subject
             The variable TCR_TEST_FILE_SET_CONTENT_PATH should eq '/current/work/directory/.tcr.lock'
             The variable TCR_TEST_FILE_SET_CONTENT should eq "TCR_HOME=\"$TCR_HOME\""
         End
 
         Describe 'when enabling tcr mode again'
-            It 'should raise an error'
-                unset TCR_OUTPUT_SILENT
-                tcr 'enable'
+            BeforeEach 'unset TCR_OUTPUT_SILENT; subject'
 
-                When call tcr 'enable'
+            It 'should raise an error'
+                When call subject
                 The error should eq "$(error_message "$TCR_ERROR_TCR_ALREADY_ENABLED")"
                 The variable TCR_TEST_EXIT_STATUS should eq "$(error_code "$TCR_ERROR_TCR_ALREADY_ENABLED")"
             End

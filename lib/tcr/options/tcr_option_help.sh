@@ -14,19 +14,19 @@ If the tests fail, the code is reverted.
 Usage: tcr [action] [options]
 
 Actions:
-  init    - Initialize TCR
+  $TCR_ACTION_INIT    - Initialize TCR
             Create a template configuration file
             in the current working directory
 
-  enable  - Enable TCR in the current working directory
+  $TCR_ACTION_ENABLE   - Enable TCR in the current working directory
             Starts a TCR session
 
-  disable - Disable TCR
+  $TCR_ACTION_DISABLE - Disable TCR
             Ends a TCR session
 
-  run     - Run tests and commit or revert code 
+  $TCR_ACTION_RUN     - Run tests and commit or revert code 
             based on the results
 
-  status  - Show TCR status
+  $TCR_ACTION_STATUS  - Show TCR status
 HELP
 }
