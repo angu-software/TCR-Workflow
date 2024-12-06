@@ -3,7 +3,6 @@
 source "$TCR_HOME/lib/foundation.sh"
 source "$TCR_HOME/lib/tcr/watch_directory.sh"
 source "$TCR_HOME/lib/tcr/error_consts.sh"
-source "$TCR_HOME/lib/tcr/actions/tcr_action_run_on_change.sh"
 
 
 TCR_ACTION_WATCH='watch'
@@ -18,4 +17,12 @@ tcr_action_watch() {
 
     watch_directory_loop_start tcr_action_run_on_change &
     TCR_ACTION_WATCH_LOOP_PROCESS_ID=$!
+}
+
+tcr_action_watch_is_running() {
+    watch_directory_loop_is_running
+}
+
+tcr_action_watch_stop() {
+    watch_directory_loop_stop
 }

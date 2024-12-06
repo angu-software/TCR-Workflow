@@ -9,32 +9,55 @@ source './spec/test_doubles/file_mock.sh'
 
 Describe 'tcr disable'
 
-    setup() {
-        export TCR_OUTPUT_SILENT='true'
-        setup_exit_mock
-        setup_file_mock
-    }
-    teardown() {
-        setup_exit_mock
-        setup_file_mock
-        unset TCR_OUTPUT_SILENT
-    }
-    BeforeEach 'setup'
-    AfterEach 'teardown'
-
     Describe 'when disabling tcr mode'
-        BeforeEach 'tcr enable'
 
-        It 'should delete the tcr lock file'
-            When call tcr 'disable'
-            The variable TCR_TEST_FILE_DELETE_CMD should eq '_rm_ -f /current/work/directory/.tcr.lock'
+        Context 'When trc watch is not running'
+            setup() {
+                export TCR_OUTPUT_SILENT='true'
+                setup_exit_mock
+                setup_file_mock
+            }
+            teardown() {
+                setup_exit_mock
+                setup_file_mock
+                unset TCR_OUTPUT_SILENT
+            }
+            BeforeEach 'setup'
+            AfterEach 'teardown'
+            
+            BeforeEach 'tcr enable'
+
+            It 'should delete the tcr lock file'
+                When call tcr 'disable'
+                The variable TCR_TEST_FILE_DELETE_CMD should include '_rm_ -f /current/work/directory/.tcr.lock'
+            End
+
+            It 'should inform that tcr mode is disabled'
+                unset TCR_OUTPUT_SILENT
+
+                When call tcr 'disable'
+                The output should eq '[TCR] OFF'
+            End
         End
 
-        It 'should inform that tcr mode is disabled'
-            unset TCR_OUTPUT_SILENT
+        Context 'When tcr watch is running'
+            
+            tcr_action_watch_stop() { 
+                TEST_TCR_WATCH_IS_RUNNING=''
+            }
 
-            When call tcr 'disable'
-            The output should eq '[TCR] OFF'
+            tcr_action_watch_is_running() { 
+                is_set "$TEST_TCR_WATCH_IS_RUNNING"
+            }
+
+            BeforeEach 'TEST_TCR_WATCH_IS_RUNNING=true'
+
+            It 'It stops tcr watch'
+                unset TCR_OUTPUT_SILENT
+
+                When call tcr 'disable'
+                The result of function tcr_action_watch_is_running should not be successful
+            End
         End
     End
 End

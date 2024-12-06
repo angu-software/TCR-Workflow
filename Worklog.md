@@ -2,9 +2,11 @@
 
 ## In progress
 
+* [ ] `tcr disable` also stops watch
+* [x] add method tcr_action_watch_is_watch_running
+  
 ## Open
 
-* [ ] `tcr disable` also stops watch
 * [ ] `tcr watch --stop` to stop running observation
 * [ ] add `tcr watch` to help
 * [ ] Offer to adjust the change detection command through the config file (offers to adjust which folders to watch)
@@ -29,6 +31,9 @@
   * [ ] tcr runs (changes), committed (success), reverted (failed), not build
   * [ ] Session starts with tcr enable and ends with tcr disable
   * [ ] tcr status shows those stats when enabled
+* [ ] Aliases for tcr enable/disable -> start/stop
+* [ ] Optional partameter for TCR start to specify some label to check on focus of the session
+  * [ ] reflected in tcr status
 
 ## Done
 

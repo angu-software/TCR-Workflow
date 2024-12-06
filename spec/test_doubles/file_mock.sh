@@ -7,7 +7,13 @@ touch() {
 }
 
 rm() {
-    TCR_TEST_FILE_DELETE_CMD="_rm_ $1 $2"
+    cmd="_rm_ $1 $2"
+
+    if is_set "$TCR_TEST_FILE_DELETE_CMD"; then
+        TCR_TEST_FILE_DELETE_CMD="$TCR_TEST_FILE_DELETE_CMD\n$cmd"
+    else 
+        TCR_TEST_FILE_DELETE_CMD="$cmd"
+    fi
 }
 
 file_is_existing() {
