@@ -5,7 +5,7 @@ source "$TCR_HOME/lib/lock_file.sh"
 
 source "$TCR_HOME/lib/tcr/actions/tcr_action_watch.sh"
 
-TCR_ACTION_DISABLE='disable'
+TCR_ACTION_DISABLE='stop'
 
 tcr_action_disable() {
     lock_file_remove

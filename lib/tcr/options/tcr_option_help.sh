@@ -21,7 +21,7 @@ Actions:
   $TCR_ACTION_ENABLE   - Enable TCR in the current working directory
             Starts a TCR session
 
-  $TCR_ACTION_DISABLE - Disable TCR
+  $TCR_ACTION_DISABLE    - Disable TCR
             Ends a TCR session
 
   $TCR_ACTION_RUN     - Run tests and commit or revert code 

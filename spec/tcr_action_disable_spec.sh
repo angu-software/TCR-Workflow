@@ -11,6 +11,10 @@ Describe 'tcr disable'
 
     Describe 'when disabling tcr mode'
 
+        subject() {
+            tcr stop
+        }
+
         Context 'When trc watch is not running'
             setup() {
                 export TCR_OUTPUT_SILENT='true'
@@ -28,14 +32,14 @@ Describe 'tcr disable'
             BeforeEach 'tcr enable'
 
             It 'should delete the tcr lock file'
-                When call tcr 'disable'
+                When call subject
                 The variable FILE_SYSTEM_STUB_RM should include 'rm -f /current/work/directory/.tcr.lock'
             End
 
             It 'should inform that tcr mode is disabled'
                 unset TCR_OUTPUT_SILENT
 
-                When call tcr 'disable'
+                When call subject
                 The output should eq '[TCR] OFF'
             End
         End
@@ -55,7 +59,7 @@ Describe 'tcr disable'
             It 'It stops tcr watch'
                 unset TCR_OUTPUT_SILENT
 
-                When call tcr 'disable'
+                When call subject
                 The result of function tcr_action_watch_is_running should not be successful
             End
         End
