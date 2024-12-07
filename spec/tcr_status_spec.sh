@@ -25,7 +25,7 @@ Describe 'tcr status'
 
         It 'should inform that tcr mode is disabled'
             When call subject
-            The output should eq '[TCR] disabled'
+            The output should eq '[TCR] no session active'
         End
     End
 End
