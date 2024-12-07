@@ -44,7 +44,7 @@ tcr() {
 
     case "$action" in
         "$TCR_ACTION_ENABLE")
-            tcr_action_enable
+            tcr_action_enable "$@"
             ;;
         "$TCR_ACTION_DISABLE")
             tcr_action_disable

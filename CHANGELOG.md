@@ -3,6 +3,7 @@
 ## HEAD
 
 * Add `tcr watch` to observe file changes in a git repository and run tcr on changes
+* Add an optional parameter to `tcr start [session name]` to specify a tcr session name
 * Rename actions `tcr enable/disable` to `tcr start/stop`
 
 ## 0.1.0

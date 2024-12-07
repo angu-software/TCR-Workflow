@@ -2,12 +2,6 @@
 
 ## In progress
 
-* [ ] Optional partameter for TCR start to specify some label to check on focus of the session
-  * [ ] reflected in tcr status
-  * [ ] rename ON OFF to TCR <name> session started/ended
-  * [ ] TCR status tells "TCR session <name> active"
-  * [ ] TCR status tells "TCR no session active"
-
 ## Open
 
 * [ ] add `tcr watch` to help
@@ -46,6 +40,12 @@
 
 ## Done
 
+* [x] Optional partameter for TCR start to specify some label to check on focus of the session
+  * [x] reflected in tcr status
+  * [x] rename ON OFF to TCR <name> session stopped
+  * [x] rename ON OFF to TCR <name> session started
+  * [x] TCR status tells "TCR session <name> active"
+  * [x] TCR status tells "TCR no session active"
 * [x] Rename for tcr enable/disable -> start/stop
 * [x] `tcr disable` also stops watch
 * [x] add method tcr_action_watch_is_watch_running

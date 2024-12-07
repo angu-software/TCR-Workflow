@@ -11,6 +11,10 @@ Describe 'tcr disable'
 
     Describe 'when disabling tcr mode'
 
+        tcr_load_session_info() {
+            return 0
+        }
+
         subject() {
             tcr stop
         }
@@ -40,7 +44,18 @@ Describe 'tcr disable'
                 unset TCR_OUTPUT_SILENT
 
                 When call subject
-                The output should eq '[TCR] OFF'
+                The output should eq '[TCR] session stopped'
+            End
+
+            Context 'When tcr was started with session name'
+                BeforeEach 'TCR_SESSION_NAME="my cool session"'
+
+                It 'It tells the session with name has ended'
+                    unset TCR_OUTPUT_SILENT
+
+                    When call subject
+                    The output should eq "[TCR] session 'my cool session' stopped"
+                End
             End
         End
 

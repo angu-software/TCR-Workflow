@@ -23,7 +23,7 @@ Describe 'tcr enable'
     AfterEach 'teardown'
 
     subject() {
-        tcr start
+        tcr start "$1"
     }
 
     Describe 'when enabling tcr mode'
@@ -36,13 +36,28 @@ Describe 'tcr enable'
             unset TCR_OUTPUT_SILENT
 
             When call subject
-            The output should eq '[TCR] ON'
+            The output should eq '[TCR] session started'
         End
 
         It 'it writes important information to the lock file'
             When call subject
             The variable TCR_TEST_FILE_SET_CONTENT_PATH should eq '/current/work/directory/.tcr.lock'
-            The variable TCR_TEST_FILE_SET_CONTENT should eq "TCR_HOME=\"$TCR_HOME\""
+            The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_HOME=\"$TCR_HOME\""
+        End
+
+        Context 'When enabling tcr with session name'
+
+            It 'It tells the session with name is started'
+                unset TCR_OUTPUT_SILENT
+
+                When call subject 'my cool session'
+                The output should eq "[TCR] session 'my cool session' started"
+            End
+
+            It 'It writes the session name to the lock file'
+                When call subject 'my cool session'
+                The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_SESSION_NAME=\"my cool session\""
+            End
         End
 
         Describe 'when enabling tcr mode again'
