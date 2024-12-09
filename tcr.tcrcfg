@@ -34,3 +34,8 @@ TCR_COMMIT_CMD='git add . && git commit -m "[TCR] Changes working"'
 # - Reverting only unstaged changes
 #
 TCR_REVERT_CMD='git reset --hard'
+
+# -- Detecting changes in repository -- #
+# Command to detect changes in the repository when running 'tcr watch'
+#
+TCR_CHANGE_DETECTION_CMD='git --no-pager diff HEAD --name-status'
