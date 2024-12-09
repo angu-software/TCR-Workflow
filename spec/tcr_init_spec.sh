@@ -43,6 +43,7 @@ Describe 'tcr init'
             The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_TEST_CMD=''"
             The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_COMMIT_CMD='git add . && git commit -m \"[TCR] Changes working\"'"
             The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_REVERT_CMD='git reset --hard'"
+            The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_CHANGE_DETECTION_CMD='git --no-pager diff HEAD --name-status'"
         End
 
         Context 'When config file already exists'

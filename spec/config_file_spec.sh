@@ -16,7 +16,7 @@ Describe 'config_file'
         echo '/current/work/directory/tcr.tcrcfg'
     }
 
-    Context 'When searhing for a file'
+    Context 'When searching for a file'
         It 'It searches for file in a directory'
             When call config_file_find_in_dir '/current/work/directory'
             The variable TEST_FILE_SEARCH_COMMAND should eq '_find_ /current/work/directory -maxdepth 1 -type f -name *.tcrcfg'

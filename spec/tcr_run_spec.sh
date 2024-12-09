@@ -44,43 +44,37 @@ Describe 'tcr run'
         is_unset "$TEST_TCR_DISABLED"
     }
 
+    TEST_DID_CALL_TCR_LOAD_CONFIG=''
     TEST_CFG_FILE_PATH='./spec/fixtures/config_fixture.tcrcfg'
-    config_file_find_in_dir() {
-        cat <<-FILE_LIST
-$TEST_CFG_FILE_PATH
-$TEST_CFG_FILE_PATH
-FILE_LIST
+    file_load_as_source() {
+        TEST_DID_CALL_TCR_LOAD_CONFIG='true'
+
+        source "$TEST_CFG_FILE_PATH"
+    }
+
+    subject() {
+        tcr run
     }
 
     Describe 'When executing tcr with run action'
+        BeforeEach 'unset TEST_DID_CALL_TCR_LOAD_CONFIG'
 
-        It 'It searches for a tcr configuration file in the current work directory'
-            When call tcr run
-            The variable TCR_ACTION_RUN_CFG_PATH should eq "$TEST_CFG_FILE_PATH"
-        End
-
-        Context 'When no cfg file was found'
-            It 'It raises an error'
-                print_unset_quiet
-                unset TEST_CFG_FILE_PATH
-                    
-                When call tcr run
-                The error should eq '[TCR Error] No configuration file found'
-                The variable TCR_TEST_EXIT_STATUS should eq 20
-            End
+        It 'It loads the configuration file'
+            When call subject
+            The variable TEST_DID_CALL_TCR_LOAD_CONFIG should be defined
         End
 
         Context 'When a config file was found'
 
             It 'It runs the build command from the loaded config'
-                When call tcr run
+                When call subject
                 The variable TCR_RUN_BUILD_EXECUTED_COMMAND should eq "$TCR_BUILD_CMD"
             End
 
             It 'It tells that it builds the changes'
                 unset TCR_OUTPUT_SILENT
 
-                When call tcr run
+                When call subject
                 The output should include '[TCR] Building changes'
             End
 
@@ -88,14 +82,14 @@ FILE_LIST
                 TEST_CFG_FILE_PATH='./spec/fixtures/config_fixture_no_build_cmd.tcrcfg'
 
                 It 'It skipps the build phase'
-                    When call tcr run
+                    When call subject
                     The variable TCR_RUN_BUILD_EXECUTED_COMMAND should be blank
                 End
 
                 It 'It tells that it is skipping the build command'
                     print_unset_quiet
 
-                    When call tcr run
+                    When call subject
                     The output should include '[TCR] Skipping Building phase'
                     The output should not include '[TCR] Building changes'
                 End
@@ -104,27 +98,27 @@ FILE_LIST
             Describe 'When the build command succeeds'
                 
                 It 'It runs the test command from the loaded config'
-                    When call tcr run
+                    When call subject
                     The variable TCR_RUN_TEST_EXECUTED_COMMAND should eq "$TCR_TEST_CMD"
                 End
 
                 It 'It tells that it runs the tests'
                     unset TCR_OUTPUT_SILENT
 
-                    When call tcr run
+                    When call subject
                     The output should include '[TCR] Testing changes'
                 End
 
                 Describe 'When the test command succeeds'
                     It 'It commits the changes using the command from the config'
-                        When call tcr run
+                        When call subject
                         The variable TCR_RUN_COMMIT_EXECUTED_COMMAND should eq "$TCR_COMMIT_CMD"
                     End
 
                     It 'It tells that it commits the changes'
                         unset TCR_OUTPUT_SILENT
 
-                        When call tcr run
+                        When call subject
                         The output should include '[TCR] Committing changes'
                         The error should not be present
                     End
@@ -135,7 +129,7 @@ FILE_LIST
                         It 'It raises an error'
                             unset TCR_OUTPUT_SILENT
 
-                            When call tcr run
+                            When call subject
                             The output should be present
                             The error should eq '[TCR Error] Committing failed with status 88'
                             The variable TCR_TEST_EXIT_STATUS should eq 88
@@ -149,7 +143,7 @@ FILE_LIST
                     It 'It raises an error'
                         unset TCR_OUTPUT_SILENT
 
-                        When call tcr run
+                        When call subject
                         The output should be present
                         The error should eq '[TCR Error] Testing failed with status 66'
                         The variable TCR_TEST_EXIT_STATUS should eq 66
@@ -158,7 +152,7 @@ FILE_LIST
                     It 'It reverts the changes using the command from the loaded config'
                         unset TCR_OUTPUT_SILENT
 
-                        When call tcr run
+                        When call subject
                         The output should be present
                         The error should be present
                         The variable TCR_RUN_REVERT_EXECUTED_COMMAND should eq "$TCR_REVERT_CMD"
@@ -167,7 +161,7 @@ FILE_LIST
                     It 'It tells that it reverts the changes'
                         unset TCR_OUTPUT_SILENT
 
-                        When call tcr run
+                        When call subject
                         The output should include '[TCR] Reverting changes'
                         The error should be present
                     End
@@ -178,7 +172,7 @@ FILE_LIST
                         It 'It raises an error'
                             unset TCR_OUTPUT_SILENT
 
-                            When call tcr run
+                            When call subject
                             The output should be present
                             The error should eq '[TCR Error] Reverting failed with status 77'
                             The variable TCR_TEST_EXIT_STATUS should eq 77
@@ -194,7 +188,7 @@ FILE_LIST
             It 'It raises an error'
                 unset TCR_OUTPUT_SILENT
 
-                When call tcr run
+                When call subject
                 The output should be present
                 The error should eq '[TCR Error] Building failed with status 99'
                 The variable TCR_TEST_EXIT_STATUS should eq 99
@@ -207,7 +201,7 @@ FILE_LIST
             It 'It raises an error'
                 unset TCR_OUTPUT_SILENT
 
-                When call tcr run
+                When call subject
                 The error should eq '[TCR Error] TCR is not enabled'
                 The variable TCR_TEST_EXIT_STATUS should eq 3
             End

@@ -16,7 +16,7 @@ config_file_create() {
 config_file_exists_in_dir() {
     local search_dir="$1"
 
-    files=$(config_file_find_in_dir "$search_dir")
+    files="$(config_file_find_in_dir "$search_dir")"
 
     is_set "$files"
 }
@@ -34,6 +34,12 @@ config_file_find_first_in_dir() {
     found_files=$(config_file_find_in_dir "$search_dir")
 
     list_first_entry "$found_files"
+}
+
+config_file_load() {
+    path="$1"
+
+    file_load_as_source "$path"
 }
 
 config_file_create_template() {
@@ -93,6 +99,11 @@ TCR_COMMIT_CMD='git add . && git commit -m "[TCR] Changes working"'
 # - Reverting only unstaged changes
 #
 TCR_REVERT_CMD='git reset --hard'
+
+# -- Detecting changes in repository -- #
+# Command to detect changes in the repository when running 'tcr watch'
+#
+TCR_CHANGE_DETECTION_CMD='git --no-pager diff HEAD --name-status'
 
 CONFIG
 }

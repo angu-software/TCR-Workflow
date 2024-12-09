@@ -2,14 +2,18 @@
 
 ## In progress
 
+### Current Focus
+
+### Next up
+
 ## Open
 
 * [ ] add `tcr watch` to help
 * [ ] `tcr status` reflects that watch is running
 * [ ] `tcr watch --stop` to stop running observation
 * [ ] tell that tcr watch has started
-  
-* [ ] Offer to adjust the change detection command through the config file (offers to adjust which folders to watch)
+
+* [ ] Document the VARs which should be available in the config file
 
 * [ ] structure to define a action with options
 * [ ] obtain options for action from arguments
@@ -40,6 +44,7 @@
 
 ## Done
 
+* [x] Offer to adjust the change detection command through the config file (offers to adjust which folders to watch)
 * [x] Optional partameter for TCR start to specify some label to check on focus of the session
   * [x] reflected in tcr status
   * [x] rename ON OFF to TCR <name> session stopped

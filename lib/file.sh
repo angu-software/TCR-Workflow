@@ -1,5 +1,7 @@
 #!/bin/bash
 
+TCR_FIND_CMD='find'
+
 file_create() {
     local file_path="$1"
 
@@ -29,5 +31,11 @@ file_find() {
     local search_dir="$1"
     local file_name_glob="$2"
 
-    find "$search_dir" -maxdepth 1 -type f -name "$file_name_glob"
+    "$TCR_FIND_CMD" "$search_dir" -maxdepth 1 -type f -name "$file_name_glob"
+}
+
+file_load_as_source() {
+    local file_path="$1"
+
+    source "$file_path"
 }

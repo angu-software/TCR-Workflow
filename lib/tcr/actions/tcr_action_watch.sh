@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source "$TCR_HOME/lib/foundation.sh"
+source "$TCR_HOME/lib/tcr/actions/tcr_action_run_on_change.sh"
 source "$TCR_HOME/lib/tcr/watch_directory.sh"
 source "$TCR_HOME/lib/tcr/error_consts.sh"
 

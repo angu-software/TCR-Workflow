@@ -27,3 +27,7 @@ lock_file_set_content() {
 
     file_set_content "$content" "$TCR_LOCK_FILE_PATH"
 }
+
+lock_file_load() {
+    file_load_as_source "$TCR_LOCK_FILE_PATH"
+}

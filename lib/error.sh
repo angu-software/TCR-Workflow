@@ -37,3 +37,7 @@ error_raise() {
     print "$(error_message "$error")" "$TCR_OUTPUT_STDERR"
     $TCR_EXIT "$error_code"
 }
+
+latest_error_code() {
+    echo "$?"
+}

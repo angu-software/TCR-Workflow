@@ -5,24 +5,15 @@ source "$TCR_HOME/lib/tcr/config_file.sh"
 
 TCR_ACTION_RUN='run'
 
-TCR_ERROR_TCR_RUN_CFG_MISSING=$(error_build 20 "No configuration file found")
-
 TCR_ACTION_RUN_PHASE_BUILD='Building'
 TCR_ACTION_RUN_PHASE_TEST='Testing'
 TCR_ACTION_RUN_PHASE_COMMIT='Committing'
 TCR_ACTION_RUN_PHASE_REVERT='Reverting'
 
-TCR_ACTION_RUN_CFG_PATH=''
-
 tcr_action_run() {
-
-    TCR_ACTION_RUN_CFG_PATH=$(config_file_find_first_in_dir "$TCR_WORK_DIRECTORY")
-    if is_unset "$TCR_ACTION_RUN_CFG_PATH"; then
-        error_raise "$TCR_ERROR_TCR_RUN_CFG_MISSING"
-        return
+    if ! tcr_load_config; then
+        return "$(latest_error_code)"
     fi
-
-    source "$TCR_ACTION_RUN_CFG_PATH"
 
     execution_phase="$TCR_ACTION_RUN_PHASE_BUILD"
     execute_phase "$execution_phase"
