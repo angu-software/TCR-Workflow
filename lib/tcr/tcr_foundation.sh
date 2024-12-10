@@ -22,7 +22,7 @@ tcr_load_config() {
     cfg_path="$(config_file_find_first_in_dir "$TCR_WORK_DIRECTORY")"
     if is_unset "$cfg_path"; then
         error_raise "$TCR_ERROR_TCR_CFG_MISSING"
-        return "$(error_code "$TCR_ERROR_TCR_CFG_MISSING")"
+        return "$(latest_error_code)"
     fi
 
     config_file_load "$cfg_path"

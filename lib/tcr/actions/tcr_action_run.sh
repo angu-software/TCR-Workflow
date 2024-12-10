@@ -58,6 +58,7 @@ handle_error() {
 
     if ! is_success "$error_code"; then
         error_raise "$(make_run_command_error "$error_code" "$execution_phase")"
+        return "$error_code"
     fi
 }
 
@@ -96,7 +97,7 @@ execute_phase_command() {
 
     if is_unset "$command"; then
         print_status "Skipping $phase phase"
-        return
+        return "$(last_command_status)"
     fi
 
     if is_set "$phase"; then

@@ -60,7 +60,6 @@ Describe 'watch_directory'
 
                 When call watch_directory_loop_start "return 0"
                 The error should eq '[TCR Error] TCR is already watching for changes'
-                The variable TCR_TEST_EXIT_STATUS should eq 30
                 The status should eq 30
             End
         End

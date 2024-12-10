@@ -2,7 +2,7 @@
 
 source "$TCR_HOME/lib/print.sh"
 
-TCR_EXIT='exit'
+TCR_EXIT_CMD='exit'
 
 # Error format: "<error_code>|<error_message>"
 
@@ -35,9 +35,13 @@ error_raise() {
     error_code="$(error_code "$error")"
 
     print "$(error_message "$error")" "$TCR_OUTPUT_STDERR"
-    $TCR_EXIT "$error_code"
+    $TCR_EXIT_CMD "$error_code"
 }
 
 latest_error_code() {
     echo "$?"
+}
+
+last_command_status() {
+    latest_error_code
 }

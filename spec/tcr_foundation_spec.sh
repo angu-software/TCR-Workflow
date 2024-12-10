@@ -43,7 +43,6 @@ Describe 'tcr_foundation'
                     
                 When call subject
                 The error should eq '[TCR Error] No configuration file found'
-                The variable TCR_TEST_EXIT_STATUS should eq 5
                 The status should eq 5
             End
         End

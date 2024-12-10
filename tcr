@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 file_absolute_dir_path() {
     local file_path="$1"
     local file_dir
@@ -31,15 +33,15 @@ tcr() {
 
     if is_containing "$arguments" "$TCR_OPTION_HELP"; then
         tcr_option_help
-        return
+        return "$(last_command_status)"
     elif is_containing "$arguments" "$TCR_OPTION_VERSION"; then
         tcr_option_version
-        return
+        return "$(last_command_status)"
     fi
 
     if is_unset "$action"; then
         error_raise "$TCR_ERROR_TCR_ARGUMENTS_MISSING"
-        return
+        return "$(latest_error_code)"
     fi
 
     case "$action" in
@@ -52,7 +54,7 @@ tcr() {
         "$TCR_ACTION_RUN")
             if ! tcr_is_enabled; then
                 error_raise "$TCR_ERROR_TCR_NOT_ENABLED"
-                return
+                return "$(latest_error_code)"
             fi
 
             tcr_action_run
@@ -68,6 +70,7 @@ tcr() {
             ;;
         *)
             error_raise "$TCR_ERROR_TCR_UNKNOWN_ACTION"
+            return "$(latest_error_code)"
         ;;
     esac
 }

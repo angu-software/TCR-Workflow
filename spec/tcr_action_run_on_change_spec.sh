@@ -57,8 +57,7 @@ Describe 'tcr_action_run_on_change'
         It 'It raises an error'
             When call subject
             The error should eq '[TCR Error] Change detection command TCR_CHANGE_DETECTION_CMD not set in configuration file'
-            The variable TCR_TEST_EXIT_STATUS should eq 20
-            #The status should eq 20
+            The status should eq 20
         End
     End
 

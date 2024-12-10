@@ -11,11 +11,9 @@ Describe 'tcr enable'
 
     setup() {
         export TCR_OUTPUT_SILENT='true'
-        setup_exit_mock
         setup_file_mock
     }
     teardown() {
-        setup_exit_mock
         setup_file_mock
         unset TCR_OUTPUT_SILENT
     }
@@ -66,7 +64,7 @@ Describe 'tcr enable'
             It 'should raise an error'
                 When call subject
                 The error should eq "$(error_message "$TCR_ERROR_TCR_ALREADY_ENABLED")"
-                The variable TCR_TEST_EXIT_STATUS should eq "$(error_code "$TCR_ERROR_TCR_ALREADY_ENABLED")"
+                The status should eq "$(error_code "$TCR_ERROR_TCR_ALREADY_ENABLED")"
             End
         End
     End

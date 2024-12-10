@@ -7,10 +7,6 @@ source './lib/error.sh'
 source './spec/test_doubles/exit_mock.sh'
 
 Describe 'error'
-    setup_exit_mock
-
-    BeforeEach 'unset TCR_TEST_EXIT_STATUS'
-
     ERROR="1|Some strange error"
 
     Describe 'error_message'
@@ -31,7 +27,7 @@ Describe 'error'
         It 'should print the error message to stderr'
             When call error_raise "$ERROR"
             The error should eq 'Some strange error'
-            The variable TCR_TEST_EXIT_STATUS should eq 1
+            The status should eq 1
         End
     End
 

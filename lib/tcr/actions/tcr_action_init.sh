@@ -11,7 +11,7 @@ tcr_action_init() {
 
     if config_file_exists_in_dir "$TCR_WORK_DIRECTORY"; then
         error_raise "$TCR_ERROR_TCR_INIT_CFG_EXISTS"
-        return
+        return "$(latest_error_code)"
     fi
 
     create_config_template

@@ -20,7 +20,6 @@
 * [ ] dynamic help generation
 
 * [ ] ensure that watch loop runs further after executed commands fail
-* [ ] error_raise should still return the error code
 * [ ] Add some hints to errors. What can the user do to avoid the error
 
 * [ ] Offer action to squash tcr commit together with a new message
@@ -44,6 +43,7 @@
 
 ## Done
 
+* [x] error_raise should still return the error code
 * [x] Offer to adjust the change detection command through the config file (offers to adjust which folders to watch)
 * [x] Optional partameter for TCR start to specify some label to check on focus of the session
   * [x] reflected in tcr status

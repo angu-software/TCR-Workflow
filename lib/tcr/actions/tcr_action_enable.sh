@@ -10,7 +10,7 @@ tcr_action_enable() {
 
     if lock_file_is_existing; then
         error_raise "$TCR_ERROR_TCR_ALREADY_ENABLED"
-        return
+        return "$(latest_error_code)"
     fi
 
     setup_lock_file "$session_name"

@@ -11,7 +11,6 @@ Describe 'tcr init'
 
     setup() {
         print_set_quiet
-        setup_exit_mock
         setup_file_mock
         unset TEST_CFG_EXISTS
     }
@@ -53,7 +52,7 @@ Describe 'tcr init'
             
                 When call tcr init
                 The error should eq '[TCR Error] Config file already exists'
-                The variable TCR_TEST_EXIT_STATUS should eq 10
+                The status should eq 10
             End
         End
     End

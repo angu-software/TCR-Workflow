@@ -22,18 +22,14 @@ Describe 'tcr disable'
         Context 'When trc watch is not running'
             setup() {
                 export TCR_OUTPUT_SILENT='true'
-                setup_exit_mock
                 setup_file_mock
             }
             teardown() {
-                setup_exit_mock
                 setup_file_mock
                 unset TCR_OUTPUT_SILENT
             }
             BeforeEach 'setup'
             AfterEach 'teardown'
-            
-            BeforeEach 'tcr enable'
 
             It 'should delete the tcr lock file'
                 When call subject

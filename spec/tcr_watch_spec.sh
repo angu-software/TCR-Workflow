@@ -37,7 +37,6 @@ Describe 'tcr_action_watch'
         It 'It raises an error'
             When call tcr_action_watch
             The error should eq "$(error_message "$TCR_ERROR_TCR_NOT_ENABLED")"
-            The variable TCR_TEST_EXIT_STATUS should eq "$(error_code "$TCR_ERROR_TCR_NOT_ENABLED")"
             The status should eq "$(error_code "$TCR_ERROR_TCR_NOT_ENABLED")"
         End
     End

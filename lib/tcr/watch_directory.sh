@@ -15,7 +15,7 @@ watch_directory_loop_start() {
 
     if watch_directory_loop_is_running; then
         error_raise "$TCR_ERROR_WATCH_RUNNING"
-        return "$(error_code "$TCR_ERROR_WATCH_RUNNING")"
+        return "$(latest_error_code)"
     fi
 
     watch_directory_create_lock_file

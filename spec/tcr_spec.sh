@@ -12,7 +12,7 @@ Describe 'tcr'
 
             When call tcr 'unknown'
             The error should eq "$(error_message "$TCR_ERROR_TCR_UNKNOWN_ACTION")"
-            The variable TCR_TEST_EXIT_STATUS should eq "$(error_code "$TCR_ERROR_TCR_UNKNOWN_ACTION")"
+            The status should eq "$(error_code "$TCR_ERROR_TCR_UNKNOWN_ACTION")"
         End
     End
 
@@ -22,7 +22,7 @@ Describe 'tcr'
 
             When call tcr
             The error should eq "$(error_message "$TCR_ERROR_TCR_ARGUMENTS_MISSING")"
-            The variable TCR_TEST_EXIT_STATUS should eq "$(error_code "$TCR_ERROR_TCR_ARGUMENTS_MISSING")"
+            The status should eq "$(error_code "$TCR_ERROR_TCR_ARGUMENTS_MISSING")"
         End
     End
 

@@ -9,13 +9,8 @@ Describe 'tcr run'
     setup() {
         print_set_quiet
         unset $TEST_TCR_DISABLED
-        setup_exit_mock
-    }
-    teardown() {
-        teardown_exit_mock
     }
     BeforeEach 'setup'
-    AfterEach 'teardown'
 
     TEST_TCR_BUILD_CMD_EXIT_STATUS=0
     TEST_TCR_TEST_CMD_EXIT_STATUS=0
@@ -132,7 +127,7 @@ Describe 'tcr run'
                             When call subject
                             The output should be present
                             The error should eq '[TCR Error] Committing failed with status 88'
-                            The variable TCR_TEST_EXIT_STATUS should eq 88
+                            The status should eq 88
                         End
                     End
                 End
@@ -146,7 +141,7 @@ Describe 'tcr run'
                         When call subject
                         The output should be present
                         The error should eq '[TCR Error] Testing failed with status 66'
-                        The variable TCR_TEST_EXIT_STATUS should eq 66
+                        The status should eq 66
                     End
 
                     It 'It reverts the changes using the command from the loaded config'
@@ -155,6 +150,7 @@ Describe 'tcr run'
                         When call subject
                         The output should be present
                         The error should be present
+                        The status should be failure
                         The variable TCR_RUN_REVERT_EXECUTED_COMMAND should eq "$TCR_REVERT_CMD"
                     End
 
@@ -164,6 +160,7 @@ Describe 'tcr run'
                         When call subject
                         The output should include '[TCR] Reverting changes'
                         The error should be present
+                        The status should be failure
                     End
 
                     Context 'When the revert command is failing'
@@ -175,7 +172,7 @@ Describe 'tcr run'
                             When call subject
                             The output should be present
                             The error should eq '[TCR Error] Reverting failed with status 77'
-                            The variable TCR_TEST_EXIT_STATUS should eq 77
+                            The status should eq 77
                         End
                     End
                 End
@@ -191,7 +188,7 @@ Describe 'tcr run'
                 When call subject
                 The output should be present
                 The error should eq '[TCR Error] Building failed with status 99'
-                The variable TCR_TEST_EXIT_STATUS should eq 99
+                The status should eq 99
             End
         End
 
@@ -203,7 +200,7 @@ Describe 'tcr run'
 
                 When call subject
                 The error should eq '[TCR Error] TCR is not enabled'
-                The variable TCR_TEST_EXIT_STATUS should eq 3
+                The status should eq 3
             End
         End
     End
