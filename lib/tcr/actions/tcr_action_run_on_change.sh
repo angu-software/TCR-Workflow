@@ -20,16 +20,24 @@ tcr_action_run_on_change() {
     if tcr_action_run_on_change_has_changes; then
         tcr_action_run_on_change_print_change_detected
 
-        tcr_action_run
+        tcr_action_run_on_change_run_tcr_actions
     fi
 }
 
 tcr_action_run_on_change_print_change_detected() {
     print_status "Changes detected"
     
-    tcr_action_run_on_change_detect_changes_cmd
-    
-    print_status "Executing TCR actions"
+    changes="$(tcr_action_run_on_change_current_changes)"
+    echo "$changes"
+}
+
+tcr_action_run_on_change_run_tcr_actions() {
+    print_status "-- Executing TCR actions --"
+
+    result="$(tcr_action_run)"
+    echo "$result"
+
+    print_status "-- TCR actions finished --"
 }
 
 tcr_action_run_on_change_has_changes() {

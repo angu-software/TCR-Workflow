@@ -9,7 +9,7 @@ source "./spec/test_doubles/exit_mock.sh"
 Describe 'tcr_action_run_on_change'
 
     tcr_action_run() {
-        echo "tcr_action_run called"
+        command_run 'echo "tcr_action_run called"'
     }
 
     TEST_SPY_COMMAND_RETURN_VALUE=''
@@ -47,7 +47,7 @@ Describe 'tcr_action_run_on_change'
 
     It 'It checks if the repo has changes'
         When call subject
-        The result of function test_spy_command_run_call_log should eq "git --no-pager diff HEAD --name-status"
+        The line 1 of result of function test_spy_command_run_call_log should eq "git --no-pager diff HEAD --name-status"
     End
 
 
@@ -64,19 +64,17 @@ Describe 'tcr_action_run_on_change'
     Context 'When there are changes in the repo'
         BeforeEach 'TEST_SPY_COMMAND_RETURN_VALUE="M file.txt"'
 
-        It 'It runs the build and test commands'
+        It 'It tells that changes were detected and the tcr actions are executed'
             When call subject
-            The output should include "$(<<-EXPECTED
-[TCR] Changes detected
-M file.txt
-[TCR] Executing TCR actions
-EXPECTED
-)"
+            The line 1 of output should eq '[TCR] Changes detected'
+            The line 3 of output should eq '[TCR] -- Executing TCR actions --'
+            The line 4 of output should eq 'M file.txt'
+            The line 5 of output should eq '[TCR] -- TCR actions finished --'
         End
 
         It 'It runs the build and test commands'
             When call subject
-            The output should include "tcr_action_run called"
+            The line 3 of result of function test_spy_command_run_call_log should include 'echo "tcr_action_run called"'
         End
     End
 End
