@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 file_absolute_dir_path() {
     local file_path="$1"
     local file_dir

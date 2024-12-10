@@ -16,6 +16,7 @@ tcr_action_watch() {
         return "$(latest_error_code)"
     fi
 
+    print_status 'Watching for changes'
     watch_directory_loop_start tcr_action_run_on_change &
     TCR_ACTION_WATCH_LOOP_PROCESS_ID=$!
 }

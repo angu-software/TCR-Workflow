@@ -66,7 +66,17 @@ Describe 'tcr_action_run_on_change'
 
         It 'It runs the build and test commands'
             When call subject
-            The output should eq "tcr_action_run called"
+            The output should include "$(<<-EXPECTED
+[TCR] Changes detected
+M file.txt
+[TCR] Executing TCR actions
+EXPECTED
+)"
+        End
+
+        It 'It runs the build and test commands'
+            When call subject
+            The output should include "tcr_action_run called"
         End
     End
 End

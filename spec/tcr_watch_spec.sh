@@ -42,8 +42,15 @@ Describe 'tcr_action_watch'
     End
 
     Context 'When executing watch action'
+
+        It 'It tells that it starts watching for changes'
+            When call tcr_action_watch
+            The output should eq '[TCR] Watching for changes'
+        End
+
         It 'It starts a loop to watches for changes'
             When call tcr_action_watch
+            The output should be present
             The variable TCR_ACTION_WATCH_LOOP_PROCESS_ID should be defined
         End
 

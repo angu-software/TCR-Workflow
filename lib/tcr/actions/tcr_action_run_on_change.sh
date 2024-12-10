@@ -18,8 +18,18 @@ tcr_action_run_on_change() {
     fi
 
     if tcr_action_run_on_change_has_changes; then
+        tcr_action_run_on_change_print_change_detected
+
         tcr_action_run
     fi
+}
+
+tcr_action_run_on_change_print_change_detected() {
+    print_status "Changes detected"
+    
+    tcr_action_run_on_change_detect_changes_cmd
+    
+    print_status "Executing TCR actions"
 }
 
 tcr_action_run_on_change_has_changes() {

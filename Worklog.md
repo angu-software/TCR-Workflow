@@ -2,6 +2,8 @@
 
 ## In progress
 
+* [ ] Make sure `tcr watch` keeps running after failed commands
+
 ### Current Focus
 
 ### Next up
@@ -11,7 +13,6 @@
 * [ ] add `tcr watch` to help
 * [ ] `tcr status` reflects that watch is running
 * [ ] `tcr watch --stop` to stop running observation
-* [ ] tell that tcr watch has started
 
 * [ ] Document the VARs which should be available in the config file
 
@@ -43,6 +44,8 @@
 
 ## Done
 
+* [x] `tcr watch` tells which changes are detected
+* [x] tell that tcr watch has started
 * [x] error_raise should still return the error code
 * [x] Offer to adjust the change detection command through the config file (offers to adjust which folders to watch)
 * [x] Optional partameter for TCR start to specify some label to check on focus of the session

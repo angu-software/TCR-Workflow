@@ -59,6 +59,7 @@ Describe 'watch_directory'
                 file_create "$TCR_WATCH_DIR_LOCK_FILE_PATH"
 
                 When call watch_directory_loop_start "return 0"
+                The output should not be present
                 The error should eq '[TCR Error] TCR is already watching for changes'
                 The status should eq 30
             End
