@@ -11,6 +11,11 @@ TCR_ACTION_RUN_PHASE_COMMIT='Committing'
 TCR_ACTION_RUN_PHASE_REVERT='Reverting'
 
 tcr_action_run() {
+    if ! tcr_is_enabled; then
+        error_raise "$TCR_ERROR_TCR_NOT_ENABLED"
+        return "$(latest_error_code)"
+    fi
+
     if ! tcr_load_config; then
         return "$(latest_error_code)"
     fi

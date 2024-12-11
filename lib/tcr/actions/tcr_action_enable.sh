@@ -5,8 +5,12 @@ source "$TCR_HOME/lib/tcr/error_consts.sh"
 
 TCR_ACTION_ENABLE='start'
 
+tcr_action_start() {
+    tcr_action_enable "$@"
+}
+
 tcr_action_enable() {
-    session_name="$2"
+    session_name="$1"
 
     if lock_file_is_existing; then
         error_raise "$TCR_ERROR_TCR_ALREADY_ENABLED"

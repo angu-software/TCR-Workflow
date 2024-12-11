@@ -7,6 +7,10 @@ source "$TCR_HOME/lib/tcr/actions/tcr_action_watch.sh"
 
 TCR_ACTION_DISABLE='stop'
 
+tcr_action_stop() {
+    tcr_action_disable "$@"
+}
+
 tcr_action_disable() {
     if tcr_action_watch_is_running; then
         tcr_action_watch_stop

@@ -26,51 +26,44 @@ source "$TCR_HOME/lib/tcr/actions.sh"
 source "$TCR_HOME/lib/tcr/options.sh"
 
 tcr() {
-    local arguments="$*"
-    local action="$1"
+    local all_arguments="$*"
 
-    if is_containing "$arguments" "$TCR_OPTION_HELP"; then
-        tcr_option_help
-        return "$(last_command_status)"
-    elif is_containing "$arguments" "$TCR_OPTION_VERSION"; then
-        tcr_option_version
-        return "$(last_command_status)"
-    fi
-
-    if is_unset "$action"; then
+    if is_unset "$all_arguments"; then
         error_raise "$TCR_ERROR_TCR_ARGUMENTS_MISSING"
         return "$(latest_error_code)"
     fi
 
-    case "$action" in
-        "$TCR_ACTION_ENABLE")
-            tcr_action_enable "$@"
-            ;;
-        "$TCR_ACTION_DISABLE")
-            tcr_action_disable
-            ;;
-        "$TCR_ACTION_RUN")
-            if ! tcr_is_enabled; then
-                error_raise "$TCR_ERROR_TCR_NOT_ENABLED"
-                return "$(latest_error_code)"
-            fi
+    if is_containing "$all_arguments" "$TCR_OPTION_HELP"; then
+        tcr_option_help
+        return "$(last_command_status)"
+    elif is_containing "$all_arguments" "$TCR_OPTION_VERSION"; then
+        tcr_option_version
+        return "$(last_command_status)"
+    fi
 
-            tcr_action_run
-            ;;
-        "$TCR_ACTION_INIT")
-            tcr_action_init
-            ;;
-        "$TCR_ACTION_STATUS")
-            tcr_action_status
-            ;;
-        "$TCR_ACTION_WATCH")
-            tcr_action_watch "$@"
-            ;;
-        *)
-            error_raise "$TCR_ERROR_TCR_UNKNOWN_ACTION"
-            return "$(latest_error_code)"
-        ;;
-    esac
+    local action="$1"
+    local action_arguments=("${@:2}")
+
+    if ! tcr_is_supported_action "$action"; then
+        error_raise "$TCR_ERROR_TCR_UNKNOWN_ACTION"
+        return "$(latest_error_code)"
+    fi
+    
+    tcr_run_action "$action" "${action_arguments[@]}"
+}
+
+tcr_is_supported_action() {
+    available_actions=("$TCR_ACTION_INIT" "$TCR_ACTION_ENABLE" "$TCR_ACTION_DISABLE" "$TCR_ACTION_STATUS" "$TCR_ACTION_RUN" "$TCR_ACTION_WATCH")
+    local action="$1"
+
+    is_containing "${available_actions[*]}" "$action"
+}
+
+tcr_run_action() {
+    action="$1"
+    action_arguments=("${@:2}")
+
+    "tcr_action_$action" "${action_arguments[@]}"
 }
 
 # -- Main -- #
