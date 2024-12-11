@@ -16,15 +16,25 @@ tcr_action_watch() {
         return "$(latest_error_code)"
     fi
 
-    print_status 'Watching for changes'
-    watch_directory_loop_start tcr_action_run_on_change &
-    TCR_ACTION_WATCH_LOOP_PROCESS_ID=$!
+    if is_containing "$*" "--stop"; then
+        tcr_action_watch_stop
+    else 
+        tcr_action_watch_start
+    fi
 }
 
 tcr_action_watch_is_running() {
     watch_directory_loop_is_running
 }
 
+tcr_action_watch_start() {
+    print_status 'Watching for changes'
+
+    watch_directory_loop_start tcr_action_run_on_change &
+    TCR_ACTION_WATCH_LOOP_PROCESS_ID=$!
+}
+
 tcr_action_watch_stop() {
     watch_directory_loop_stop
+    print_status "Stopped watching for changes"
 }

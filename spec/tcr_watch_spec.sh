@@ -21,12 +21,22 @@ Describe 'tcr_action_watch'
     }
 
     test_spy_watch_directory_loop_start_call_log() {
+        if [ ! -f "$TEST_CALL_LOG_FILE" ]; then
+            return
+        fi
+
         log="$(<"$TEST_CALL_LOG_FILE")"
         echo "$log"
     }
 
     test_spy_watch_directory_loop_start_reset() {
-        file_remove "$TEST_CALL_LOG_FILE"
+        if [ -f "$TEST_CALL_LOG_FILE" ]; then
+            file_remove "$TEST_CALL_LOG_FILE"
+        fi
+    }
+
+    subject() {
+        tcr_action_watch
     }
 
     AfterEach 'test_spy_watch_directory_loop_start_reset'
@@ -35,7 +45,7 @@ Describe 'tcr_action_watch'
         BeforeAll 'unset TEST_TCR_ENABLED'
 
         It 'It raises an error'
-            When call tcr_action_watch
+            When call subject
             The error should eq "$(error_message "$TCR_ERROR_TCR_NOT_ENABLED")"
             The status should eq "$(error_code "$TCR_ERROR_TCR_NOT_ENABLED")"
         End
@@ -44,19 +54,47 @@ Describe 'tcr_action_watch'
     Context 'When executing watch action'
 
         It 'It tells that it starts watching for changes'
-            When call tcr_action_watch
+            When call subject
             The output should eq '[TCR] Watching for changes'
         End
 
         It 'It starts a loop to watches for changes'
-            When call tcr_action_watch
+            When call subject
             The output should be present
             The variable TCR_ACTION_WATCH_LOOP_PROCESS_ID should be defined
         End
 
         It 'It starts a loop with the necessary paramerers'
-            When call tcr_action_watch
+            When call subject
             The result of function test_spy_watch_directory_loop_start_call_log should eq 'tcr_action_run_on_change'
+        End
+    End
+
+    Context 'When watch is running'
+        Context 'When stopping the watch'
+            BeforeEach 'tcr_action_watch'
+
+            watch_directory_loop_is_running() {
+                is_set "$(test_spy_watch_directory_loop_start_call_log)"
+            }
+
+            watch_directory_loop_stop() {
+                test_spy_watch_directory_loop_start_reset
+            }
+
+            subject() {
+                tcr_action_watch "--stop"
+            }
+
+            It 'It stops the watch'
+                When call subject
+                The result of function tcr_action_watch_is_running should not be successful
+            End
+
+            It 'It tells that it stopped watching for changes'
+                When call subject
+                The output should eq '[TCR] Stopped watching for changes'
+            End
         End
     End
 End

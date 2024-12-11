@@ -2,8 +2,6 @@
 
 ## In progress
 
-### Current Focus
-
 ### Next up
 
 ## Open
@@ -12,7 +10,6 @@
 
 * [ ] add `tcr watch` to help
 * [ ] `tcr status` reflects that watch is running
-* [ ] `tcr watch --stop` to stop running observation
 
 * [ ] Document the VARs which should be available in the config file
 
@@ -44,6 +41,7 @@
 
 ## Done
 
+* [x] `tcr watch --stop` to stop running observation
 * [x] Make sure `tcr watch` keeps running after failed commands
 * [x] `tcr watch` tells which changes are detected
 * [x] tell that tcr watch has started

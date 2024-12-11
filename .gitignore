@@ -4,7 +4,7 @@ Tools/bin
 
 # TCR
 .tcr.lock
-.trc_loop.lock
+trc_watch.lock
 
 # Release artifacts
 *.tar.gz

@@ -2,7 +2,7 @@
 
 ## HEAD
 
-* Add mandatory 'TCR_CHANGE_DETECTION_CMD' to the config file to specify the command to detect changes in the repository when running `tcr watch`
+* Add mandatory `TCR_CHANGE_DETECTION_CMD` to the config file to specify the command to detect changes in the repository when running `tcr watch`
 * Add `tcr watch` to observe file changes in a git repository and run tcr on changes
 * Add an optional parameter to `tcr start [session name]` to specify a tcr session name
 * Rename actions `tcr enable/disable` to `tcr start/stop`

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOCK_FILE_PATH='./.trc_loop.lock'
+LOCK_FILE_PATH='./.tcr_playground_loop.lock'
 touch "$LOCK_FILE_PATH"
 
 FOLDER_PATH='./TCR_MVP'
