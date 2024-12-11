@@ -23,7 +23,7 @@ Actions:
                            Starts a TCR session.
                            Takes an optional session name as argument.
 
-  $TCR_ACTION_DISABLE                   - Disable TCR
+  $TCR_ACTION_STOP                   - Disable TCR
                            Ends a TCR session
 
   $TCR_ACTION_RUN                    - Run tests and commit or revert code 

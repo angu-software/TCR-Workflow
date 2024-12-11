@@ -53,7 +53,7 @@ tcr() {
 }
 
 tcr_is_supported_action() {
-    available_actions=("$TCR_ACTION_INIT" "$TCR_ACTION_ENABLE" "$TCR_ACTION_DISABLE" "$TCR_ACTION_STATUS" "$TCR_ACTION_RUN" "$TCR_ACTION_WATCH")
+    available_actions=("$TCR_ACTION_INIT" "$TCR_ACTION_ENABLE" "$TCR_ACTION_STOP" "$TCR_ACTION_STATUS" "$TCR_ACTION_RUN" "$TCR_ACTION_WATCH")
     local action="$1"
 
     is_containing "${available_actions[*]}" "$action"
