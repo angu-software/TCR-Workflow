@@ -19,7 +19,7 @@ Actions:
                            Create a template configuration file
                            in the current working directory
 
-  $TCR_ACTION_ENABLE [<session name>] - Enable TCR in the current working directory
+  $TCR_ACTION_START [<session name>] - Enable TCR in the current working directory
                            Starts a TCR session.
                            Takes an optional session name as argument.
 
