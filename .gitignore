@@ -8,6 +8,7 @@ trc_watch.lock
 
 # Release artifacts
 *.tar.gz
+*.zip
 
 # Test artifacts
 spec/tmp/*.*
