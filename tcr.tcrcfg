@@ -1,5 +1,5 @@
 # TCR Configuration File
-# TCR version: 0.1.0
+# TCR version: 1.0.0
 #
 # This configuration file is used to set up the commands for the TCR (Test && Commit || Revert) workflow.
 # The TCR workflow automates the process of running tests, committing changes if tests pass, and reverting changes if tests fail.

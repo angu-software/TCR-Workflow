@@ -62,7 +62,7 @@ TCR_REVERT_CMD='git checkout --'
 To start a TCR session in our repository run:
 
 ```text
-$> tcr enable
+$> tcr start
 ```
 
 ### Run TCR
@@ -85,7 +85,7 @@ Depending on the success or failure of the *test command* TCR will either
 To end the TCR session run:
 
 ```text
-$> tcr disable
+$> tcr stop
 ```
 
 ## Acknowledgements

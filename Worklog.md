@@ -18,7 +18,6 @@
 * [ ] obtain options for action from arguments
 * [ ] dynamic help generation
 
-* [ ] ensure that watch loop runs further after executed commands fail
 * [ ] Add some hints to errors. What can the user do to avoid the error
 
 * [ ] Offer action to squash tcr commit together with a new message
