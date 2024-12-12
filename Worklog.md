@@ -8,7 +8,6 @@
 
 * [ ] Forward output of tcr action to not mix error output with success output
 
-* [ ] add `tcr watch` to help
 * [ ] Beautify the output of `tcr status`
 
 * [ ] Document the VARs which should be available in the config file
@@ -43,6 +42,7 @@
 
 ## Done
 
+* [x] add `tcr watch` to help
 * [x] `tcr status` reflects that watch is running
 * [x] `tcr watch --stop` to stop running observation
 * [x] Make sure `tcr watch` keeps running after failed commands

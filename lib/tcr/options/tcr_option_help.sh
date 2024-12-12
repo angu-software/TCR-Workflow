@@ -26,10 +26,14 @@ Actions:
   $TCR_ACTION_STOP                   - Disable TCR
                            Ends a TCR session
 
+  $TCR_ACTION_STATUS                 - Show TCR status
+
   $TCR_ACTION_RUN                    - Run tests and commit or revert code 
                            based on the results
 
-  $TCR_ACTION_STATUS                 - Show TCR status
+  $TCR_ACTION_WATCH [--stop]         - Watch for changes in the current working directory
+                           and run tcr if changes where detected.
+                           Takes an optional argument to stop watching.
 
 Options:
 
