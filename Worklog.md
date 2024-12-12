@@ -9,9 +9,11 @@
 * [ ] Forward output of tcr action to not mix error output with success output
 
 * [ ] add `tcr watch` to help
-* [ ] `tcr status` reflects that watch is running
+* [ ] Beautify the output of `tcr status`
 
 * [ ] Document the VARs which should be available in the config file
+
+* [ ] Set a session name after tcr is already started
 
 * [ ] structure to define a action with options
 * [ ] obtain options for action from arguments
@@ -41,6 +43,7 @@
 
 ## Done
 
+* [x] `tcr status` reflects that watch is running
 * [x] `tcr watch --stop` to stop running observation
 * [x] Make sure `tcr watch` keeps running after failed commands
 * [x] `tcr watch` tells which changes are detected

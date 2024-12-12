@@ -12,6 +12,10 @@ tcr_action_status() {
         else
             print_status 'session active'
         fi
+
+        if tcr_action_watch_is_running; then
+            print_status 'watching for changes'
+        fi
     else
         print_status 'no session active'
     fi
