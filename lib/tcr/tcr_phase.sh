@@ -29,7 +29,7 @@ tcr_phase_exec() {
     if is_success "$cmd_exit"; then
         tcr_print_footer_event "$phase_success_message"
     else 
-        tcr_print_footer_event "$phase_failure_message"
+        tcr_print_footer_event "$phase_failure_message" "Exit code $cmd_exit."
     fi
 
     return "$cmd_exit"

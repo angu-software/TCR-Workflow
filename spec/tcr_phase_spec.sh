@@ -55,7 +55,7 @@ OUTPUT
                 When call subject
                 The error should be blank
                 The status should be failure
-                The line 10 of output should eq "[$TEST_TIME] Tests are failing."
+                The line 10 of output should eq "[$TEST_TIME] Tests are failing. Exit code $TEST_COMMAND_RETURN_CODE."
             End
 
             It 'It returns the commands exit code'

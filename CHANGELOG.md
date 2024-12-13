@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Structured output for tcr run
+
 ## 1.0.0
 
 * Add mandatory `TCR_CHANGE_DETECTION_CMD` to the config file to specify the command to detect changes in the repository when running `tcr watch`
