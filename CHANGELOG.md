@@ -2,6 +2,8 @@
 
 ## HEAD
 
+## 1.1.0
+
 ### Additions
 
 * `tcr start` treads all remaining parameters as session name

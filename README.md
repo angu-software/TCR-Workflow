@@ -29,7 +29,8 @@ Run `tcr init` at the root of your git repositories root directory to let TCR ge
 
 ```text
 $> tcr init
-[TCR] Generating template configuration tcr.tcrcfg
+[09:10:11] Generating template configuration tcr.tcrcfg...
+[09:10:11] Generating template completed.
 ```
 
 Next, specify the commands for building and testing your code changes for your repository.
@@ -42,19 +43,28 @@ A config file to run TCR on a swift package may look like the following:
 # ./tcr.tcrcfg
 
 # TCR Configuration File
-# TCR version: 0.1.0
+# TCR version: 1.0.0
 
-# Build command
-TCR_BUILD_CMD='swift build'
+# -- Build command (Optional) --
+# Command to build the project before running tests.
+# TCR_BUILD_CMD=''
 
-# Test command
+# -- Test command --
+# Command to run the tests.
 TCR_TEST_CMD='swift test'
 
-# Commit command
+# -- Commit command --
+# Command to commit the changes if tests pass.
 TCR_COMMIT_CMD='git add . && git commit -m "[TCR] Changes working"'
 
-# Revert command
-TCR_REVERT_CMD='git checkout --'
+# -- Revert command --
+# Command to revert the changes if tests fail.
+TCR_REVERT_CMD='git reset --hard'
+
+# -- Detecting changes in repository -- #
+# Command to detect changes in the repository when running 'tcr watch'
+TCR_CHANGE_DETECTION_CMD='git --no-pager diff HEAD --name-status'
+
 ```
 
 ### Enable TCR workflow
