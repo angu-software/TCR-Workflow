@@ -65,6 +65,13 @@ Describe 'tcr run'
 
         Context 'When a config file was found'
 
+            It 'It tells the tcr run action starts'
+                print_unset_quiet
+
+                When call subject
+                The line 1 of output should eq '[12:34:56] Starting TCR run...'
+            End
+
             It 'It runs the build command from the loaded config'
                 When call subject
                 The variable TCR_RUN_BUILD_EXECUTED_COMMAND should eq "$TCR_BUILD_CMD"
@@ -115,6 +122,13 @@ Describe 'tcr run'
                         The variable TCR_RUN_COMMIT_EXECUTED_COMMAND should eq "$TCR_COMMIT_CMD"
                     End
                 End
+            End
+
+            It 'It tells that the tcr run has been completed'
+                print_unset_quiet
+
+                When call subject
+                The line 17 of output should eq '[12:34:56] TCR run completed.'
             End
         End
 

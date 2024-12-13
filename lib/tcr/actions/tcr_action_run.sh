@@ -24,6 +24,8 @@ tcr_action_run() {
         return "$(latest_error_code)"
     fi
 
+    tcr_print_event "Starting TCR run..."
+
     execution_phase="$TCR_ACTION_RUN_PHASE_BUILD"
     execute_phase "$execution_phase"
     phase_error_code=$?
@@ -57,6 +59,8 @@ tcr_action_run() {
             fi
         fi
     fi
+
+    tcr_print_event "TCR run completed."
 }
 
 execute_phase() {
