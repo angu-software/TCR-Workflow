@@ -6,6 +6,8 @@ source './tcr'
 
 Describe 'Acceptance tests'
 
+    Include './spec/test_doubles/time_dummy.sh'
+
     subject() {
         tcr stop
     }
@@ -16,8 +18,9 @@ Describe 'Acceptance tests'
 
             Context 'When tcr gets disabled'
                 It 'It tells the named session has ended'
+
                     When call subject
-                    The output should include "[TCR] session 'my cool session' stopped"
+                    The output should include "[$TEST_TIME] TCR Session 'my cool session' stopped."
                 End
             End
         End

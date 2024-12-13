@@ -9,6 +9,8 @@ source './spec/test_doubles/file_mock.sh'
 
 Describe 'tcr disable'
 
+    Include './spec/test_doubles/time_dummy.sh'
+
     Describe 'when disabling tcr mode'
 
         tcr_load_session_info() {
@@ -40,7 +42,11 @@ Describe 'tcr disable'
                 unset TCR_OUTPUT_SILENT
 
                 When call subject
-                The output should eq '[TCR] session stopped'
+                The output should eq "$(cat <<-OUTPUT
+[$TEST_TIME] Stopping TCR session...
+[$TEST_TIME] TCR session stopped.
+OUTPUT
+)"
             End
 
             Context 'When tcr was started with session name'
@@ -50,7 +56,11 @@ Describe 'tcr disable'
                     unset TCR_OUTPUT_SILENT
 
                     When call subject
-                    The output should eq "[TCR] session 'my cool session' stopped"
+                    The output should eq "$(cat <<-OUTPUT
+[$TEST_TIME] Stopping TCR session 'my cool session'...
+[$TEST_TIME] TCR Session 'my cool session' stopped.
+OUTPUT
+)"
                 End
             End
         End
