@@ -36,7 +36,11 @@ Describe 'tcr enable'
             unset TCR_OUTPUT_SILENT
 
             When call subject
-            The output should eq '[TCR] session started'
+            The output should eq "$(cat <<-OUTPUT
+[$TEST_TIME] Starting TCR session...
+[$TEST_TIME] TCR session started.
+OUTPUT
+)"
         End
 
         It 'it writes important information to the lock file'
@@ -51,7 +55,11 @@ Describe 'tcr enable'
                 unset TCR_OUTPUT_SILENT
 
                 When call subject 'my cool session'
-                The output should eq "[TCR] session 'my cool session' started"
+                The output should eq "$(cat <<-OUTPUT
+[$TEST_TIME] Starting TCR session 'my cool session'...
+[$TEST_TIME] TCR session 'my cool session' started.
+OUTPUT
+)"
             End
 
             It 'It writes the session name to the lock file'

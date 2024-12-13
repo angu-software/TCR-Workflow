@@ -14,12 +14,18 @@ tcr_action_start() {
         return "$(latest_error_code)"
     fi
 
+    if is_set "$session_name"; then
+        tcr_print_event "Starting TCR session '$session_name'..."
+    else
+        tcr_print_event 'Starting TCR session...'
+    fi
+
     setup_lock_file "$session_name"
 
     if is_set "$session_name"; then
-        print_status "session '$session_name' started"
+        tcr_print_event "TCR session '$session_name' started."
     else
-        print_status 'session started'
+        tcr_print_event 'TCR session started.'
     fi
 }
 
