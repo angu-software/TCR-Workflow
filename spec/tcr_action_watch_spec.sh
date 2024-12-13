@@ -57,7 +57,7 @@ Describe 'tcr_action_watch'
 
         It 'It tells that it starts watching for changes'
             When call subject
-            The output should eq '[TCR] Watching for changes'
+            The output should eq "[$TEST_TIME] Start watching for changes..."
         End
 
         It 'It starts a loop to watches for changes'
@@ -95,7 +95,7 @@ Describe 'tcr_action_watch'
 
             It 'It tells that it stopped watching for changes'
                 When call subject
-                The output should eq '[TCR] Stopped watching for changes'
+                The output should eq "[$TEST_TIME] Watching for changes stopped."
             End
         End
     End

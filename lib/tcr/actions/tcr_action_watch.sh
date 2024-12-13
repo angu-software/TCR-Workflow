@@ -29,7 +29,7 @@ tcr_action_watch_is_running() {
 }
 
 tcr_action_watch_start() {
-    print_status 'Watching for changes'
+    tcr_print_event 'Start watching for changes...'
 
     watch_directory_loop_start tcr_action_run_on_change &
     TCR_ACTION_WATCH_LOOP_PROCESS_ID=$!
@@ -37,5 +37,5 @@ tcr_action_watch_start() {
 
 tcr_action_watch_stop() {
     watch_directory_loop_stop
-    print_status "Stopped watching for changes"
+    tcr_print_event "Watching for changes stopped."
 }
