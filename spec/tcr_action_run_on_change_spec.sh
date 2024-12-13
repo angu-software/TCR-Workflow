@@ -8,6 +8,8 @@ source "./spec/test_doubles/exit_mock.sh"
 
 Describe 'tcr_action_run_on_change'
 
+    Include './spec/test_doubles/time_dummy.sh'
+
     tcr_action_run() {
         command_run 'echo "tcr_action_run called"'
     }
@@ -56,7 +58,7 @@ Describe 'tcr_action_run_on_change'
 
         It 'It raises an error'
             When call subject
-            The error should eq '[TCR Error] Change detection command TCR_CHANGE_DETECTION_CMD not set in configuration file'
+            The error should eq "[$TEST_TIME] Error: Change detection command TCR_CHANGE_DETECTION_CMD not set in configuration file"
             The status should eq 20
         End
     End

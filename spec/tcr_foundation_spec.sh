@@ -10,6 +10,8 @@ Describe 'tcr_foundation'
     source "./spec/test_doubles/exit_mock.sh"
     source "./spec/test_doubles/test_stub_find.sh"
 
+    Include './spec/test_doubles/time_dummy.sh'
+
     Describe 'tcr_load_config'
 
         TEST_LOADED_FILE_PATH=''
@@ -42,7 +44,7 @@ Describe 'tcr_foundation'
                 unset TEST_STUB_FIND_RESULT_FILE_PATH
                     
                 When call subject
-                The error should eq '[TCR Error] No configuration file found'
+                The error should eq "[$TEST_TIME] Error: No configuration file found!"
                 The status should eq 5
             End
         End

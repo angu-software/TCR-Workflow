@@ -29,7 +29,7 @@ tcr() {
     local all_arguments="$*"
 
     if is_unset "$all_arguments"; then
-        error_raise "$TCR_ERROR_TCR_ARGUMENTS_MISSING"
+        tcr_error_raise "$TCR_ERROR_TCR_ARGUMENTS_MISSING"
         return "$(latest_error_code)"
     fi
 
@@ -45,7 +45,7 @@ tcr() {
     local action_arguments=("${@:2}")
 
     if ! tcr_is_supported_action "$action"; then
-        error_raise "$TCR_ERROR_TCR_UNKNOWN_ACTION"
+        tcr_error_raise "$TCR_ERROR_TCR_UNKNOWN_ACTION"
         return "$(latest_error_code)"
     fi
     

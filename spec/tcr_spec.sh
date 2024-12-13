@@ -6,12 +6,14 @@ source './spec/test_doubles/exit_mock.sh'
 
 Describe 'tcr'
 
+    Include './spec/test_doubles/time_dummy.sh'
+
     Describe 'When passing unknown arguments'
         It 'It should raise an error'
             unset TCR_OUTPUT_SILENT
 
             When call tcr 'unknown'
-            The error should eq "$(error_message "$TCR_ERROR_TCR_UNKNOWN_ACTION")"
+            The error should eq "[$TEST_TIME] Error: Unknown action!"
             The status should eq "$(error_code "$TCR_ERROR_TCR_UNKNOWN_ACTION")"
         End
     End
@@ -21,7 +23,7 @@ Describe 'tcr'
             unset TCR_OUTPUT_SILENT
 
             When call tcr
-            The error should eq "$(error_message "$TCR_ERROR_TCR_ARGUMENTS_MISSING")"
+            The error should eq "[$TEST_TIME] Error: No arguments specified!"
             The status should eq "$(error_code "$TCR_ERROR_TCR_ARGUMENTS_MISSING")"
         End
     End

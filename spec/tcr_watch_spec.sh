@@ -9,6 +9,8 @@ source './spec/test_doubles/exit_mock.sh'
 
 Describe 'tcr_action_watch'
 
+    Include './spec/test_doubles/time_dummy.sh'
+
     TEST_TCR_ENABLED='true'
     tcr_is_enabled() {
         is_set "$TEST_TCR_ENABLED"
@@ -46,7 +48,7 @@ Describe 'tcr_action_watch'
 
         It 'It raises an error'
             When call subject
-            The error should eq "$(error_message "$TCR_ERROR_TCR_NOT_ENABLED")"
+            The error should eq "[$TEST_TIME] Error: TCR is not enabled!"
             The status should eq "$(error_code "$TCR_ERROR_TCR_NOT_ENABLED")"
         End
     End

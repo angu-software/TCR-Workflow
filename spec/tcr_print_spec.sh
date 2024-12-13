@@ -3,10 +3,7 @@
 Describe 'tcr_print.sh'
     Include spec/test_doubles/home_dir_mock.sh
     Include lib/tcr/tcr_print.sh
-
-    time_now() {
-        echo "12:34:56"
-    }
+    Include './spec/test_doubles/time_dummy.sh'
 
     Describe 'tcr_print_event'
 
@@ -16,7 +13,7 @@ Describe 'tcr_print.sh'
 
         It 'It prints an event with the current time'
             When call subject Starting TCR cycle...
-            The output should eq "[12:34:56] Starting TCR cycle..."
+            The output should eq "[$TEST_TIME] Starting TCR cycle..."
         End
 
         Context 'When no event message is provided'
@@ -35,7 +32,7 @@ Describe 'tcr_print.sh'
 
         It 'It prints an error event with the current time'
             When call subject Something is not right.
-            The error should eq "[12:34:56] Error: Something is not right."
+            The error should eq "[$TEST_TIME] Error: Something is not right."
         End
     End
 
@@ -72,7 +69,7 @@ HEADER
             When call subject All tests passed.
             The output should eq "$(cat <<-HEADER
 --------------------------------------------------
-[12:34:56] All tests passed.
+[$TEST_TIME] All tests passed.
 HEADER
 )"
         End

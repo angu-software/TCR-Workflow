@@ -2,10 +2,11 @@
 
 source "$TCR_HOME/lib/tcr/tcr_foundation.sh"
 source "$TCR_HOME/lib/tcr/actions/tcr_action_run.sh"
+source "$TCR_HOME/lib/tcr/tcr_error.sh"
 
 TCR_ACTION_RUN_ON_CHANGE='run_on_change'
 
-TCR_ERROR_RUN_ON_CHANGE_DETECT_CMD_MISSING="$(error_build 20 'Change detection command TCR_CHANGE_DETECTION_CMD not set in configuration file')"
+TCR_ERROR_RUN_ON_CHANGE_DETECT_CMD_MISSING="$(tcr_error_build 20 'Change detection command TCR_CHANGE_DETECTION_CMD not set in configuration file')"
 
 tcr_action_run_on_change() {
     if ! tcr_load_config; then
@@ -13,7 +14,7 @@ tcr_action_run_on_change() {
     fi
 
     if is_unset "$(tcr_action_run_on_change_detect_changes_cmd)"; then
-        error_raise "$TCR_ERROR_RUN_ON_CHANGE_DETECT_CMD_MISSING"
+        tcr_error_raise "$TCR_ERROR_RUN_ON_CHANGE_DETECT_CMD_MISSING"
         return "$(latest_error_code)"
     fi
 

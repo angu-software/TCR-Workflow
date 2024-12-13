@@ -9,6 +9,8 @@ source './spec/test_doubles/file_mock.sh'
 
 Describe 'tcr enable'
 
+    Include './spec/test_doubles/time_dummy.sh'
+
     setup() {
         export TCR_OUTPUT_SILENT='true'
         setup_file_mock
@@ -63,7 +65,7 @@ Describe 'tcr enable'
 
             It 'should raise an error'
                 When call subject
-                The error should eq "$(error_message "$TCR_ERROR_TCR_ALREADY_ENABLED")"
+                The error should eq "[$TEST_TIME] Error: TCR is already enabled!"
                 The status should eq "$(error_code "$TCR_ERROR_TCR_ALREADY_ENABLED")"
             End
         End

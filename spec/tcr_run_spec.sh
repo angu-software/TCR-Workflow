@@ -6,9 +6,7 @@ source './spec/test_doubles/exit_mock.sh'
 
 Describe 'tcr run'
 
-    time_now() {
-        echo "12:34:56"
-    }
+    Include './spec/test_doubles/time_dummy.sh'
 
     setup() {
         print_set_quiet
@@ -69,7 +67,7 @@ Describe 'tcr run'
                 print_unset_quiet
 
                 When call subject
-                The line 1 of output should eq '[12:34:56] Starting TCR run...'
+                The line 1 of output should eq "[$TEST_TIME] Starting TCR run..."
             End
 
             It 'It runs the build command from the loaded config'
@@ -81,7 +79,7 @@ Describe 'tcr run'
                 print_unset_quiet
 
                 When call subject
-                The output should include '[12:34:56] Building project...'
+                The output should include "[$TEST_TIME] Building project..."
             End
 
             Context 'When no build command is set in the cfg file'
@@ -96,8 +94,8 @@ Describe 'tcr run'
                     print_unset_quiet
 
                     When call subject
-                    The output should include '[12:34:56] Skipping Build phase, no command specified.'
-                    The output should not include '[12:34:56] Building project...'
+                    The line 2 of output should eq "[$TEST_TIME] Skipping Build phase, no command specified."
+                    The output should not eq "[$TEST_TIME] Building project..."
                 End
 
             End
@@ -113,7 +111,7 @@ Describe 'tcr run'
                     print_unset_quiet
 
                     When call subject
-                    The output should include '[12:34:56] Running tests...'
+                    The output should include "[$TEST_TIME] Running tests..."
                 End
 
                 Describe 'When the test command succeeds'
@@ -128,7 +126,7 @@ Describe 'tcr run'
                 print_unset_quiet
 
                 When call subject
-                The line 17 of output should eq '[12:34:56] TCR run completed.'
+                The line 17 of output should eq "[$TEST_TIME] TCR run completed."
             End
         End
 
@@ -139,7 +137,7 @@ Describe 'tcr run'
                 unset TCR_OUTPUT_SILENT
 
                 When call subject
-                The error should eq '[TCR Error] TCR is not enabled'
+                The error should eq "[$TEST_TIME] Error: TCR is not enabled!"
                 The status should eq 3
             End
         End

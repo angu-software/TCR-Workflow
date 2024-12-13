@@ -3,6 +3,7 @@
 source "$TCR_HOME/lib/foundation.sh"
 source "$TCR_HOME/lib/tcr/config_file.sh"
 source "$TCR_HOME/lib/tcr/error_consts.sh"
+source "$TCR_HOME/lib/tcr/tcr_error.sh"
 
 tcr_is_enabled() {
     lock_file_is_existing
@@ -21,7 +22,7 @@ tcr_load_session_info() {
 tcr_load_config() {
     cfg_path="$(config_file_find_first_in_dir "$TCR_WORK_DIRECTORY")"
     if is_unset "$cfg_path"; then
-        error_raise "$TCR_ERROR_TCR_CFG_MISSING"
+        tcr_error_raise "$TCR_ERROR_TCR_CFG_MISSING"
         return "$(latest_error_code)"
     fi
 

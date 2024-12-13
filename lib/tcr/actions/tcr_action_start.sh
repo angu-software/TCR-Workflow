@@ -2,6 +2,7 @@
 
 source "$TCR_HOME/lib/foundation.sh"
 source "$TCR_HOME/lib/tcr/error_consts.sh"
+source "$TCR_HOME/lib/tcr/tcr_error.sh"
 
 TCR_ACTION_START='start'
 
@@ -9,7 +10,7 @@ tcr_action_start() {
     session_name="$1"
 
     if lock_file_is_existing; then
-        error_raise "$TCR_ERROR_TCR_ALREADY_ENABLED"
+        tcr_error_raise "$TCR_ERROR_TCR_ALREADY_ENABLED"
         return "$(latest_error_code)"
     fi
 

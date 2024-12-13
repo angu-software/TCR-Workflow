@@ -12,6 +12,8 @@ source './spec/test_doubles/exit_mock.sh'
 
 Describe 'watch_directory'
 
+    Include './spec/test_doubles/time_dummy.sh' 
+
     AfterEach 'watch_directory_loop_stop'
 
     Context 'When watching for changes'
@@ -60,7 +62,7 @@ Describe 'watch_directory'
 
                 When call watch_directory_loop_start "return 0"
                 The output should not be present
-                The error should eq '[TCR Error] TCR is already watching for changes'
+                The error should eq "[$TEST_TIME] Error: TCR is already watching for changes"
                 The status should eq 30
             End
         End

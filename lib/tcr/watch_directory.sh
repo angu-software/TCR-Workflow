@@ -1,11 +1,12 @@
 #!/bin/bash
 
 source "$TCR_HOME/lib/foundation.sh"
+source "$TCR_HOME/lib/tcr/tcr_error.sh"
 
 TCR_WATCH_DIR_LOCK_FILE_NAME='tcr_watch.lock'
 TCR_WATCH_DIR_LOCK_FILE_PATH="$TCR_WORK_DIRECTORY/$TCR_WATCH_DIR_LOCK_FILE_NAME"
 
-TCR_ERROR_WATCH_RUNNING="$(error_build 30 'TCR is already watching for changes')"
+TCR_ERROR_WATCH_RUNNING="$(tcr_error_build 30 'TCR is already watching for changes')"
 
 watch_directory_loop_start() {
     repeating_cmd="$1"
@@ -14,7 +15,7 @@ watch_directory_loop_start() {
     fi
 
     if watch_directory_loop_is_running; then
-        error_raise "$TCR_ERROR_WATCH_RUNNING"
+        tcr_error_raise "$TCR_ERROR_WATCH_RUNNING"
         return "$(latest_error_code)"
     fi
 
