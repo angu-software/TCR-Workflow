@@ -23,7 +23,7 @@ Describe 'tcr enable'
     AfterEach 'teardown'
 
     subject() {
-        tcr start "$1"
+        tcr start "$@"
     }
 
     Describe 'when enabling tcr mode'
@@ -54,7 +54,7 @@ OUTPUT
             It 'It tells the session with name is started'
                 unset TCR_OUTPUT_SILENT
 
-                When call subject 'my cool session'
+                When call subject my cool session
                 The output should eq "$(cat <<-OUTPUT
 [$TEST_TIME] Starting TCR session 'my cool session'...
 [$TEST_TIME] TCR session 'my cool session' started.

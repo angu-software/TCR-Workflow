@@ -3,6 +3,8 @@
 ## HEAD
 
 * Structured output for tcr run
+* `tcr start` treads all remaining parameters as session name
+  `tcr start Hello World` will start a session named `Hello World`
 
 ## 1.0.0
 

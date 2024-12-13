@@ -7,7 +7,7 @@ source "$TCR_HOME/lib/tcr/tcr_error.sh"
 TCR_ACTION_START='start'
 
 tcr_action_start() {
-    session_name="$1"
+    session_name="$*"
 
     if lock_file_is_existing; then
         tcr_error_raise "$TCR_ERROR_TCR_ALREADY_ENABLED"
