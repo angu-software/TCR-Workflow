@@ -68,10 +68,11 @@ Describe 'tcr_action_run_on_change'
 
         It 'It tells that changes were detected and the tcr actions are executed'
             When call subject
-            The line 1 of output should eq '[TCR] Changes detected'
-            The line 3 of output should eq '[TCR] -- Executing TCR actions --'
-            The line 4 of output should eq 'M file.txt'
-            The line 5 of output should eq '[TCR] -- TCR actions finished --'
+            The line 1 of output should eq "[$TEST_TIME] Changes detected."
+            The line 2 of output should eq "[Detected Changes]"
+            The line 3 of output should eq "--------------------------------------------------"
+            The line 4 of output should eq "M file.txt"
+            The line 5 of output should eq "--------------------------------------------------"
         End
 
         It 'It runs the build and test commands'

@@ -3,6 +3,7 @@
 source "$TCR_HOME/lib/tcr/tcr_foundation.sh"
 source "$TCR_HOME/lib/tcr/actions/tcr_action_run.sh"
 source "$TCR_HOME/lib/tcr/tcr_error.sh"
+source "$TCR_HOME/lib/tcr/tcr_print.sh"
 
 TCR_ACTION_RUN_ON_CHANGE='run_on_change'
 
@@ -26,19 +27,19 @@ tcr_action_run_on_change() {
 }
 
 tcr_action_run_on_change_print_change_detected() {
-    print_status "Changes detected"
-    
+    tcr_print_event "Changes detected."
+
+    local changes
     changes="$(tcr_action_run_on_change_current_changes)"
+
+    tcr_print_header "Detected Changes"
     echo "$changes"
+    tcr_print_separator
 }
 
 tcr_action_run_on_change_run_tcr_actions() {
-    print_status "-- Executing TCR actions --"
-
     result="$(tcr_action_run)"
-    echo "$result"
-
-    print_status "-- TCR actions finished --"
+    print "$result"
 }
 
 tcr_action_run_on_change_has_changes() {
