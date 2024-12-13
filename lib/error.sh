@@ -4,10 +4,13 @@ source "$TCR_HOME/lib/print.sh"
 
 TCR_EXIT_CMD='exit'
 
-# Error format: "<error_code>|<error_message>"
+# Error structure:
+# <error_code>|<error_message>
 
+# DEPRECATED
 TCR_ERROR_MSG_PREFIX='[TCR Error]'
 
+# DEPRECATED: Use tcr_error_build instead
 error_build() {
     local code="$1"
     local message="$2"
@@ -29,6 +32,7 @@ error_code() {
     echo "$code"
 }
 
+# DEPRECATED: Use tcr_error_build instead
 error_raise() {
     local error="$1"
     local error_code

@@ -9,6 +9,8 @@ source './spec/test_doubles/file_mock.sh'
 
 Describe 'tcr init'
 
+    Include './spec/test_doubles/time_dummy.sh'
+
     setup() {
         print_set_quiet
         setup_file_mock
@@ -31,7 +33,11 @@ Describe 'tcr init'
             print_unset_quiet
 
             When call tcr init
-            The output should eq '[TCR] Generating template configuration 'tcr.tcrcfg''
+            The output should eq "$(cat <<-OUTPUT
+[$TEST_TIME] Generating template configuration tcr.tcrcfg...
+[$TEST_TIME] Generating template completed.
+OUTPUT
+)"
         End
 
         It 'It writes config template content to the config file'
@@ -51,7 +57,7 @@ Describe 'tcr init'
                 print_unset_quiet
             
                 When call tcr init
-                The error should eq '[TCR Error] Config file already exists'
+                The error should eq "[$TEST_TIME] Error: Config file already exists!"
                 The status should eq 10
             End
         End
