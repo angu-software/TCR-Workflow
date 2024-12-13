@@ -6,8 +6,6 @@
 
 ## Open
 
-* [ ] BUG: when stopping tcr, when no session is started, it shows a weird error message
-
 * [ ] Add parameter to `tcr run` to skip commit/revert phase (useful when drafting the test)
 
 * [ ] Forward output of tcr action to not mix error output with success output
@@ -46,6 +44,7 @@
 
 ## Done
 
+* [x] BUG: when stopping tcr, when no session is started, it shows a weird error message
 * [x] take all remaining parameters after tcr start as session name
 * [x] phase exec tell error code of failed command in output
 * [x] Structured output for tcr run

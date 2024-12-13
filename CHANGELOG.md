@@ -2,9 +2,18 @@
 
 ## HEAD
 
-* Structured output for tcr run
+### Additions
+
 * `tcr start` treads all remaining parameters as session name
   `tcr start Hello World` will start a session named `Hello World`
+
+### Modification
+
+* More structured output for `tcr run` and other actions
+
+### Fixes
+
+* Fixes an unintended error output when stopping tcr without a started session
 
 ## 1.0.0
 

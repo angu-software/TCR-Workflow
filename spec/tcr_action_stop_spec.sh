@@ -7,9 +7,15 @@ source './tcr'
 source './spec/test_doubles/exit_mock.sh'
 source './spec/test_doubles/file_mock.sh'
 
-Describe 'tcr disable'
+Describe 'tcr stop'
 
     Include './spec/test_doubles/time_dummy.sh'
+
+        # TODO: file_is_existing should be used
+    TEST_TCR_ENABLED='true'
+    lock_file_is_existing() {
+        is_set "$TEST_TCR_ENABLED"
+    }
 
     Describe 'when disabling tcr mode'
 
@@ -20,6 +26,16 @@ Describe 'tcr disable'
         subject() {
             tcr stop
         }
+
+        Context 'When tcr is not active'
+            BeforeEach 'unset TEST_TCR_ENABLED'
+
+            It 'It throws an error'
+                When call subject
+                The error should eq "[$TEST_TIME] Error: TCR is not enabled!"
+                The status should eq 3
+            End
+        End
 
         Context 'When trc watch is not running'
             setup() {
