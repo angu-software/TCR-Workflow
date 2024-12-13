@@ -38,8 +38,9 @@ Describe 'tcr'
 
     Context 'tcr --version'
         It 'should show the version'
+
             When call tcr '--version'
-            The output should eq "[TCR] v$TCR_VERSION"
+            The output should eq "TCR Version: $TCR_VERSION"
         End
     End
 

@@ -3,5 +3,5 @@
 TCR_OPTION_VERSION='--version'
 
 tcr_option_version() {
-    print_status "v${TCR_VERSION}"
+    print "TCR Version: ${TCR_VERSION}"
 }
