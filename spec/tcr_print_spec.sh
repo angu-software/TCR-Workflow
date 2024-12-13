@@ -27,6 +27,18 @@ Describe 'tcr_print.sh'
         End
     End
 
+    Describe 'tcr_print_error_event'
+
+        subject() {
+            tcr_print_error_event "$*"
+        }
+
+        It 'It prints an error event with the current time'
+            When call subject Something is not right.
+            The error should eq "[12:34:56] Error: Something is not right."
+        End
+    End
+
     Describe 'tcr_print_header'
 
         subject() {
@@ -72,4 +84,6 @@ HEADER
             End
         End
     End
+
+    
 End

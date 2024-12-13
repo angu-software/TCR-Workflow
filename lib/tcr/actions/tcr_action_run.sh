@@ -4,9 +4,6 @@ source "$TCR_HOME/lib/foundation.sh"
 source "$TCR_HOME/lib/tcr/config_file.sh"
 source "$TCR_HOME/lib/tcr/tcr_phase.sh"
 
-# TODO: remove this dependency
-source "$TCR_HOME/lib/tcr/tcr_print.sh"
-
 TCR_ACTION_RUN='run'
 
 TCR_ACTION_RUN_PHASE_BUILD="$TCR_BUILD_PHASE"

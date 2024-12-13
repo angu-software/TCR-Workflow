@@ -10,6 +10,10 @@ tcr_print_event() {
     print "[$(time_now)] $*"
 }
 
+tcr_print_error_event() {
+    tcr_print_event "Error: $*" >&2
+}
+
 tcr_print_header() {
     if is_unset "$*"; then
         return
