@@ -4,7 +4,11 @@
 
 ### Next up
 
+* [ ] take all remaining parameters after tcr start as session name
+
 ## Open
+
+* [ ] BUG: when stopping tcr, when no session is started, it shows a weird error message
 
 * [ ] Add parameter to `tcr run` to skip commit/revert phase (useful when drafting the test)
 

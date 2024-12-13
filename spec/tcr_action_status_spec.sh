@@ -1,8 +1,16 @@
 #!/bin/bash
 
-source './tcr'
+test_make_status() {
+    cat <<-STATUS
+TCR Status: $1
+--------------------------------------------------
+Session Name: $2
+Monitoring for Changes: $3
+STATUS
+}
 
 Describe 'tcr status'
+    Include './tcr'
 
     TEST_TCR_ENABLED='true'
     tcr_is_enabled() {
@@ -26,7 +34,7 @@ Describe 'tcr status'
     Context 'When tcr was started without session name'
         It 'should inform that tcr mode is enabled'
             When call subject
-            The output should eq '[TCR] session active'
+            The output should eq "$(test_make_status 'Active' 'None' 'No')"
         End
     End
 
@@ -35,20 +43,15 @@ Describe 'tcr status'
 
         It 'It tells the name of the session'
             When call subject
-            The output should eq "[TCR] session 'my cool session' active"
+            The output should eq "$(test_make_status 'Active' 'my cool session' 'No')"
         End
     End
 
     Context 'When tcr is watching for changes'
         BeforeEach 'TEST_TCR_WATCHING_FOR_CHANGES=true'
-
         It 'It informs that tcr is watching for changes'
             When call subject
-            The output should eq "$(cat <<-STATUS_OUTPUT
-[TCR] session active
-[TCR] watching for changes
-STATUS_OUTPUT
-)"
+            The output should eq "$(test_make_status 'Active' 'None' 'Yes')"
         End
     End
 
@@ -57,7 +60,7 @@ STATUS_OUTPUT
 
         It 'should inform that tcr mode is disabled'
             When call subject
-            The output should eq '[TCR] no session active'
+            The output should eq "$(test_make_status 'Inactive' 'None' 'No')"
         End
     End
 End
