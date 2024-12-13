@@ -2,13 +2,17 @@
 
 source "$TCR_HOME/lib/foundation.sh"
 source "$TCR_HOME/lib/tcr/config_file.sh"
+source "$TCR_HOME/lib/tcr/tcr_phase.sh"
+
+# TODO: remove this dependency
+source "$TCR_HOME/lib/tcr/tcr_print.sh"
 
 TCR_ACTION_RUN='run'
 
-TCR_ACTION_RUN_PHASE_BUILD='Building'
-TCR_ACTION_RUN_PHASE_TEST='Testing'
-TCR_ACTION_RUN_PHASE_COMMIT='Committing'
-TCR_ACTION_RUN_PHASE_REVERT='Reverting'
+TCR_ACTION_RUN_PHASE_BUILD="$TCR_BUILD_PHASE"
+TCR_ACTION_RUN_PHASE_TEST="$TCR_TEST_PHASE"
+TCR_ACTION_RUN_PHASE_COMMIT="$TCR_COMMIT_PHASE"
+TCR_ACTION_RUN_PHASE_REVERT="$TCR_REVERT_PHASE"
 
 tcr_action_run() {
     if ! tcr_is_enabled; then
@@ -53,18 +57,6 @@ tcr_action_run() {
             fi
         fi
     fi
-
-    handle_error "$phase_error_code" "$execution_phase"
-}
-
-handle_error() {
-    error_code="$1"
-    execution_phase="$2"
-
-    if ! is_success "$error_code"; then
-        error_raise "$(make_run_command_error "$error_code" "$execution_phase")"
-        return "$error_code"
-    fi
 }
 
 execute_phase() {
@@ -90,24 +82,15 @@ command_for_phase() {
     esac
 }
 
-make_run_command_error() {
-    error_code="$1"
-    execution_phase="$2"
-    error_build "$error_code" "$execution_phase failed with status $error_code"
-}
-
 execute_phase_command() {
     phase="$1"
     command="$2"
 
     if is_unset "$command"; then
-        print_status "Skipping $phase phase"
+        phase_name="$(tcr_phase_get_name "$phase")"
+        tcr_print_event "Skipping $phase_name phase, no command specified."
         return "$(last_command_status)"
     fi
 
-    if is_set "$phase"; then
-        print_status "$phase changes"
-    fi
-
-    command_run "$command"
+    tcr_phase_exec "$phase" "$command"
 }

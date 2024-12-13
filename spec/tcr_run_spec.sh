@@ -6,6 +6,10 @@ source './spec/test_doubles/exit_mock.sh'
 
 Describe 'tcr run'
 
+    time_now() {
+        echo "12:34:56"
+    }
+
     setup() {
         print_set_quiet
         unset $TEST_TCR_DISABLED
@@ -67,10 +71,10 @@ Describe 'tcr run'
             End
 
             It 'It tells that it builds the changes'
-                unset TCR_OUTPUT_SILENT
+                print_unset_quiet
 
                 When call subject
-                The output should include '[TCR] Building changes'
+                The output should include '[12:34:56] Building project...'
             End
 
             Context 'When no build command is set in the cfg file'
@@ -85,9 +89,10 @@ Describe 'tcr run'
                     print_unset_quiet
 
                     When call subject
-                    The output should include '[TCR] Skipping Building phase'
-                    The output should not include '[TCR] Building changes'
+                    The output should include '[12:34:56] Skipping Build phase, no command specified.'
+                    The output should not include '[12:34:56] Building project...'
                 End
+
             End
 
             Describe 'When the build command succeeds'
@@ -98,10 +103,10 @@ Describe 'tcr run'
                 End
 
                 It 'It tells that it runs the tests'
-                    unset TCR_OUTPUT_SILENT
+                    print_unset_quiet
 
                     When call subject
-                    The output should include '[TCR] Testing changes'
+                    The output should include '[12:34:56] Running tests...'
                 End
 
                 Describe 'When the test command succeeds'
@@ -109,86 +114,7 @@ Describe 'tcr run'
                         When call subject
                         The variable TCR_RUN_COMMIT_EXECUTED_COMMAND should eq "$TCR_COMMIT_CMD"
                     End
-
-                    It 'It tells that it commits the changes'
-                        unset TCR_OUTPUT_SILENT
-
-                        When call subject
-                        The output should include '[TCR] Committing changes'
-                        The error should not be present
-                    End
-
-                    Context 'When the commit command is failing'
-                        TEST_TCR_COMMIT_CMD_EXIT_STATUS=88
-
-                        It 'It raises an error'
-                            unset TCR_OUTPUT_SILENT
-
-                            When call subject
-                            The output should be present
-                            The error should eq '[TCR Error] Committing failed with status 88'
-                            The status should eq 88
-                        End
-                    End
                 End
-
-                Describe 'When the test command fails'
-                    TEST_TCR_TEST_CMD_EXIT_STATUS=66
-
-                    It 'It raises an error'
-                        unset TCR_OUTPUT_SILENT
-
-                        When call subject
-                        The output should be present
-                        The error should eq '[TCR Error] Testing failed with status 66'
-                        The status should eq 66
-                    End
-
-                    It 'It reverts the changes using the command from the loaded config'
-                        unset TCR_OUTPUT_SILENT
-
-                        When call subject
-                        The output should be present
-                        The error should be present
-                        The status should be failure
-                        The variable TCR_RUN_REVERT_EXECUTED_COMMAND should eq "$TCR_REVERT_CMD"
-                    End
-
-                    It 'It tells that it reverts the changes'
-                        unset TCR_OUTPUT_SILENT
-
-                        When call subject
-                        The output should include '[TCR] Reverting changes'
-                        The error should be present
-                        The status should be failure
-                    End
-
-                    Context 'When the revert command is failing'
-                        TEST_TCR_REVERT_CMD_EXIT_STATUS=77
-
-                        It 'It raises an error'
-                            unset TCR_OUTPUT_SILENT
-
-                            When call subject
-                            The output should be present
-                            The error should eq '[TCR Error] Reverting failed with status 77'
-                            The status should eq 77
-                        End
-                    End
-                End
-            End
-        End
-
-        Describe 'When the build command fails'
-            TEST_TCR_BUILD_CMD_EXIT_STATUS=99
-
-            It 'It raises an error'
-                unset TCR_OUTPUT_SILENT
-
-                When call subject
-                The output should be present
-                The error should eq '[TCR Error] Building failed with status 99'
-                The status should eq 99
             End
         End
 

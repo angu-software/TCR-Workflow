@@ -4,7 +4,11 @@
 
 ### Next up
 
+* [ ] phase exec tell error code of failed command in output
+
 ## Open
+
+* [ ] Add parameter to `tcr run` to skip commit/revert phase (useful when drafting the test)
 
 * [ ] Forward output of tcr action to not mix error output with success output
 
