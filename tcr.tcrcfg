@@ -1,5 +1,5 @@
 # TCR Configuration File
-# TCR version: 1.0.0
+# TCR version: 1.1.0
 #
 # This configuration file is used to set up the commands for the TCR (Test && Commit || Revert) workflow.
 # The TCR workflow automates the process of running tests, committing changes if tests pass, and reverting changes if tests fail.
@@ -39,3 +39,11 @@ TCR_REVERT_CMD='git reset --hard'
 # Command to detect changes in the repository when running 'tcr watch'
 #
 TCR_CHANGE_DETECTION_CMD='git --no-pager diff HEAD --name-status'
+
+# -- Notification commands (Optional) --
+# Commands to play a sound notification when tests pass or fail.
+# You can use the provided notification sounds or specify your own.
+# Note: The commands used as default is for macOS. You may need to adjust the commands for other operating systems.
+#
+# TCR_NOTIFICATION_SUCCESS_CMD="afplay \$TCR_HOME/resources/notifications/tcr_success.mp3"
+# TCR_NOTIFICATION_FAILURE_CMD="afplay \$TCR_HOME/resources/notifications/tcr_failure.mp3"
