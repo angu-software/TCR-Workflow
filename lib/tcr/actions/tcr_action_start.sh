@@ -1,6 +1,8 @@
 #!/bin/bash
 
 source "$TCR_HOME/lib/foundation.sh"
+source "$TCR_HOME/lib/tcr/tcr_foundation.sh"
+source "$TCR_HOME/lib/lock_file.sh"
 source "$TCR_HOME/lib/tcr/error_consts.sh"
 source "$TCR_HOME/lib/tcr/tcr_error.sh"
 
@@ -43,6 +45,7 @@ prepare_lock_file_content() {
     local content
     content="$(cat <<-LOCK_FILE_CONTENT
 TCR_HOME="$(path_expand "$TCR_HOME")"
+TCR_SESSION_START_DATE_TIME="$(date_time_now)"
 TCR_SESSION_NAME="$session_name"
 LOCK_FILE_CONTENT
     )"

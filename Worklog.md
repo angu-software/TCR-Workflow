@@ -10,13 +10,11 @@
 
 * [ ] Forward output of tcr action to not mix error output with success output
 
-* [ ] Beautify the output of `tcr status`
-
 * [ ] Document the VARs which should be available in the config file
 
 * [ ] Set a session name after tcr is already started
 
-* [ ] structure to define a action with options
+* [ ] structure to define an action with options
 * [ ] obtain options for action from arguments
 * [ ] dynamic help generation
 
@@ -44,6 +42,8 @@
 
 ## Done
 
+* [x] Add session start date to the lock file
+* [x] Beautify the output of `tcr status`
 * [x] BUG: when stopping tcr, when no session is started, it shows a weird error message
 * [x] take all remaining parameters after tcr start as session name
 * [x] phase exec tell error code of failed command in output

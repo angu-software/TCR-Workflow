@@ -1,15 +1,15 @@
 #!/bin/bash
 
-source './spec/test_doubles/work_dir_mock.sh'
-
-source './tcr'
-
-source './spec/test_doubles/exit_mock.sh'
-source './spec/test_doubles/file_mock.sh'
-
-Describe 'tcr enable'
+Describe 'tcr_action_start'
+    Include './spec/test_doubles/home_dir_mock.sh'
+    Include './spec/test_doubles/work_dir_mock.sh'
+    
+    Include './lib/tcr/actions/tcr_action_start.sh'
 
     Include './spec/test_doubles/time_dummy.sh'
+    Include './spec/test_doubles/date_time_dummy.sh'
+    Include './spec/test_doubles/exit_mock.sh'
+    Include './spec/test_doubles/file_mock.sh'
 
     setup() {
         export TCR_OUTPUT_SILENT='true'
@@ -23,49 +23,27 @@ Describe 'tcr enable'
     AfterEach 'teardown'
 
     subject() {
-        tcr start "$@"
+        tcr_action_start my cool session
     }
 
-    Describe 'when enabling tcr mode'
-        It 'should creates a tcr lock file at the current work directory'
-            When call subject
-            The variable TCR_TEST_FILE_CREATE_PATH should eq '/current/work/directory/.tcr.lock'
-        End
-        
+    Describe 'when enabling tcr mode'       
         It 'should inform that tcr mode is enabled'
             unset TCR_OUTPUT_SILENT
 
             When call subject
             The output should eq "$(cat <<-OUTPUT
-[$TEST_TIME] Starting TCR session...
-[$TEST_TIME] TCR session started.
-OUTPUT
-)"
-        End
-
-        It 'it writes important information to the lock file'
-            When call subject
-            The variable TCR_TEST_FILE_SET_CONTENT_PATH should eq '/current/work/directory/.tcr.lock'
-            The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_HOME=\"$TCR_HOME\""
-        End
-
-        Context 'When enabling tcr with session name'
-
-            It 'It tells the session with name is started'
-                unset TCR_OUTPUT_SILENT
-
-                When call subject my cool session
-                The output should eq "$(cat <<-OUTPUT
 [$TEST_TIME] Starting TCR session 'my cool session'...
 [$TEST_TIME] TCR session 'my cool session' started.
 OUTPUT
 )"
-            End
+        End
 
-            It 'It writes the session name to the lock file'
-                When call subject 'my cool session'
-                The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_SESSION_NAME=\"my cool session\""
-            End
+        It 'It writes session information to the lock file'
+            When call subject
+            The variable TCR_TEST_FILE_SET_CONTENT_PATH should eq '/current/work/directory/.tcr.lock'
+            The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_HOME=\"$(path_expand $TCR_HOME)\""
+            The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_SESSION_NAME=\"my cool session\""
+            The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_SESSION_START_DATE_TIME=\"$TEST_DATE_TIME\""
         End
 
         Describe 'when enabling tcr mode again'
