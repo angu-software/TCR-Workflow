@@ -2,6 +2,8 @@
 
 ## HEAD
 
+## 1.2.0
+
 ### Additions
 
 * Add optional `TCR_NOTIFICATION_SUCCESS_CMD` and `TCR_NOTIFICATION_FAILURE_CMD` to the config file to specify the command to notify when tcr run succeeds or fails
