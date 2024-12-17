@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* `tcr status` shows the start date of the session
+
 ## 1.1.0
 
 ### Additions

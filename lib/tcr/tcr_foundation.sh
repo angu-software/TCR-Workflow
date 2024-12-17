@@ -15,6 +15,12 @@ tcr_session_name() {
     echo "$TCR_SESSION_NAME"
 }
 
+tcr_session_start_date_time() {
+    tcr_load_session_info
+    
+    echo "$TCR_SESSION_START_DATE_TIME"
+}
+
 tcr_load_session_info() {
     lock_file_load
 }

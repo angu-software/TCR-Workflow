@@ -42,6 +42,7 @@
 
 ## Done
 
+* [x] Add session start date to trc status
 * [x] Add session start date to the lock file
 * [x] Beautify the output of `tcr status`
 * [x] BUG: when stopping tcr, when no session is started, it shows a weird error message

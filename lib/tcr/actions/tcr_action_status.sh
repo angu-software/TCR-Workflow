@@ -1,32 +1,41 @@
 #!/bin/bash
 
+source "$TCR_HOME/lib/tcr/tcr_foundation.sh"
 source "$TCR_HOME/lib/tcr/tcr_print.sh"
 
 TCR_ACTION_STATUS='status'
 
 tcr_action_status() {
+    local session_state="Inactive"
+    local session_start="Never"
+    local session_name="None"
+    local session_watch_running="No"
+
     if tcr_is_enabled; then
-        local session_name
-        session_name="$(tcr_session_name)"
+        session_state="Active"
+
+        tcr_load_session_info
         
-        if is_unset "$session_name"; then
-            session_name="None"
+        if is_set "$(tcr_session_start_date_time)"; then
+            session_start="$(tcr_session_start_date_time)"
         fi
 
-        watch_running="No"
+        if is_set "$(tcr_session_name)"; then
+            session_name="$(tcr_session_name)"
+        fi
+
         if tcr_action_watch_is_running; then
-            watch_running="Yes"
+            session_watch_running="Yes"
         fi
-
-        tcr_action_status_print "Active" "$session_name" "$watch_running"
-    else
-        tcr_action_status_print "Inactive" "None" "No"
     fi
+
+    tcr_action_status_print "$session_state" "$session_start" "$session_name" "$session_watch_running"
 }
 
 tcr_action_status_print() {
     print "TCR Status: $1"
     tcr_print_separator
-    print "Session Name: $2"
-    print "Monitoring for Changes: $3"
+    print "Started: $2"
+    print "Session Name: $3"
+    print "Monitoring for Changes: $4"
 }
