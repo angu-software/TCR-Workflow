@@ -2,7 +2,6 @@
 
 ## In progress
 
-* [ ] TCR plays success and failure sounds (usefull when execution is based on folder changes) After tcr commands for failure/success
 
 ### Next up
 
@@ -46,5 +45,6 @@
 
 ## Done
 
+* [x] TCR plays success and failure sounds (usefull when execution is based on folder changes) After tcr commands for failure/success
 * [x] Add session start date to trc status
 * [x] Add session start date to the lock file

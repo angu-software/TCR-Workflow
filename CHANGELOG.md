@@ -2,6 +2,9 @@
 
 ## HEAD
 
+### Additions
+
+* Add optional `TCR_NOTIFICATION_SUCCESS_CMD` and `TCR_NOTIFICATION_FAILURE_CMD` to the config file to specify the command to notify when tcr run succeeds or fails
 * `tcr status` shows the start date of the session
 
 ## 1.1.0

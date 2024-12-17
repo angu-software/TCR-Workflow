@@ -1,11 +1,9 @@
 #!/bin/bash
 
-source './tcr'
-
-source './spec/test_doubles/exit_mock.sh'
-
 Describe 'tcr run'
-
+    Include './tcr'
+    Include './spec/test_doubles/exit_mock.sh'
+    Include './spec/test_doubles/config_dummy.sh'
     Include './spec/test_doubles/time_dummy.sh'
 
     setup() {
@@ -34,6 +32,12 @@ Describe 'tcr run'
         elif [ "$new_command" == "$TCR_COMMIT_CMD" ]; then
             TCR_RUN_COMMIT_EXECUTED_COMMAND="$new_command"
             return $TEST_TCR_COMMIT_CMD_EXIT_STATUS
+        elif [ "$new_command" == "$TCR_NOTIFICATION_SUCCESS_CMD" ]; then
+            TEST_DID_EXEC_NOTIFICATION_SUCCESS_CMD="$new_command"
+            return 0
+        elif [ "$new_command" == "$TCR_NOTIFICATION_FAILURE_CMD" ]; then
+            TEST_DID_EXEC_NOTIFICATION_FAILURE_CMD="$new_command"
+            return 0
         fi
     }
 
@@ -41,24 +45,28 @@ Describe 'tcr run'
         is_unset "$TEST_TCR_DISABLED"
     }
 
-    TEST_DID_CALL_TCR_LOAD_CONFIG=''
-    TEST_CFG_FILE_PATH='./spec/fixtures/config_fixture.tcrcfg'
-    file_load_as_source() {
-        TEST_DID_CALL_TCR_LOAD_CONFIG='true'
-
-        source "$TEST_CFG_FILE_PATH"
-    }
-
     subject() {
         tcr run
     }
 
     Describe 'When executing tcr with run action'
-        BeforeEach 'unset TEST_DID_CALL_TCR_LOAD_CONFIG'
+        BeforeEach 'unset TEST_ACTION_RUN_CFG_PATH'
+
+        Describe 'When tcr is not enabled'
+            BeforeEach "TEST_TCR_DISABLED='true'"
+
+            It 'It raises an error'
+                unset TCR_OUTPUT_SILENT
+
+                When call subject
+                The error should eq "[$TEST_TIME] Error: TCR is not enabled!"
+                The status should eq 3
+            End
+        End
 
         It 'It loads the configuration file'
             When call subject
-            The variable TEST_DID_CALL_TCR_LOAD_CONFIG should be defined
+            The variable TCR_ACTION_RUN_CFG_PATH should be defined
         End
 
         Context 'When a config file was found'
@@ -83,7 +91,7 @@ Describe 'tcr run'
             End
 
             Context 'When no build command is set in the cfg file'
-                TEST_CFG_FILE_PATH='./spec/fixtures/config_fixture_no_build_cmd.tcrcfg'
+                BeforeEach 'unset TEST_BUILD_CMD'
 
                 It 'It skipps the build phase'
                     When call subject
@@ -126,19 +134,36 @@ Describe 'tcr run'
                 print_unset_quiet
 
                 When call subject
-                The line 17 of output should eq "[$TEST_TIME] TCR run completed."
+                The output should include "[$TEST_TIME] TCR run completed."
             End
         End
 
-        Describe 'When tcr is not enabled'
-            TEST_TCR_DISABLED='true'
+        Context 'When tcr run was successful'
 
-            It 'It raises an error'
-                unset TCR_OUTPUT_SILENT
-
+            BeforeEach "TEST_NOTIFICATION_SUCCESS_CMD='echo \"TCR run successful!\"'"
+        
+            It 'It notifies the user that the run was successful'
                 When call subject
-                The error should eq "[$TEST_TIME] Error: TCR is not enabled!"
-                The status should eq 3
+                The variable TEST_DID_EXEC_NOTIFICATION_SUCCESS_CMD should eq "$TEST_NOTIFICATION_SUCCESS_CMD"
+            End
+        End
+
+        Context 'When tcr run was not successful'
+            BeforeEach "TEST_TCR_TEST_CMD_EXIT_STATUS=1; TEST_NOTIFICATION_FAILURE_CMD='echo \"TCR run failed!\"'"
+            
+            It 'It notifies the user that the run failed'
+                When call subject
+                The variable TEST_DID_EXEC_NOTIFICATION_FAILURE_CMD should eq "$TEST_NOTIFICATION_FAILURE_CMD"
+            End
+
+            Context 'Because build command failed'
+
+                BeforeEach 'TEST_TCR_BUILD_CMD_EXIT_STATUS=1'
+
+                It 'It notifies the user that the run failed'
+                    When call subject
+                    The variable TEST_DID_EXEC_NOTIFICATION_FAILURE_CMD should eq "$TEST_NOTIFICATION_FAILURE_CMD"
+                End
             End
         End
     End
