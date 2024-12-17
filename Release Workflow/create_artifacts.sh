@@ -12,6 +12,7 @@ FILES=(
     "$PROJECT_ROOT/tcr_version.sh"
     "$PROJECT_ROOT/tcr.env"
     "$PROJECT_ROOT/uninstall_tcr.sh"
+    "$PROJECT_ROOT/resources"
 )
 
 create_tar() {
