@@ -41,6 +41,7 @@ OUTPUT
         End
 
         It 'It writes config template content to the config file'
+
             When call tcr init
             The variable TCR_TEST_FILE_SET_CONTENT_PATH should eq '/current/work/directory/tcr.tcrcfg'
             The variable TCR_TEST_FILE_SET_CONTENT should include "TCR version: $TCR_VERSION"
@@ -49,6 +50,8 @@ OUTPUT
             The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_COMMIT_CMD='git add . && git commit -m \"[TCR] Changes working\"'"
             The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_REVERT_CMD='git reset --hard'"
             The variable TCR_TEST_FILE_SET_CONTENT should include "TCR_CHANGE_DETECTION_CMD='git --no-pager diff HEAD --name-status'"
+            The variable TCR_TEST_FILE_SET_CONTENT should include "# TCR_NOTIFICATION_SUCCESS_CMD=\"afplay \$TCR_HOME/resources/notifications/tcr_success.mp3\""
+            The variable TCR_TEST_FILE_SET_CONTENT should include "# TCR_NOTIFICATION_FAILURE_CMD=\"afplay \$TCR_HOME/resources/notifications/tcr_failure.mp3\""
         End
 
         Context 'When config file already exists'

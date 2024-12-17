@@ -105,5 +105,13 @@ TCR_REVERT_CMD='git reset --hard'
 #
 TCR_CHANGE_DETECTION_CMD='git --no-pager diff HEAD --name-status'
 
+# -- Notification commands (Optional) --
+# Commands to play a sound notification when tests pass or fail.
+# You can use the provided notification sounds or specify your own.
+# Note: The commands used as default is for macOS. You may need to adjust the commands for other operating systems.
+#
+# TCR_NOTIFICATION_SUCCESS_CMD="afplay \$TCR_HOME/resources/notifications/tcr_success.mp3"
+# TCR_NOTIFICATION_FAILURE_CMD="afplay \$TCR_HOME/resources/notifications/tcr_failure.mp3"
+
 CONFIG
 }

@@ -20,6 +20,10 @@
 * [ ] obtain options for action from arguments
 * [ ] dynamic help generation
 
+* [ ] Add warnings output if commands are failing
+  * [ ] Add a warning if the commit command is failing
+  * [ ] Add a warning if the revert command is failing
+  * [ ] Add a warning if the notification command is failing
 * [ ] Add some hints to errors. What can the user do to avoid the error
 
 * [ ] Offer action to squash tcr commit together with a new message
