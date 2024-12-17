@@ -2,6 +2,8 @@
 
 ## In progress
 
+* [ ] TCR plays success and failure sounds (usefull when execution is based on folder changes) After tcr commands for failure/success
+
 ### Next up
 
 ## Open
@@ -29,8 +31,6 @@
 * [ ] Path to a config file can be specified when tcr run is executed
 * [ ] Optional config name can be passed as argument when creating a template cfg
 
-* [ ] TCR plays success and failure sounds (usefull when execution is based on folder changes) After tcr commands for failure/success
-
 * [ ] cfg Templates for TCR variants
   * [ ] TCR: (build,) test, commit, stash --> TCS
   * [ ] TCR: (build,) test, stage, revert unstaged --> TSU
@@ -44,8 +44,3 @@
 
 * [x] Add session start date to trc status
 * [x] Add session start date to the lock file
-* [x] Beautify the output of `tcr status`
-* [x] BUG: when stopping tcr, when no session is started, it shows a weird error message
-* [x] take all remaining parameters after tcr start as session name
-* [x] phase exec tell error code of failed command in output
-* [x] Structured output for tcr run
